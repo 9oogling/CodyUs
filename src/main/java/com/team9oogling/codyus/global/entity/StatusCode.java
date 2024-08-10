@@ -62,6 +62,7 @@ public enum StatusCode {
   FILE_CONVERT_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "File Convert Error"),
   NOT_FOUND_EMAIL(HttpStatus.NOT_FOUND, "해당 이메일을 찾을 수 없습니다."),
   ALREADY_EXIST_CATEGORY(HttpStatus.CONFLICT, "이미 존재하는 카테고리입니다."),
+  NOT_FOUND_PHONENUMBER(HttpStatus.NOT_FOUND, "해당 휴대폰번호는 존재하지 않습니다."),
 
   // Chatting
   NOT_FOUND_POST(HttpStatus.NOT_FOUND, "게시물이 없습니다."),

@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FindEmailDto {
+public class FindEmailRequestDto {
 
-  @NotBlank(message = "이메일을 입력해주세요.")
-  private String email;
+  @NotBlank(message = "휴대폰번호를 입력해주세요.")
+  private String phoneNumber;
 
 }

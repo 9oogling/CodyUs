@@ -1,6 +1,7 @@
 package com.team9oogling.codyus.domain.user.controller;
 
-import com.team9oogling.codyus.domain.user.dto.FindEmailDto;
+import com.team9oogling.codyus.domain.user.dto.FindEmailRequestDto;
+import com.team9oogling.codyus.domain.user.dto.FindEmailResponseDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfileAddressRequestDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfilePasswordRequestDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfilePhoneNumberRequestDto;
@@ -110,9 +111,9 @@ public class UserController {
   }
 
   @GetMapping("/users/email")
-  public ResponseEntity<DataResponseDto<FindEmailDto>> FindEmail(@Valid @RequestBody FindEmailDto requestDto) {
+  public ResponseEntity<DataResponseDto<FindEmailResponseDto>> FindEmail(@Valid @RequestBody FindEmailRequestDto requestDto) {
 
-    FindEmailDto responseDto = userService.FindEmail(requestDto);
+    FindEmailResponseDto responseDto = userService.FindEmail(requestDto);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_FIND_EMAIL);
   }
