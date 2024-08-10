@@ -79,7 +79,7 @@ public class SecurityConfig {
             // 1. 중복 url 삭제 2. 파일명 -> API 로 변경
             .requestMatchers("chat","/api/users/signup", "/main.html"
                 , "/posts", "/api/posts", "posts/postDetail/", "/chatting/**", "/posts/**",
-                "/posts/postCreate", "/chat",
+                "/posts/postCreate", "/chat", "/admin/signup",
                 "/api/users/token/refresh", "/api/users/login", "/login", "/home",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입</title>
+  <title>관리자 회원가입</title>
   <link rel="stylesheet" type="text/css" href="/css/signup.css">
   <link rel="stylesheet" type="text/css" href="/css/header.css">
   <link rel="stylesheet" type="text/css" href="/css/footer.css">
@@ -30,6 +30,8 @@
     <input id="checkPassword" name="checkPassword" type="password" placeholder="비밀번호 재입력">
     <span>닉네임</span>
     <input id="nickname" name="nickname" type="text" placeholder="닉네임을 입력해 주세요.">
+    <span>AdminToken</span>
+    <input id="adminToken" name="adminToken" type="text" placeholder="관리자 토큰을 입력해 주세요.">
     <div class="button-container">
       <button type="submit">회원가입</button>
     </div>
@@ -37,7 +39,7 @@
 </div>
 
 <div th:insert="footer :: footer-content"></div>
-<script src="/js/signup.js"></script>
+<script src="/js/admin-signup.js"></script>
 <script src="/js/header.js"></script>
 </body>
 </html>

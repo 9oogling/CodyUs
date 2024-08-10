@@ -22,6 +22,11 @@ public class HomeController {
     return "signup";
   }
 
+  @GetMapping("/admin/signup")
+  public String adminSignupPage() {
+    return "admin-signup";
+  }
+
   @GetMapping("/posts")
   public String postsPage() {
     return "posts";
