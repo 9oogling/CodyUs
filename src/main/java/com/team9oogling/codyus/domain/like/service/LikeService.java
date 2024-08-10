@@ -60,6 +60,7 @@ public class LikeService {
         likeRepository.delete(checkLike);
     }
 
+
     // 사용자가 좋아요 한 목록 조회
     @Transactional
     public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
@@ -70,5 +71,17 @@ public class LikeService {
                 .toList();
 
         return posts.stream().map(LikedPostResponseDto::new).toList();
+
+    @Transactional
+    public int likecount(Long postId){
+        return likeRepository.countByPostId(postId);
+    }
+
+    public boolean isLiked(Long postId, UserDetailsImpl userDetails) {
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
+                -> new CustomException(StatusCode.NOT_FOUND_USER));
+
+        return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
+
     }
 }

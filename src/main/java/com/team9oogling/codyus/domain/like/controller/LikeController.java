@@ -3,6 +3,7 @@ package com.team9oogling.codyus.domain.like.controller;
 import com.team9oogling.codyus.domain.like.dto.LikedPostResponseDto;
 import com.team9oogling.codyus.domain.like.service.LikeService;
 import com.team9oogling.codyus.global.dto.DataResponseDto;
+import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import com.team9oogling.codyus.global.dto.MessageResponseDto;
 import com.team9oogling.codyus.global.entity.ResponseFactory;
 import com.team9oogling.codyus.global.entity.StatusCode;
@@ -38,6 +39,7 @@ public class LikeController {
         return ResponseFactory.ok(StatusCode.SUCCESS_DELETE_LIKE);
     }
 
+
     // 사용자가 좋아요 한 목록 조회
     @GetMapping("/likes/my")
     public ResponseEntity<DataResponseDto<List<LikedPostResponseDto>>> getLikedPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -46,4 +48,20 @@ public class LikeController {
 
         return ResponseFactory.ok(likedPosts, StatusCode.SUCCESS_GET_LIKE);
     }
+
+    @GetMapping("/{postId}/likes/count")
+    public ResponseEntity<DataResponseDto<Integer>> getLikeCount(@PathVariable Long postId) {
+        int likeCount = likeService.likecount(postId);
+        return ResponseFactory.ok(likeCount, StatusCode.SUCCESS_GET_LIKECOUNT);
+
+    }
+
+    @GetMapping("/{postId}/likes/status")
+    public ResponseEntity<DataResponseDto<Boolean>> getLikeStatus(@PathVariable Long postId,
+                                                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        boolean isLiked = likeService.isLiked(postId, userDetails);
+        return ResponseFactory.ok(isLiked, StatusCode.SUCCESS_GET_LIKESTATUS);
+    }
+
+
 }
