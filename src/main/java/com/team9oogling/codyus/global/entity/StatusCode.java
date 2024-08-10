@@ -15,7 +15,7 @@ public enum StatusCode {
   SUCCESS_UPDATE_PASSWORD(HttpStatus.OK, "비밀번호 수정에 성공했습니다."),
   SUCCESS_UPDATE_ADDRESS(HttpStatus.OK, "주소 수정에 성공했습니다."),
   SUCCESS_UPDATE_PHONE_NUMBER(HttpStatus.OK, "휴대폰 번호 수정에 성공했습니다."),
-  SUCCESS_CREATE_POST(HttpStatus.CREATED, " 게시물 생성에 성공했습니다."),
+  SUCCESS_CREATE_POST(HttpStatus.CREATED, "게시물 생성에 성공했습니다."),
   SUCCESS_UPDATE_POST(HttpStatus.OK, "게시물 수정에 성공했습니다."),
   SUCCESS_DELETE_POST(HttpStatus.OK, "게시물 삭제에 성공했습니다."),
   SUCCESS_GET_POST(HttpStatus.OK,"게시물 선택 조회에 성공했습니다."),
@@ -27,6 +27,7 @@ public enum StatusCode {
   SUCCESS_GET_CHATTINGROOMS_LIST(HttpStatus.OK, "채팅방 목록 조회에 성공했습니다."),
   SUCCESS_ADD_LIKE(HttpStatus.CREATED, "좋아요를 눌렀습니다."),
   SUCCESS_DELETE_LIKE(HttpStatus.OK, "좋아요가 취소되었습니다."),
+  SUCCESS_GET_LIKE(HttpStatus.OK, "좋아요 목록 조회에 성공했습니다."),
   SUCCESS_SEND_MESSAGE(HttpStatus.OK, "메세지 전송에 성공했습니다."),
   SUCCESS_GET_MESSAGE_LIST(HttpStatus.OK,"메세지 목록 조회에 성공했습니다."),
   SUCCESS_CHATTINGROOMS_EXIT(HttpStatus.OK, "채팅방 나가기에 성공했습니다."),
@@ -34,6 +35,8 @@ public enum StatusCode {
   SUCCESS_FIND_EMAIL(HttpStatus.OK, "이메일 찾기에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_POST(HttpStatus.OK, "채팅방 게시물을 조회에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_MESSAGE_OFFSET(HttpStatus.OK, "메세지 오프셋 조회에 성공했습니다."),
+  SUCCESS_GET_LIKECOUNT(HttpStatus.OK, "좋아요 수를 조회를 성공하였습니다."),
+  SUCCESS_GET_LIKESTATUS(HttpStatus.OK, "좋아요 상태를 확인했습니다."),
   SUCCESS_CREATE_CATEGORY(HttpStatus.CREATED, "카테고리 생성에 성공했습니다."),
 
 
