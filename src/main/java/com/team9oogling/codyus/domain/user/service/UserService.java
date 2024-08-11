@@ -10,12 +10,12 @@ import com.team9oogling.codyus.domain.user.entity.User;
 import com.team9oogling.codyus.domain.user.entity.UserRole;
 import com.team9oogling.codyus.domain.user.entity.UserStatus;
 import com.team9oogling.codyus.domain.user.repository.UserRepository;
-import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import com.team9oogling.codyus.global.entity.BlacklistedToken;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.exception.CustomException;
 import com.team9oogling.codyus.global.jwt.JwtProvider;
 import com.team9oogling.codyus.global.repository.BlacklistedTokenRepository;
+import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -44,6 +44,8 @@ public class UserService {
 
   @Value("${ACCESS_TOKEN_EXPIRATION}")
   private long accessTokenExpiration;
+  @Value("${admin.token}")
+  private String adminToken;
 
   public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
       JwtProvider jwtProvider, BlacklistedTokenRepository blacklistedTokenRepository,
@@ -62,7 +64,15 @@ public class UserService {
       throw new CustomException(StatusCode.ALREADY_EXIST_USER);
     });
 
-    User user = new User(requestDto, UserRole.USER, UserStatus.ACTIVE);
+    UserRole role;
+
+    if (requestDto.getAdminToken() != null && requestDto.getAdminToken().equals(adminToken)) {
+      role = UserRole.ADMIN;
+    } else {
+      role = UserRole.USER;
+    }
+
+    User user = new User(requestDto, role, UserStatus.ACTIVE);
 
     if (!requestDto.getPassword().equals(requestDto.getCheckPassword())) {
       throw new CustomException(StatusCode.CHECK_PASSWORD);
@@ -252,6 +262,7 @@ public class UserService {
 
   public User findByToken(String token) {
     String email = jwtProvider.getClaimsFromToken(token).getSubject();
-    return userRepository.findByEmail(email).orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_USER));
+    return userRepository.findByEmail(email)
+        .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_USER));
   }
 }

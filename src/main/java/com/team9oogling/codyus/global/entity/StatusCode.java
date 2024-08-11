@@ -35,6 +35,7 @@ public enum StatusCode {
   SUCCESS_FIND_EMAIL(HttpStatus.OK, "이메일 찾기에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_POST(HttpStatus.OK, "채팅방 게시물을 조회에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_MESSAGE_OFFSET(HttpStatus.OK, "메세지 오프셋 조회에 성공했습니다."),
+  SUCCESS_CREATE_CATEGORY(HttpStatus.CREATED, "카테고리 생성에 성공했습니다."),
   SUCCESS_GET_LIKECOUNT(HttpStatus.OK, "좋아요 수를 조회를 성공하였습니다."),
   SUCCESS_GET_LIKESTATUS(HttpStatus.OK, "좋아요 상태를 확인했습니다."),
 
@@ -60,6 +61,7 @@ public enum StatusCode {
   NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당 카테고리를 찾을 수 없습니다."),
   FILE_CONVERT_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "File Convert Error"),
   NOT_FOUND_EMAIL(HttpStatus.NOT_FOUND, "해당 이메일을 찾을 수 없습니다."),
+  ALREADY_EXIST_CATEGORY(HttpStatus.CONFLICT, "이미 존재하는 카테고리입니다."),
 
   // Chatting
   NOT_FOUND_POST(HttpStatus.NOT_FOUND, "게시물이 없습니다."),
