@@ -1,7 +1,6 @@
 package com.team9oogling.codyus.domain.user.controller;
 
-import com.team9oogling.codyus.domain.user.dto.FindEmailRequestDto;
-import com.team9oogling.codyus.domain.user.dto.FindEmailResponseDto;
+import com.team9oogling.codyus.domain.user.dto.FindEmailByPhoneNumberResponseDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfileAddressRequestDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfilePasswordRequestDto;
 import com.team9oogling.codyus.domain.user.dto.UpdateProfilePhoneNumberRequestDto;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,13 +41,14 @@ public class UserController {
   // 회원 관련 정보 받기
   @GetMapping("/user-info")
   @ResponseBody
-  public ResponseEntity<DataResponseDto<UserInfoDto>> getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+  public ResponseEntity<DataResponseDto<UserInfoDto>> getUserInfo(
+      @AuthenticationPrincipal UserDetailsImpl userDetails) {
     String email = userDetails.getUser().getEmail();
     UserRole role = userDetails.getUser().getRole();
     String nickName = userDetails.getUser().getNickname();
     boolean isAdmin = (role == UserRole.ADMIN);
 
-    UserInfoDto responseDto = new UserInfoDto(email, isAdmin,nickName);
+    UserInfoDto responseDto = new UserInfoDto(email, isAdmin, nickName);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_GET_USERINFO);
   }
@@ -110,12 +111,20 @@ public class UserController {
     return ResponseFactory.ok(StatusCode.SUCCESS_UPDATE_PHONE_NUMBER);
   }
 
-  @GetMapping("/users/email")
-  public ResponseEntity<DataResponseDto<FindEmailResponseDto>> FindEmail(@Valid @RequestBody FindEmailRequestDto requestDto) {
+  @GetMapping("/users/email/find-by-phone")
+  public ResponseEntity<DataResponseDto<FindEmailByPhoneNumberResponseDto>> FindEmail(
+      @RequestParam String phoneNumber) {
 
-    FindEmailResponseDto responseDto = userService.FindEmail(requestDto);
+    FindEmailByPhoneNumberResponseDto responseDto = userService.FindEmail(phoneNumber);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_FIND_EMAIL);
+  }
+
+  @GetMapping("/users/exists-by-email")
+  public ResponseEntity<DataResponseDto<Boolean>> checkEmailExists(@RequestParam String email) {
+    boolean exists = userService.checkEmailExists(email);
+
+    return ResponseFactory.ok(exists, StatusCode.SUCCESS_CHECK_EMAIL);
   }
 
 }

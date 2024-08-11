@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class FindEmailResponseDto {
+public class FindEmailByPhoneNumberResponseDto {
 
   private String email;
 
-  public FindEmailResponseDto(User user) {
+  public FindEmailByPhoneNumberResponseDto(User user) {
     this.email = user.getEmail();
   }
 

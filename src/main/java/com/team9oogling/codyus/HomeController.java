@@ -57,4 +57,14 @@ public class HomeController {
     return "chat";
   }
 
+  @GetMapping("/login/find-email")
+  public String findEmailPage() {
+    return "find-email";
+  }
+
+  @GetMapping("/login/find-password")
+  public String findPasswordPage() {
+    return "find-password";
+  }
+
 }
