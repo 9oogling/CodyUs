@@ -71,6 +71,7 @@ public class LikeService {
                 .toList();
 
         return posts.stream().map(LikedPostResponseDto::new).toList();
+    }
 
     @Transactional
     public int likecount(Long postId){
