@@ -1,17 +1,19 @@
 package com.team9oogling.codyus.domain.like.service;
 
+import com.team9oogling.codyus.domain.like.dto.LikedPostResponseDto;
 import com.team9oogling.codyus.domain.like.entity.Like;
 import com.team9oogling.codyus.domain.like.repository.LikeRepository;
 import com.team9oogling.codyus.domain.post.entity.Post;
 import com.team9oogling.codyus.domain.post.repository.PostRepository;
 import com.team9oogling.codyus.domain.user.entity.User;
 import com.team9oogling.codyus.domain.user.repository.UserRepository;
-import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.exception.CustomException;
+import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,8 +33,7 @@ public class LikeService {
         Post post = postRepository.findById(postId).orElseThrow(()
                 -> new CustomException(StatusCode.NOT_FOUND_POST));
 
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
-                -> new CustomException(StatusCode.NOT_FOUND_USER));
+        User user = userDetails.getUser();
 
         if (post.getUser().equals(user)) {
             throw new CustomException(StatusCode.CANNOT_LIKE_YOURS);
@@ -50,12 +51,37 @@ public class LikeService {
 
     @Transactional
     public void unLike(Long postId, UserDetailsImpl userDetails) {
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
-                -> new CustomException(StatusCode.NOT_FOUND_USER));
+        User user = userDetails.getUser();
+
 
         Like checkLike = likeRepository.findByPostIdAndUserId(postId, user.getId()).orElseThrow(()
                 -> new CustomException(StatusCode.NOT_FOUND_LIKE));
 
         likeRepository.delete(checkLike);
+    }
+
+
+    // 사용자가 좋아요 한 목록 조회
+    @Transactional
+    public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
+        User user = userDetails.getUser();
+
+        List<Post> posts = likeRepository.findAllByUserId(user.getId()).stream()
+                .map(Like::getPost)
+                .toList();
+
+        return posts.stream().map(LikedPostResponseDto::new).toList();
+
+    @Transactional
+    public int likecount(Long postId){
+        return likeRepository.countByPostId(postId);
+    }
+
+    public boolean isLiked(Long postId, UserDetailsImpl userDetails) {
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
+                -> new CustomException(StatusCode.NOT_FOUND_USER));
+
+        return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
+
     }
 }
