@@ -30,7 +30,9 @@ $(document).ready(function () {
             content: $('#content').val(),
             price: parseInt($('#price').val()),
             saleType: $('#saleType').val(),
-            hashtags: Array.from($('#hashtagContainer .hashtag').map(function () { return $(this).text(); })).join(','),
+            hashtags: $('#hashtagContainer .hashtag').map(function () {
+                return $(this).text().replace('×', '').trim();
+            }).get().join(','),
             categoryName: categoryNameString
         })], {type: "application/json"}));
 
@@ -62,47 +64,6 @@ $(document).ready(function () {
         });
     });
 
-    // 이미지 미리보기
-    function previewImage(event, previewElementId) {
-        const file = event.target.files[0];
-        const previewContainer = document.getElementById(previewElementId);
-        previewContainer.innerHTML = '';
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.maxWidth = '100%';
-                img.style.marginTop = '10px';
-                previewContainer.appendChild(img);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    document.getElementById('image').addEventListener('change', function (e) {
-        previewImage(e, 'imagePreview');
-    });
-
-    document.getElementById('productImage').addEventListener('change', function (e) {
-        previewImage(e, 'productImagePreview');
-    });
-});
-
-
-function submit() {
-    const salesType = document.getElementById('salesType').value;
-
-    if (!salesType) {
-        alert("판매 유형을 선택해주세요.");
-        return;
-    }
-
-    const data = {
-        saleType: salesType
-        // 추가 필드 필요 시 여기에 추가
-    };
-
     // 해시태그 처리
     const hashtagsInput = document.getElementById('hashtags');
     const hashtagContainer = document.getElementById('hashtagContainer');
@@ -132,4 +93,30 @@ function submit() {
         hashtagElement.appendChild(removeButton);
         hashtagContainer.appendChild(hashtagElement);
     }
-};
+
+    // 이미지 미리보기
+    function previewImage(event, previewElementId) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById(previewElementId);
+        previewContainer.innerHTML = '';
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.maxWidth = '100%';
+                img.style.marginTop = '10px';
+                previewContainer.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    document.getElementById('image').addEventListener('change', function (e) {
+        previewImage(e, 'imagePreview');
+    });
+
+    document.getElementById('productImage').addEventListener('change', function (e) {
+        previewImage(e, 'productImagePreview');
+    });
+});
