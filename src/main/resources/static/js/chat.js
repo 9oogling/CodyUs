@@ -108,66 +108,16 @@ document.addEventListener('DOMContentLoaded',
                             const chatList = document.querySelector('.chat-list');
                             chatList.insertBefore(existingItem, chatList.firstChild);
                         } else {
-                            // 기존 아이템이 없을 때 fetch 요청
-                            fetch(`/api/chattingrooms/${msg.chattingRoomId}`, {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': token
-                                }
-                            })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('네트워크 응답이 실패했습니다.');
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => {
-                                        // 새 채팅 아이템 생성 로직
-                                        let newResponse = data.data;
-                                        const chatList = document.querySelector('.chat-list');
-                                        const listItem = document.createElement('li');
-                                        listItem.className = 'chat-item';
-                                        listItem.id = 'chat-room-' + newResponse.chattingRoomId;
-
-                                        const randomIndex = Math.floor(Math.random() * images.length);
-                                        const selectedImage = images[randomIndex];
-                                        // 새로운 메시지 내용으로 설정
-                                        listItem.innerHTML = `
-                                <img src="${selectedImage}" alt="Avatar" class="chat-avatar">
-                                <div class="chat-info">
-                                    <div class="chat-name">
-                                        ${newResponse.partnerNickname} <span class="unread-count">${newResponse.unReadMessageCount}</span>
-                                    </div>
-                                    <div class="chat-preview">${newResponse.lastMessage}</div>
-                                </div>
-                                <div class="chat-lastTimeStamp">${new Date(newResponse.lastTimestamp).toLocaleTimeString([], {
-                                            hour: '2-digit',
-                                            minute: '2-digit'
-                                        })}</div>
-                            `;
-                                        chatList.insertBefore(listItem, chatList.firstChild);
-                                    }
-                                )
-                                .catch(error => {
-                                    console.error('Fetch 중 오류 발생:', error);
-                                });
+                            getChattingrooms(msg.chattingRoomId);
                         }
-
                     })
-
                 }
-
-                ,
-                (error) => {
+                ,(error) => {
                     console.error("소켓 연결 에러", error);
                 }
             );
         }
-
         chattingRoomList(page, size);
-
-
     });
 
 
@@ -235,6 +185,7 @@ function chattingRoomList(page, size) {
 
                 chatList.appendChild(listItem);
             })
+            getParamChattingrooms();
         })
         .catch(error => {
             console.error(error);
@@ -244,7 +195,6 @@ function chattingRoomList(page, size) {
 function loadMoreChats() {
     page++;
     chattingRoomList(page, size);
-    console.log(page + " page " + size + " ");
 }
 
 function topicChattingRoom(chattingRoomId) {
@@ -699,6 +649,75 @@ function enableInput() {
     messageInput.style.cursor = 'text';
     messageInput.disabled = false; // 입력 필드 활성화
     sendButton.disabled = false; // 전송 버튼 활성화
+}
+
+function getChattingrooms(chattingroomsId) {
+    const url = '/api/chattingrooms/'+ chattingroomsId;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('네트워크 응답이 실패했습니다.');
+            }
+            return response.json();
+        })
+        .then(data => {
+                // 새 채팅 아이템 생성 로직
+                let newResponse = data.data;
+                const chatList = document.querySelector('.chat-list');
+                const listItem = document.createElement('li');
+                listItem.className = 'chat-item';
+                listItem.id = 'chat-room-' + newResponse.chattingRoomId;
+
+                const randomIndex = Math.floor(Math.random() * images.length);
+                const selectedImage = images[randomIndex];
+                // 새로운 메시지 내용으로 설정
+                listItem.innerHTML = `
+                                <img src="${selectedImage}" alt="Avatar" class="chat-avatar">
+                                <div class="chat-info">
+                                    <div class="chat-name">
+                                        ${newResponse.partnerNickname} <span class="unread-count">${newResponse.unReadMessageCount}</span>
+                                    </div>
+                                    <div class="chat-preview">${newResponse.lastMessage}</div>
+                                </div>
+                                <div class="chat-lastTimeStamp">${new Date(newResponse.lastTimestamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}</div>
+                            `;
+                chatList.insertBefore(listItem, chatList.firstChild);
+            }
+        )
+        .catch(error => {
+            console.error('Fetch 중 오류 발생:', error);
+        });
+}
+
+function getParamChattingrooms(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomId = parseInt(urlParams.get('roomId'));
+    if (!roomId) {
+        return;
+    }
+    const targetChatItem = document.getElementById(`chat-room-`+ roomId);
+    if (!targetChatItem) {
+        getChattingrooms(roomId);
+    }
+
+    const partnerNameElement = targetChatItem.querySelector('.chat-name');
+    const spanElement = partnerNameElement.querySelector('span');
+    let partnerName = partnerNameElement.textContent.trim();
+    if (spanElement) {
+        // span 요소의 텍스트를 제외한 내용만 가져오기
+        const spanText = spanElement.textContent.trim();
+        partnerName = partnerName.replace(spanText, '').trim(); // span의 텍스트를 제거
+    }
+    openChat(roomId, partnerName);
 }
 
 document.getElementById('messageInput').addEventListener('keypress', function (e) {

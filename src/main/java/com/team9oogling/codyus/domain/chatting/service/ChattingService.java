@@ -75,7 +75,7 @@ public class ChattingService {
 		messageOffsetRepository.save(messageOffset);
 		messageOffsetRepository.save(messageOffsetPostUser);
 
-		return new ChattingRoomCreateResponseDto(chattingRoom.getId(), post);
+		return new ChattingRoomCreateResponseDto(chattingRoom.getId());
 	}
 
 	@Transactional(readOnly = true)
