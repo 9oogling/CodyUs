@@ -67,4 +67,19 @@ public class HomeController {
     return "find-password";
   }
 
+  @GetMapping("/help")
+  public String helpPage() {
+    return "contact-us";
+  }
+
+  @GetMapping("/like")
+  public String likePage() {
+    return "likePage";
+  }
+
+  @GetMapping("/my-page")
+  public String myPage() {
+    return "myPage";
+  }
+
 }

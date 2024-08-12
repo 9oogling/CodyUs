@@ -40,7 +40,7 @@ public class LikeController {
     }
 
 
-    // 사용자가 좋아요 한 목록 조회
+//     사용자가 좋아요 한 목록 조회
     @GetMapping("/likes/my")
     public ResponseEntity<DataResponseDto<List<LikedPostResponseDto>>> getLikedPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
