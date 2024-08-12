@@ -41,27 +41,27 @@ public class LikeController {
 
 
     // 사용자가 좋아요 한 목록 조회
-//    @GetMapping("/likes/my")
-//    public ResponseEntity<DataResponseDto<List<LikedPostResponseDto>>> getLikedPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    @GetMapping("/likes/my")
+    public ResponseEntity<DataResponseDto<List<LikedPostResponseDto>>> getLikedPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-//        List<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails);
+        List<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails);
 
-//        return ResponseFactory.ok(likedPosts, StatusCode.SUCCESS_GET_LIKE);
-//    }
+        return ResponseFactory.ok(likedPosts, StatusCode.SUCCESS_GET_LIKE);
+    }
 
-//    @GetMapping("/{postId}/likes/count")
-//    public ResponseEntity<DataResponseDto<Integer>> getLikeCount(@PathVariable Long postId) {
-//        int likeCount = likeService.likecount(postId);
-//        return ResponseFactory.ok(likeCount, StatusCode.SUCCESS_GET_LIKECOUNT);
-//
-//    }
+    @GetMapping("/{postId}/likes/count")
+    public ResponseEntity<DataResponseDto<Integer>> getLikeCount(@PathVariable Long postId) {
+        int likeCount = likeService.likecount(postId);
+        return ResponseFactory.ok(likeCount, StatusCode.SUCCESS_GET_LIKECOUNT);
 
-//    @GetMapping("/{postId}/likes/status")
-//    public ResponseEntity<DataResponseDto<Boolean>> getLikeStatus(@PathVariable Long postId,
-//                                                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
-//        boolean isLiked = likeService.isLiked(postId, userDetails);
-//        return ResponseFactory.ok(isLiked, StatusCode.SUCCESS_GET_LIKESTATUS);
-//    }
+    }
+
+    @GetMapping("/{postId}/likes/status")
+    public ResponseEntity<DataResponseDto<Boolean>> getLikeStatus(@PathVariable Long postId,
+                                                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        boolean isLiked = likeService.isLiked(postId, userDetails);
+        return ResponseFactory.ok(isLiked, StatusCode.SUCCESS_GET_LIKESTATUS);
+    }
 
 
 }
