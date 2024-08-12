@@ -1,15 +1,8 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: #ffffff;
-    z-index: 1;
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
-    margin: 0;
-    padding: 0;
+/* 기본 폰트 설정 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 /* 헤더 적용에 따라 다름 */
@@ -21,11 +14,10 @@ body {
     width: 800px;
     height: 600px;
     border: 1px solid black;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
     padding: 35px;
 }
 
@@ -151,13 +143,12 @@ textarea::placeholder {
     outline: 1px transparent;
 }
 
-ul {
+.container ul {
     position: absolute;
     top: 5%;
     left: 0;
     list-style: none;
     white-space: nowrap;
-
 }
 
 .menu {

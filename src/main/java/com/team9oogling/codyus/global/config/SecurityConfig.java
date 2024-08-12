@@ -80,7 +80,7 @@ public class SecurityConfig {
             .requestMatchers("chat","/api/users/signup", "/main.html"
                 , "/posts", "/api/posts", "posts/postDetail/", "/chatting/**", "/posts/**",
                 "/posts/postCreate", "/chat", "/admin/signup", "/login/find-email", "/login/find-password",
-                "/api/users/token/refresh", "/api/users/login", "/login", "/home",
+                "/api/users/token/refresh", "/api/users/login", "/login", "/home", "/like", "/help", "/my-page",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()
             .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts"
