@@ -99,5 +99,12 @@ public class PostController {
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_SEARCH_POSTS);
     }
 
+    // 카테고리별 게시물 조회
+    @GetMapping("/category/{categoryName}")
+    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName) {
+        List<PostResponseDto> posts = postService.findPostsByCategory(categoryName);
+        return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
+    }
+
 
 }

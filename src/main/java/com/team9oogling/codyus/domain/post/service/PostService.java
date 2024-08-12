@@ -45,12 +45,16 @@ public class PostService {
     public PostResponseDto savePost(PostRequestDto requestDto, UserDetailsImpl userDetails, List<MultipartFile> images, List<MultipartFile> productImages) {
         User user = userDetails.getUser();
 
-        Category category = categoryRepository.findByCategory(requestDto.getCategoryName())
-                .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_CATEGORY));
+        // 여러 카테고리명을 받아와서 매핑
+        List<Category> categories = requestDto.getCategoryName().stream()
+            .map(categoryName -> categoryRepository.findByCategory(categoryName)
+                .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_CATEGORY)))
+            .collect(Collectors.toList());
 
+        // Post 엔티티에 여러 카테고리를 전달
         final Post post = new Post(requestDto.getTitle(), requestDto.getContent(), requestDto.getPrice(),
-                requestDto.getSaleType(), requestDto.getHashtags(), user, category);
-         postRepository.save(post);
+            requestDto.getSaleType(), requestDto.getHashtags(), user, categories);
+        postRepository.save(post);
 
         // 2. 이미지 업로드 및 URL 저장
         List<String> imageUrls = awsS3Uploader.uploadImage(images, ImageType.POST, post.getId());
@@ -58,11 +62,11 @@ public class PostService {
 
         // 3. PostImage 엔티티 생성 및 게시물에 추가
         List<PostImage> postImages = imageUrls.stream()
-                .map(url -> new PostImage(post, url))
-                .collect(Collectors.toList());
+            .map(url -> new PostImage(post, url))
+            .collect(Collectors.toList());
         postImages.addAll(productImageUrls.stream()
-                .map(url -> new PostImage(post, url))
-                .collect(Collectors.toList()));
+            .map(url -> new PostImage(post, url))
+            .collect(Collectors.toList()));
 
         // 4. 게시물에 이미지 추가 및 저장
         post.getPostImages().addAll(postImages);
@@ -75,8 +79,16 @@ public class PostService {
         User user = userDetails.getUser();
         Post post = findById(postId);
         checkUserSame(post, user);
+
+        // 여러 카테고리명을 받아와서 매핑
+        List<Category> categories = requestDto.getCategoryName().stream()
+            .map(categoryName -> categoryRepository.findByCategory(categoryName)
+                .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_CATEGORY)))
+            .collect(Collectors.toList());
+
+        // 기존의 카테고리를 클리어하고 새롭게 업데이트
         post.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getPrice(),
-                requestDto.getSaleType(), requestDto.getHashtags(), user, requestDto.getCategoryName());
+            requestDto.getSaleType(), requestDto.getHashtags(), user, categories);
 
         return new PostResponseDto(post);
     }
@@ -88,6 +100,14 @@ public class PostService {
         checkUserSame(post, user);
         postRepository.delete(post);
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostResponseDto> findPostsByCategory(String categoryName) {
+        List<Post> posts = postRepository.findByCategoryName(categoryName);
+        return posts.stream()
+            .map(PostResponseDto::new)
+            .collect(Collectors.toList());
     }
 
     public List<PostResponseDto> findAllPost(int page, int size) {

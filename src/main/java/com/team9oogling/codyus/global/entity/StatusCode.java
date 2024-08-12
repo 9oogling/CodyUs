@@ -40,6 +40,7 @@ public enum StatusCode {
   SUCCESS_GET_LIKESTATUS(HttpStatus.OK, "좋아요 상태를 확인했습니다."),
   SUCCESS_CHECK_EMAIL(HttpStatus.OK, "이메일 존재 여부 확인에 성공했습니다."),
   NOT_FOUND_PHONENUMBER(HttpStatus.OK, "해당 휴대폰번호는 존재하지 않습니다."), // 휴대폰 찾기에 에러가 뜨기 때문에 ok 로 변경
+  SUCCESS_GET_POSTSBYCATEGORY(HttpStatus.OK, "카테고리별 게시글 조회에 성공했습니다."),
 
 
   // 400번대

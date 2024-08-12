@@ -4,6 +4,7 @@ package com.team9oogling.codyus.domain.post.dto;
 import com.team9oogling.codyus.domain.post.entity.SaleType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -22,8 +23,7 @@ public class PostRequestDto {
 
     private String hashtags;
 
-    @NotBlank
-    private String categoryName;
+    private List<String> categoryName;
 
     //여기에 이미지 업로드 추가
 }
