@@ -85,7 +85,7 @@ public class SecurityConfig {
             .permitAll()
             .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts"
                 , "/api/posts/{postId}/likes/count", "/api/users/email/find-by-phone", "/api/users/exists-by-email",
-                "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search",
+                "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search", "/api/posts/category/{categoryName}",
                 "/posts/postCreate", "api/posts/search/**").permitAll()
             .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
             .anyRequest().authenticated())

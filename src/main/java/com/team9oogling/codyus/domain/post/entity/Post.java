@@ -19,12 +19,8 @@ public class Post extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostCategoryMatches> postCategoryMatches = new ArrayList<>();
-
-    @Column
-    private String category;
 
     private String title;
     private String content;
@@ -50,30 +46,38 @@ public class Post extends Timestamped {
         return user.getNickname(); // User 엔티티에서 nickname 가져오기
     }
 
-
-    public Post(String title, String content, int price, SaleType saleType, String hashtags, User user, Category category) {
+    public Post(String title, String content, int price, SaleType saleType, String hashtags, User user, List<Category> categories) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.saleType = saleType;
         this.hashtags = hashtags;
         this.user = user;
-        this.category = category.getCategory();
 
-        PostCategoryMatches postCategoryMatches = new PostCategoryMatches(this, category);
-        this.postCategoryMatches.add(postCategoryMatches);
-        category.getPostCategoryMatches().add(postCategoryMatches);
+        // 카테고리를 PostCategoryMatches로 매핑
+        categories.forEach(category -> {
+            PostCategoryMatches postCategoryMatch = new PostCategoryMatches(this, category);
+            this.postCategoryMatches.add(postCategoryMatch);
+            category.getPostCategoryMatches().add(postCategoryMatch);
+        });
     }
 
-
-    public void update(String title, String content, int price, SaleType saleType, String hashtags, User user, String category) {
+    public void update(String title, String content, int price, SaleType saleType, String hashtags, User user, List<Category> categories) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.saleType = saleType;
         this.hashtags = hashtags;
         this.user = user;
-        this.category = category;
-    }
 
+        // 기존 카테고리 매핑 제거
+        this.postCategoryMatches.clear();
+
+        // 새로운 카테고리 매핑 추가
+        categories.forEach(category -> {
+            PostCategoryMatches postCategoryMatch = new PostCategoryMatches(this, category);
+            this.postCategoryMatches.add(postCategoryMatch);
+            category.getPostCategoryMatches().add(postCategoryMatch);
+        });
+    }
 }

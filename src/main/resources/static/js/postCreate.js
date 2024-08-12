@@ -23,8 +23,6 @@ $(document).ready(function () {
         }
         categoryName = categoryName.concat(seasons);
 
-        var categoryNameString = categoryName.join(',');
-
         formData.append('request', new Blob([JSON.stringify({
             title: $('#title').val(),
             content: $('#content').val(),
@@ -33,7 +31,7 @@ $(document).ready(function () {
             hashtags: $('#hashtagContainer .hashtag').map(function () {
                 return $(this).text().replace('×', '').trim();
             }).get().join(','),
-            categoryName: categoryNameString
+            categoryName: categoryName // 카테고리 리스트로 전달
         })], {type: "application/json"}));
 
         var imageFiles = $('#image')[0].files;
