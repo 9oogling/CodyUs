@@ -61,6 +61,7 @@ public class LikeService {
     }
 
 
+
     // 사용자가 좋아요 한 목록 조회
     @Transactional
     public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
@@ -85,4 +86,5 @@ public class LikeService {
         return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
 
     }
+
 }

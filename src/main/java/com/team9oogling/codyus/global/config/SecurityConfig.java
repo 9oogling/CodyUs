@@ -79,12 +79,12 @@ public class SecurityConfig {
             // 1. 중복 url 삭제 2. 파일명 -> API 로 변경
             .requestMatchers("chat","/api/users/signup", "/main.html"
                 , "/posts", "/api/posts", "posts/postDetail/", "/chatting/**", "/posts/**",
-                "/posts/postCreate", "/chat",
+                "/posts/postCreate", "/chat", "/admin/signup", "/login/find-email", "/login/find-password",
                 "/api/users/token/refresh", "/api/users/login", "/login", "/home",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts",
-                "/api/users/email", "/api/posts/{postId}/likes/count",
+            .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts"
+                , "/api/posts/{postId}/likes/count", "/api/users/email/find-by-phone", "/api/users/exists-by-email",
                 "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search",
                 "/posts/postCreate", "api/posts/search/**").permitAll()
             .requestMatchers("/api/admin/**").hasAuthority("ADMIN")

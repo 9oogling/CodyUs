@@ -1,5 +1,6 @@
 package com.team9oogling.codyus.domain.user.dto;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -22,5 +23,8 @@ public class UserSignupRequestDto {
 
   @NotBlank(message = "닉네임을 입력해주세요.")
   private String nickname;
+
+  @Nullable
+  private String adminToken;
 
 }

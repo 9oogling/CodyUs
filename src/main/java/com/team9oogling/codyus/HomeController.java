@@ -22,6 +22,11 @@ public class HomeController {
     return "signup";
   }
 
+  @GetMapping("/admin/signup")
+  public String adminSignupPage() {
+    return "admin-signup";
+  }
+
   @GetMapping("/posts")
   public String postsPage() {
     return "posts";
@@ -50,6 +55,16 @@ public class HomeController {
   @GetMapping("/chat")
   public String chatPage() {
     return "chat";
+  }
+
+  @GetMapping("/login/find-email")
+  public String findEmailPage() {
+    return "find-email";
+  }
+
+  @GetMapping("/login/find-password")
+  public String findPasswordPage() {
+    return "find-password";
   }
 
 }

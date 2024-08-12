@@ -60,7 +60,6 @@ public class User extends Timestamped {
     this.nickname = requestDto.getNickname();
     this.role = role;
     this.status = status;
-//     this.oauth = oauth;
   }
 
   public User( String email, String nickname, String password, UserRole role, UserStatus status) {

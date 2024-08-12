@@ -1,3 +1,14 @@
+/* 선택된 텍스트의 배경색과 텍스트 색상을 정의 */
+::selection {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: #222222;
+  color: #ffffff;
+}
+
 .header-container {
   max-width: 1200px;
   height: 100px; /* 고정된 높이 */
@@ -288,14 +299,6 @@ header > .logo img {
 .search input:not(.expanded) ~ .search-options {
   opacity: 0;
   visibility: hidden;
-}
-
-::selection {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-::-moz-selection {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 html {

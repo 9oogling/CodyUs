@@ -1,0 +1,71 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-logo img {
+  width: 100%;
+  display: flex;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+#signup-form > input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid rgba(115, 115, 115, 0.3);
+  color: #808080;
+  padding: 7px 3px;
+  margin-top: 5px;
+  margin-bottom: 40px;
+  width: 100%;
+  outline: none;
+}
+
+#signup-form > input::placeholder {
+  color: #cecece;
+  opacity: 5;
+}
+
+#signup-form > input::-webkit-input-placeholder{
+  color: #cecece;
+}
+
+#signup-form > input:-ms-input-placeholder{
+  color: #cecece;
+}
+
+.button-container {
+  margin-bottom: 30px;
+}
+
+.button-container > button {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #b0b0b0;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #818181;
+  font-size: 13px;
+}
+
+.button-container > button:hover {
+  background-color: #f1f1f1;
+}
+
+#signup-form span {
+  display: flex;
+  color: #818181;
+  font-size: 13px;
+  float: left;
+}
