@@ -80,8 +80,7 @@ public class LikeService {
     }
 
     public boolean isLiked(Long postId, UserDetailsImpl userDetails) {
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
-                -> new CustomException(StatusCode.NOT_FOUND_USER));
+        User user = userDetails.getUser();
 
         return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
 

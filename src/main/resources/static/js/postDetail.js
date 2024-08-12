@@ -27,11 +27,14 @@ $(document).ready(function() {
                             <img src="${imageUrl}" alt="${title}" class="img-fluid" />
                         </div>
                     `);
+                    let hashtagsArray = Array.isArray(hashtags) ? hashtags : hashtags.split(',');
                     $('#post-caption').html(`
                         <div class="post-header">
                             <div class="post-content" style="display: inline-block; margin-left: 10px;">${content}</div>
                         </div>
-                        <div class="post-hashtag">${hashtags}</div>
+                        <div class="post-hashtag">
+                        ${hashtagsArray.map(tag => `<span class="hashtag">${tag.trim()}</span>`).join(' ')}
+                    </div>
                     `);
 
                     // 두 번째 이미지 URL이 있으면 상품 이미지로 사용
@@ -45,6 +48,13 @@ $(document).ready(function() {
                            <div class="product-price">$${price}</div> <!-- 가격 표시 -->
                         </div>
                     `);
+
+                    // 해시태그 클릭 이벤트 추가
+                    $('.post-hashtag .hashtag').click(function() {
+                        const searchType = "HASHTAGS"; // searchType을 HASHTAGS로 고정
+                        const hashtagText = $(this).text();
+                        window.location.href = `/posts/search?type=${searchType}&keyword=${encodeURIComponent(hashtagText)}&page=1&size=10`;
+                    });
 
                     //좋아요 수 요청
                     $.ajax({

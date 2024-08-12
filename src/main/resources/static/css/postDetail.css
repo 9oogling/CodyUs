@@ -121,10 +121,11 @@
     color: #1da1f2; /* 해시태그 색상 */
     text-decoration: none; /* 링크의 밑줄 제거 */
     font-weight: bold;
+    cursor: pointer;
 }
 
 .post-hashtag:hover {
-    text-decoration: underline; /* 해시태그에 마우스를 올렸을 때 밑줄 추가 */
+    text-decoration: none; /* 해시태그에 마우스를 올렸을 때 밑줄 추가 */
 }
 
 .product-gallery {
