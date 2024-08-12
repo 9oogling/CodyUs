@@ -35,6 +35,11 @@ public class PostRepositoryImpl implements PostRepositoryCustom{
         BooleanExpression predicate;
 
         switch (type) {
+            case ALL:
+                predicate = post.title.containsIgnoreCase(keyword)
+                        .or(post.content.containsIgnoreCase(keyword))
+                        .or(post.hashtags.containsIgnoreCase(keyword));
+                break;
             case TITLE:
                 predicate = post.title.containsIgnoreCase(keyword);
                 break;
