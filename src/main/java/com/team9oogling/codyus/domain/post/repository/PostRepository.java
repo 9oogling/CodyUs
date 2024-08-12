@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 
 
 public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
-    List<Post> findByUser(User user);
+    Page<Post> findByUser(User user, Pageable pageable);
 
     Page<Post> findAllByStatusAndCompletedDate(PostStatus status, LocalDate completedDate, Pageable pageable);
 

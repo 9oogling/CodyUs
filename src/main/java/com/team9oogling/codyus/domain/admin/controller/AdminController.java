@@ -25,10 +25,11 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/category")
-    public ResponseEntity<MessageResponseDto> AddCategory(
-            @Valid @RequestBody CategoryRequestDto requestDto) {
-        adminService.addCategory(requestDto);
+  // 카테고리 생성 api
+  @PostMapping("/category")
+  public ResponseEntity<MessageResponseDto> AddCategory(
+      @Valid @RequestBody CategoryRequestDto requestDto) {
+    adminService.addCategory(requestDto);
 
         return ResponseFactory.created(StatusCode.SUCCESS_CREATE_CATEGORY);
     }

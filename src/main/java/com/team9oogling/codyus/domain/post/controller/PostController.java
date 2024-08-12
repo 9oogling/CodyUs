@@ -1,5 +1,21 @@
 package com.team9oogling.codyus.domain.post.controller;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team9oogling.codyus.domain.post.dto.PostRequestDto;
 import com.team9oogling.codyus.domain.post.dto.PostResponseDto;
@@ -10,15 +26,9 @@ import com.team9oogling.codyus.global.dto.MessageResponseDto;
 import com.team9oogling.codyus.global.entity.ResponseFactory;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.security.UserDetailsImpl;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -77,10 +87,13 @@ public class PostController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getMyPosts(
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> getMyPosts(
+        @RequestParam(defaultValue = "1") int page,
+		@RequestParam(defaultValue = "4") int size,
+		@RequestParam(defaultValue = "createdAt") String sortBy,
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        List<PostResponseDto> myPosts = postService.findMyPosts(userDetails);
+        Page<PostResponseDto> myPosts = postService.findMyPosts(page,size,sortBy,userDetails);
 
         return ResponseFactory.ok(myPosts, StatusCode.SUCCESS_GET_MYPOST);
     }

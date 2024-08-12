@@ -39,23 +39,29 @@ function displayPosts(posts) {
 
     // 게시물 요소 생성
     var postElement = $(`
-            <div class="card-box" data-post-id="${post.id}">
-                <div class="image-box">
-                    <img src="${imageUrl}" alt="Post Image" class="img-fluid" />
-                </div>
-                <div class="card-detail">
-                    <div class="detail-left">
-                        <div class="nickname">${post.nickname || 'Unknown'}</div>
-                    </div>
-                    <div class="detail-right">
+        <div class="card-box" data-post-id="${post.id}">
+            <div class="image-box">
+                <img src="${imageUrl}" alt="Post Image" class="img-fluid" />
+            </div>
+            <div class="card-detail">
+                <div class="card-header">
+                    <div class="title">${post.title || 'No Title'}</div>
+                    <div class="like-section">
                         <button class="like-btn" data-post-id="${post.id}">
                             <span class="like-icon">❤️</span>
                         </button>
                         <span class="like-count">${post.likeCount || 0}</span>
                     </div>
                 </div>
+                <div class="content">
+                    <p>${post.content || ''}</p>
+                </div>
+                <div class="hashtags">
+                    ${post.hashtags ? post.hashtags.split(',').map(tag => `<span class="hashtag">#${tag.trim()}</span>`).join(' ') : ''}
+                </div>
             </div>
-        `);
+        </div>
+    `);
 
     // 클릭 시 상세 페이지로 이동
     postElement.click(function () {
@@ -72,6 +78,15 @@ function displayPosts(posts) {
 
     // 게시물 컨테이너에 추가
     postsContainer.append(postElement);
+  });
+
+  // 이미지가 모두 로드된 후에 Masonry 레이아웃 적용
+  postsContainer.imagesLoaded(function () {
+    postsContainer.masonry({
+      itemSelector: '.card-box',
+      columnWidth: '.card-box', // 여기서 각 카드 박스의 너비를 기준으로 설정
+      gutter: 30 // 열 간격을 20px로 설정
+    });
   });
 }
 

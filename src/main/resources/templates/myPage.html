@@ -14,6 +14,8 @@
   <script src="https://code.jquery.com/jquery-3.7.0.js"
           integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
           crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script> <!-- js-cookie 추가 -->
+
 </head>
 <body>
 <div th:insert="header :: header-content"></div>
@@ -143,21 +145,23 @@
         <p class="like"> - 메종마르지엘라 지갑 </p>
       </div>
       <div class="box4">
-        <p class="title">판매 상품 목록</p>
+        <p class="title">내 게시물 목록</p>
         <div class="box">
           <p class="more2">더보기</p>
         </div>
         <br>
-        <p class="sale"> - 메종키츠네 반팔 [M] </p>
-        <p class="sale"> - 코디어스 블레이져 [XL] </p>
-        <p class="sale"> - 루이비통 카드지갑 </p>
-        <p class="sale"> - 카시오 시계 </p>
-        <p class="sale"> - 나이키 에어포스 [260] </p>
+        <div class="sales-list"></div>
+      </div>
+      <div class="pagination">
+        <button class="prev-page" onclick="changePage(currentPage - 1)">이전</button>
+        <span id="page-numbers"></span>
+        <button class="next-page" onclick="changePage(currentPage + 1)">다음</button>
       </div>
     </div>
   </div>
 </div>
 <div th:insert="footer :: footer-content"></div>
+<script src="/js/basic.js"></script>
 <script src="/js/myPage.js"></script>
 <script src="/js/header.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -1,7 +1,8 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .create-container {
@@ -31,6 +32,7 @@ label {
     font-weight: bold;
     color: #262626;
 }
+
 .post-create-form .image-upload{
     display: flex;
     gap: 20px;
@@ -141,4 +143,31 @@ button:hover {
     margin-left: 5px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.category-section {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* 항목 간격 */
+}
+
+.category-option {
+    width: calc(25% - 10px); /* 4개씩 배치하기 위한 너비 계산 */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0 !important;
+}
+
+.category-option input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* category-label 스타일 (여기서는 기본 스타일을 무시함) */
+.category-label {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: normal;
+    color: inherit; /* 기본 색상 제거 */
 }
