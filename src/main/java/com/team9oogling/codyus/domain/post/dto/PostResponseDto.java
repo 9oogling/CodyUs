@@ -1,5 +1,6 @@
 package com.team9oogling.codyus.domain.post.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.team9oogling.codyus.domain.post.entity.Post;
 import com.team9oogling.codyus.domain.post.entity.PostImage;
 import com.team9oogling.codyus.domain.post.entity.SaleType;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostResponseDto {
 
     private Long id;
@@ -39,5 +41,11 @@ public class PostResponseDto {
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
         this.nickname = post.getNickname(); // nickname 필드 초기화
+    }
+
+    public PostResponseDto(Long postId, String title, LocalDateTime createdAt) {
+        this.id = postId;
+        this.title = title;
+        this.createdAt = createdAt;
     }
 }

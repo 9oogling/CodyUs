@@ -1,5 +1,15 @@
 package com.team9oogling.codyus.domain.post.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.team9oogling.codyus.domain.post.dto.PostRequestDto;
 import com.team9oogling.codyus.domain.post.dto.PostResponseDto;
@@ -18,17 +28,8 @@ import com.team9oogling.codyus.global.exception.CustomException;
 import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import com.team9oogling.codyus.upload.AwsS3Uploader;
 import com.team9oogling.codyus.upload.ImageType;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -159,13 +160,13 @@ public class PostService {
         return postPage.map(PostResponseDto::new);
     }
 
-    public List<PostResponseDto> findMyPosts(UserDetailsImpl userDetails) {
+    public Page<PostResponseDto> findMyPosts(int page, int size, String sortBy, UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
+        Sort sort = Sort.by(Sort.Direction.DESC, sortBy);
+        Pageable pageable = PageRequest.of(page-1, size, sort);
 
-        List<Post> posts = postRepository.findByUser(user);
-        return posts.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
+        Page<Post> posts = postRepository.findByUser(user,pageable);
+        return posts.map(post -> new PostResponseDto(post.getId(), post.getTitle(), post.getCreatedAt()));
     }
 
     @Transactional
