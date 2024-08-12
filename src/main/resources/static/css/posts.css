@@ -13,8 +13,6 @@ body {
     margin: 30px auto 20px;
 }
 
-
-
 .post-container {
     max-width: 1400px; /* 최대 너비 설정 */
     margin: 0 auto; /* 중앙 정렬 */
@@ -25,62 +23,72 @@ body {
     box-sizing: border-box; /* 패딩을 포함하여 크기 계산 */
 }
 
-.post {
+.card-box {
     border: 2px solid black;
     border-radius: 10px;
-    flex: 1 1 calc(25% - 20px); /* 4개씩 배치하고 간격을 고려하여 크기 설정 */
     box-sizing: border-box; /* padding을 포함하여 크기 계산 */
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color: #f9f9f9;
     text-align: center;
     cursor: pointer; /* 마우스 커서를 손 모양으로 변경 */
     transition: transform 0.2s; /* 부드러운 변환 효과 추가 */
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 calc(25% - 20px); /* 4개씩 배치하고 간격을 고려하여 크기 설정 */
+    max-width: calc(25% - 20px); /* 최대 너비 설정 */
 }
 
-.post img {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-    margin-bottom: 10px;
+.card-box:hover {
+    transform: scale(1.02); /* 마우스 오버 시 크기 확대 */
 }
 
-.post .nickname {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    color: #333;
+.image-box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    object-fit: cover; /* 이미지가 박스를 채우도록 조정 */
+}
+
+.card-detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.detail-left {
+    flex: 1;
     text-align: left;
 }
-.post .nickname::before {
-    content: "@"; /* @ 기호를 추가 */
-    margin-right: 5px; /* @ 기호와 닉네임 사이에 간격 추가 */
+
+.detail-right {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.post p {
-    font-size: 0.9em;
-    margin-bottom: 10px;
+.detail-right .like-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ff0000;
 }
 
-.post small {
-    color: #666;
+.detail-right .like-count {
+    font-size: 1em;
+    color: #333;
 }
 
-.image-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-img {
-    max-width: 100%; /* 화면 크기에 맞게 조정 */
-    height: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-/* 커스텀 버튼 스타일 */
 .post-create-btn {
     background-color: #000000; /* 원하는 배경색으로 변경 */
     color: white; /* 글자 색상 */
@@ -96,14 +104,12 @@ img {
     transition-duration: 0.4s; /* 호버 시 애니메이션 지속 시간 */
 }
 
-/* 버튼을 마우스 오버할 때 스타일 */
 .post-create-btn:hover {
     background-color: #ffffff; /* 마우스 오버 시 배경색 */
     color: black;
     border: black;
 }
 
-/* 버튼을 클릭할 때 스타일 */
 .post-create-btn:active {
     background-color: #3e8e41; /* 클릭 시 배경색 */
 }
