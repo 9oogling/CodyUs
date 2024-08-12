@@ -27,6 +27,11 @@ public class HomeController {
     return "admin-signup";
   }
 
+  @GetMapping("/admin/back-office")
+  public String adminBackOfficePage() {
+    return "back-office";
+  }
+
   @GetMapping("/posts")
   public String postsPage() {
     return "posts";
