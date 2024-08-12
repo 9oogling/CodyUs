@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
 
-  CategoryRepository categoryRepository;
+  private final CategoryRepository categoryRepository;
 
   public AdminService(CategoryRepository categoryRepository) {
     this.categoryRepository = categoryRepository;

@@ -61,27 +61,27 @@ public class LikeService {
     }
 
 
-    // 사용자가 좋아요 한 목록 조회
-    @Transactional
-    public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
-        User user = userDetails.getUser();
+//    // 사용자가 좋아요 한 목록 조회
+//    @Transactional
+//    public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
+//        User user = userDetails.getUser();
+//
+//        List<Post> posts = likeRepository.findAllByUserId(user.getId()).stream()
+//                .map(Like::getPost)
+//                .toList();
+//
+//        return posts.stream().map(LikedPostResponseDto::new).toList();
 
-        List<Post> posts = likeRepository.findAllByUserId(user.getId()).stream()
-                .map(Like::getPost)
-                .toList();
-
-        return posts.stream().map(LikedPostResponseDto::new).toList();
-
-    @Transactional
-    public int likecount(Long postId){
-        return likeRepository.countByPostId(postId);
-    }
-
-    public boolean isLiked(Long postId, UserDetailsImpl userDetails) {
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
-                -> new CustomException(StatusCode.NOT_FOUND_USER));
-
-        return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
-
-    }
+//    @Transactional
+//    public int likecount(Long postId){
+//        return likeRepository.countByPostId(postId);
+//    }
+//
+//    public boolean isLiked(Long postId, UserDetailsImpl userDetails) {
+//        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(()
+//                -> new CustomException(StatusCode.NOT_FOUND_USER));
+//
+//        return likeRepository.findByPostIdAndUserId(postId, user.getId()).isPresent();
+//
+//    }
 }
