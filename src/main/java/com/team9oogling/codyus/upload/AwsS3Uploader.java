@@ -49,7 +49,10 @@ public class AwsS3Uploader {
             try {
                 amazonS3Client.putObject(bucket, s3FileName, file.getInputStream(), metadata); // 파일 업로드
 
-                imageUrls.add(amazonS3Client.getUrl(bucket, s3FileName).toString());
+                // Path-Style URL 직접 생성
+                String imageUrl = "https://s3.ap-northeast-2.amazonaws.com/" + bucket + "/" + s3FileName;
+                imageUrls.add(imageUrl);
+
             } catch (IOException e) {
                 throw new CustomException(StatusCode.FILE_CONVERT_FAIL);
             }

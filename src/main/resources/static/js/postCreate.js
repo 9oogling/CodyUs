@@ -17,11 +17,15 @@ $(document).ready(function () {
             seasons.push($(this).val());
         });
         var gender = $('input[name="gender"]:checked').val();
+        var categories = [];
+        $('input[name="category"]:checked').each(function () {
+            categories.push($(this).val());
+        });
         var categoryName = [];
         if (gender) {
             categoryName.push(gender);
         }
-        categoryName = categoryName.concat(seasons);
+        categoryName = categoryName.concat(seasons).concat(categories);
 
         formData.append('request', new Blob([JSON.stringify({
             title: $('#title').val(),
