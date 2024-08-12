@@ -71,7 +71,10 @@
 
 .post-actions {
     display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: flex-end; /* 모든 요소를 오른쪽으로 정렬 */
     margin-bottom: 10px;
+    gap: 6px;
 }
 
 .action-btn {
@@ -79,12 +82,21 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 .post-likes {
     font-weight: bold;
-    margin-bottom: 10px;
+}
+
+.chat-actions {
+    display: flex;
+    align-items: center;
+}
+
+.chat-text {
+    font-size: 1em;
+    color: #333;
+    padding: 0 5px;
 }
 
 /* 기본 하트 색상 */
