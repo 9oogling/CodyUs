@@ -25,11 +25,11 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-  // 카테고리 생성 api
-  @PostMapping("/category")
-  public ResponseEntity<MessageResponseDto> AddCategory(
-      @Valid @RequestBody CategoryRequestDto requestDto) {
-    adminService.addCategory(requestDto);
+    // 카테고리 생성 api
+    @PostMapping("/category")
+    public ResponseEntity<MessageResponseDto> AddCategory(
+            @Valid @RequestBody CategoryRequestDto requestDto) {
+        adminService.addCategory(requestDto);
 
         return ResponseFactory.created(StatusCode.SUCCESS_CREATE_CATEGORY);
     }
@@ -44,11 +44,10 @@ public class AdminController {
     }
 
     // 관리자 권한 사용자 게시물 삭제
-    @DeleteMapping("/users/{userId}/posts/{postId}")
+    @DeleteMapping("/posts/{postId}")
     public ResponseEntity<MessageResponseDto> deletePostByUserAndPostId(
-            @PathVariable Long userId,
             @PathVariable Long postId) {
-        adminService.deletePostByUserAndPostId(userId, postId);
+        adminService.deletePostByUserAndPostId(postId);
 
         return ResponseFactory.ok(StatusCode.SUCCESS_DELETE_POST);
     }

@@ -65,23 +65,13 @@ public class AdminService {
 
     // 관리자 권한 사용자 게시물 삭제
     @Transactional
-    public void deletePostByUserAndPostId(Long userId, Long postId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
+    public void deletePostByUserAndPostId(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(()
+                -> new CustomException(StatusCode.NOT_FOUND_POST));
 
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-
-            if (post.getUser().getId().equals(userId)) {
-                postRepository.delete(post);
-
-            } else {
-                throw new CustomException(StatusCode.NOT_MATCH_USERID_AND_POSTID);
-            }
-
-        } else {
-            throw new CustomException(StatusCode.NOT_FOUND_POST);
-        }
+        postRepository.delete(post);
     }
+
 
     // 사용자별 게시물 조회
     public PostPageResponseDto getAllPostsByUser(Long userId, int page) {
