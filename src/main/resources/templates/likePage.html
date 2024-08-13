@@ -6,11 +6,12 @@
     <link rel="stylesheet" type="text/css" href="/css/likePage.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/posts.css">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"
             integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 </head>
 <body>
 <div th:insert="header :: header-content"></div>
@@ -19,125 +20,9 @@
 <main>
     <div class="my-like-product"><span>나의 관심 상품</span></div>
     <div class="responsive-container">
-        <div class="grid">
-            <div class="grid-column">
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://kr.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%EB%A3%A8%EC%9D%B4-%EB%B9%84%ED%86%B5-lv-%EC%97%90%EC%84%BC%EC%85%9C-%EC%8A%A4%EC%B9%B4%ED%94%84-s00-%EC%8A%A4%EC%B9%B4%ED%94%84--M77853_PM2_Front%20view.jpg"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">루이비통 스카프</h2>
-                            <p class="product-price">₩ 800,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://image-cdn.trenbe.com/productmain/1690041714103-2b669a28-1d30-4d0a-88d3-e86dd2c834b4.jpeg?dpr=3&width=390&format=webp"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">메종 마르지엘라 카드지갑</h2>
-                            <p class="product-price">₩ 289,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://item.elandrs.com/r/image/oa/2024-07-23/0b1f0738-308a-4075-bf44-74a514031bb1.jpg?w=750&h=&q=100"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">디젤 데님 베이스볼 캡</h2>
-                            <p class="product-price">₩ 170,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="grid-column">
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://viviennewestwood.kr/fserver/files/goods/small/VOTCJW0001_09%20(1).JPG"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">미니 바스 릴리프 초커 목걸이</h2>
-                            <p class="product-price">₩ 430,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://www.casio.com/content/dam/casio/product-info/locales/kr/ko/timepiece/product/watch/A/AQ/aq8/aq-800e-3a/assets/AQ-800E-3A.png.transform/main-visual-pc/image.png"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">카시오 시계 (AQ-800E-3A)</h2>
-                            <p class="product-price">₩ 91,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://www.optimized-rlmedia.io/is/image/PoloGSI/s7-1498402_lifestyle?$rl_4x5_zoom$"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">폴로 클래식핏 옥스포드 셔츠</h2>
-                            <p class="product-price">₩ 219,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="grid-column">
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://img000b.feelway.com/6744/bd519pd6744382874ed1.jpg"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">요시다 포터 탱커 토트백</h2>
-                            <p class="product-price">₩ 498,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-                <a class="product" href="#">
-                    <div class="product-image">
-                        <img src="https://blog.kakaocdn.net/dn/cGUDkZ/btsISMj9dvz/AOuSWr276cuK3eiZqYvc61/img.png"/>
-                    </div>
-                    <div class="product-content">
-                        <div class="product-info">
-                            <h2 class="product-title">챔피온 후드스웨트셔츠</h2>
-                            <p class="product-price">₩ 169,000</p>
-                        </div>
-                        <div class="boxList">
-                            <div class="box"></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div class="grid" id="liked-posts-container">
+            <!--<div class="grid-column" id="liked-posts-container">
+            </div>-->
         </div>
     </div>
 </main>
@@ -145,5 +30,6 @@
 <div th:insert="footer :: footer-content"></div>
 <script src="/js/likePage.js"></script>
 <script src="/js/header.js"></script>
+<script src="/js/basic.js"></script>
 </body>
 </html>

@@ -42,14 +42,14 @@ main img {
     gap: 1rem;
 }
 
-.grid-column {
+/*.grid-column {
     display: flex;
     flex-direction: column;
 }
 
 .grid-column > * + * {
     margin-top: 1rem;
-}
+}*/
 
 .product {
     width: 100%;
@@ -114,9 +114,9 @@ main img {
         gap: 1.5rem;
     }
 
-    .grid-column > * + * {
+    /*.grid-column > * + * {
         margin-top: 1.5rem;
-    }
+    }*/
 }
 
 /* 좋아요 버튼 */

@@ -80,11 +80,11 @@ public class SecurityConfig {
             .requestMatchers("chat","/api/users/signup", "/main.html"
                 , "/posts", "/api/posts", "posts/postDetail/", "/chatting/**", "/posts/**",
                 "/posts/postCreate", "/chat", "/admin/signup", "/admin/back-office", "/login/find-email",
-                "/login/find-password", "/api/admin/category",
+                "/login/find-password", "/api/admin/category","api/posts/likes/my",
                 "/api/users/token/refresh", "/api/users/login", "/login", "/home", "/like", "/help", "/my-page",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts"
+            .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts","/api/posts/likes/my"
                 , "/api/posts/{postId}/likes/count", "/api/users/email/find-by-phone", "/api/users/exists-by-email",
                 "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search", "/api/posts/category/{categoryName}",
                 "/posts/postCreate", "api/posts/search/**").permitAll()
