@@ -44,6 +44,7 @@ public enum StatusCode {
   SUCCESS_GET_ALLUSERS(HttpStatus.OK, "가입된 사용자 전체 조회에 성공했습니다."),
   SUCCESS_GET_USER_POST(HttpStatus.OK, "사용자별 게시물 조회에 성공했습니다."),
   SUCCESS_GET_POSTS_BY_STATUS(HttpStatus.OK, "거래 상태 조회에 성공했습니다."),
+  SUCCESS_CREATE_USER_QUESTION(HttpStatus.CREATED, "Q n A 생성에 성공했습니다."),
 
 
   // 400번대

@@ -203,3 +203,14 @@ textarea::placeholder {
 .save-btn1:hover {
     background-color: #eaeaea;
 }
+
+#charCount {
+    margin-top: 7px;
+    margin-right: 13px;
+    float:right;
+    font-size: 12px;
+}
+
+#charCount.over-limit {
+    color: red;
+}
