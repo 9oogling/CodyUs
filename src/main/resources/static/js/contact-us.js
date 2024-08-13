@@ -74,6 +74,13 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#cancelBtn').click(function(e) {
+        e.preventDefault(); // 기본 폼 제출 방지
+        $('#userName').val('');   // 이름 필드 초기화
+        $('#userEmail').val('');  // 이메일 필드 초기화
+        $('#userInquiry').val(''); // 문의 내용 필드 초기화
+    });
 });
 
 $(document).ready(function() {
