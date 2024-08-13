@@ -1,6 +1,9 @@
 let currentPage = 1;
 let totalPages = 1;
 const token = getToken();
+if(!token){
+    window.location.href='/login';
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const openModalButtons = document.querySelectorAll('.open-modal-button');
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // 모달 닫힐 때 내용 초기화
                     dialog.querySelectorAll('input').forEach(input => input.value = '');
                     overlay.style.display = 'none'; // Hide overlay
-                }, { once: true });
+                }, {once: true});
             }
         });
     });
@@ -48,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // 모달 닫힐 때 내용 초기화
                     dialog.querySelectorAll('input').forEach(input => input.value = '');
                     overlay.style.display = 'none'; // Hide overlay
-                }, { once: true });
+                }, {once: true});
             }
         });
     });
@@ -89,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             url: '/check-password',  // 서버의 비밀번호 확인 엔드포인트
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ currentPw: currentPw }),
+            data: JSON.stringify({currentPw: currentPw}),
             success: function (response) {
                 if (response.match === false) {
                     alert("현재 비밀번호가 일치하지 않습니다.");
@@ -125,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 모달 닫힐 때 내용 초기화
                 dialog.querySelectorAll('input').forEach(input => input.value = '');
                 overlay.style.display = 'none'; // Hide overlay
-            }, { once: true });
+            }, {once: true});
         }
     });
 
@@ -142,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 모달 닫힐 때 내용 초기화
                 dialog.querySelectorAll('input').forEach(input => input.value = '');
                 overlay.style.display = 'none'; // Hide overlay
-            }, { once: true });
+            }, {once: true});
         }
     });
 });
@@ -224,9 +227,9 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-function  fetchPosts(page) {
+function fetchPosts(page) {
     $.ajax({
-        url : `/api/posts/my?page=${page}`,
+        url: `/api/posts/my?page=${page}`,
         method: 'GET',
         headers: {
             'Authorization': token
@@ -240,7 +243,7 @@ function  fetchPosts(page) {
             }
         },
         error: function (xhr) {
-        console.error('데이터를 가져오는데 실패했습니다.', xhr)
+            console.error('데이터를 가져오는데 실패했습니다.', xhr)
         }
     });
 }
@@ -297,7 +300,7 @@ function updatePagination(page) {
 
 // 페이지 변경 함수
 function changePage(page) {
-    console.log(page+" <= page" + totalPages);
+    console.log(page + " <= page" + totalPages);
     if (page < 1 || page > totalPages) return; // 페이지 범위 체크
     currentPage = page;
     fetchPosts(currentPage); // 새 페이지 데이터 가져오기
@@ -312,8 +315,13 @@ function updatePaginationButtons() {
     nextButton.classList.toggle('disabled', currentPage === totalPages); // 마지막 페이지일 때 비활성화
 }
 
+
+document.getElementById('postMoreLink').addEventListener('click', function () {
+    window.location.href = '/posts'; // 원하는 URL로 이동
+});
+
 // 초기 데이터 가져오기
-$(document).ready(function() {
+$(document).ready(function () {
     fetchPosts(currentPage); // 초기 페이지 로드 시 데이터 가져오기
     updatePaginationButtons(); // 초기 버튼 상태 업데이트
 });
