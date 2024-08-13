@@ -35,7 +35,7 @@ public class LikeService {
 
         User user = userDetails.getUser();
 
-        if (post.getUser().equals(user)) {
+        if (post.getUser().getId().equals(user.getId())) {
             throw new CustomException(StatusCode.CANNOT_LIKE_YOURS);
         }
         Optional<Like> checkLike = likeRepository.findByPostIdAndUserId(postId, user.getId());
