@@ -111,3 +111,21 @@ $(document).ready(function() {
   });
 
 });
+
+$(document).ready(function() {
+  const currentPath = window.location.pathname;
+
+  // 모든 링크의 기본 스타일 초기화
+  $('.center-bar a').each(function() {
+    $(this).removeClass('bold');
+  });
+
+  // 각 페이지별로 굵게 할 링크를 조건에 따라 지정
+  if (currentPath === '/home') {
+    $('.center-bar a').eq(0).addClass('bold'); // 첫 번째 링크 굵게
+  } else if (currentPath === '/posts') {
+    $('.center-bar a').eq(1).addClass('bold'); // 두 번째 링크 굵게
+  } else if (currentPath === '/shop') {
+    $('.center-bar a').eq(2).addClass('bold'); // 세 번째 링크 굵게
+  }
+});

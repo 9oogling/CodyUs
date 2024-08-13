@@ -329,10 +329,16 @@ nav a {
   position: relative;
   text-decoration: none;
   font-size: 17px;
-  font-weight: 600;
   color: #000000;
   margin: 0 1rem;
   /*transition: text-shadow 300ms ease, color 300ms ease;*/
+}
+.center-bar .text {
+  font-weight: 400; /* 기본 굵기 */
+}
+
+.center-bar .bold .text {
+  font-weight: 800; /* 더 굵게: 800 (extra-bold) */
 }
 
 nav a .slide {
