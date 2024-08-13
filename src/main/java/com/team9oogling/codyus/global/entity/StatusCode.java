@@ -41,6 +41,9 @@ public enum StatusCode {
   SUCCESS_CHECK_EMAIL(HttpStatus.OK, "이메일 존재 여부 확인에 성공했습니다."),
   NOT_FOUND_PHONENUMBER(HttpStatus.OK, "해당 휴대폰번호는 존재하지 않습니다."), // 휴대폰 찾기에 에러가 뜨기 때문에 ok 로 변경
   SUCCESS_GET_POSTSBYCATEGORY(HttpStatus.OK, "카테고리별 게시글 조회에 성공했습니다."),
+  SUCCESS_GET_ALLUSERS(HttpStatus.OK, "가입된 사용자 전체 조회에 성공했습니다."),
+  SUCCESS_GET_USER_POST(HttpStatus.OK, "사용자별 게시물 조회에 성공했습니다."),
+  SUCCESS_GET_POSTS_BY_STATUS(HttpStatus.OK, "거래 상태 조회에 성공했습니다."),
 
 
   // 400번대
@@ -56,7 +59,7 @@ public enum StatusCode {
   CANNOT_CHANGE_SAME_PASSWORD(HttpStatus.BAD_REQUEST, "현재 비밀번호와 동일한 비밀번호로는 변경할 수 없습니다."),
   NOT_MATCH_PASSWORD(HttpStatus.BAD_REQUEST, "비밀번호가 일치하지 않습니다."),
   NOT_FOUND_SEARCH(HttpStatus.NOT_FOUND, "검색 결과가 없습니다."),
-  INVALID_SEARCH_QUERY(HttpStatus.NOT_FOUND, "검색어와 검색 타입이 비어있습니다"),
+  INVALID_SEARCH_QUERY(HttpStatus.NOT_FOUND, "검색어와 검색 타입이 비어있습니다."),
   NOT_FOUND_DATA(HttpStatus.NOT_FOUND, "데이터를 전부 채워주세요."),
   CANNOT_LIKE_YOURS(HttpStatus.BAD_REQUEST, "본인이 작성한 게시글에는 좋아요를 할 수 없습니다."),
   NOT_FOUND_LIKE(HttpStatus.NOT_FOUND, "좋아요를 찾을 수 없습니다."),
@@ -65,6 +68,8 @@ public enum StatusCode {
   FILE_CONVERT_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "File Convert Error"),
   NOT_FOUND_EMAIL(HttpStatus.NOT_FOUND, "해당 이메일을 찾을 수 없습니다."),
   ALREADY_EXIST_CATEGORY(HttpStatus.CONFLICT, "이미 존재하는 카테고리입니다."),
+  NOT_MATCH_USERID_AND_POSTID(HttpStatus.BAD_REQUEST, "사용자 ID와 게시물 ID가 일치하지 않습니다."),
+  NOT_NULL_COMPLETED_DATE(HttpStatus.BAD_REQUEST, "거래 완료 날짜는 null이 될 수 없습니다."),
 
   // Chatting
   NOT_FOUND_POST(HttpStatus.NOT_FOUND, "게시물이 없습니다."),
