@@ -8,6 +8,9 @@ import com.team9oogling.codyus.global.dto.MessageResponseDto;
 import com.team9oogling.codyus.global.entity.ResponseFactory;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.security.UserDetailsImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -40,11 +43,15 @@ public class LikeController {
     }
 
 
-//     사용자가 좋아요 한 목록 조회
+    //사용자가 좋아요 한 목록 조회
     @GetMapping("/likes/my")
-    public ResponseEntity<DataResponseDto<List<LikedPostResponseDto>>> getLikedPosts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<DataResponseDto<Page<LikedPostResponseDto>>> getLikedPosts(
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "9") int size) {
 
-        List<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails);
+        Pageable pageable = PageRequest.of(page,size);
+        Page<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails,pageable);
 
         return ResponseFactory.ok(likedPosts, StatusCode.SUCCESS_GET_LIKE);
     }
@@ -62,6 +69,8 @@ public class LikeController {
         boolean isLiked = likeService.isLiked(postId, userDetails);
         return ResponseFactory.ok(isLiked, StatusCode.SUCCESS_GET_LIKESTATUS);
     }
+
+
 
 
 }

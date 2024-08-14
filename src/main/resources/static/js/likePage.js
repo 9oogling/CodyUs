@@ -4,26 +4,34 @@ $(document).ready(function () {
     }
 
     const auth = getToken();
+    const pageSize = 9; // 페이지당 게시물 수
+    let currentPage = 0; // 현재 페이지 번호 (0부터 시작)
 
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
         jqXHR.setRequestHeader('Authorization', auth);
     });
 
     // 페이지 로드 시 좋아요한 게시물 목록을 가져와서 표시
-    $.ajax({
-        url: '/api/posts/likes/my',
-        type: 'GET',
-        success: function (response) {
-            const likedPosts = response.data;
-            const $container = $('#liked-posts-container');
+    function fetchPosts(page=0) {
+        $.ajax({
+            url: `/api/posts/likes/my?page=${page}&size=${pageSize}`,
+            type: 'GET',
+            dataType: 'json',
+            headers: {
+                'Authorization': auth
+            },
+            success: function (response) {
+                const likedPosts = response.data.content;
+                const $container = $('#liked-posts-container');
+                $container.empty();
 
-            likedPosts.forEach(function (post) {
-                // 첫 번째 이미지 URL만 사용
-                const imageUrl = post.imageUrls && post.imageUrls.length > 0
-                    ? post.imageUrls[0] : 'default-image-url.jpg'; // 이미지 URL이 없을 경우 기본 이미지 사용
+                likedPosts.forEach(function (post) {
+                    // 첫 번째 이미지 URL만 사용
+                    const imageUrl = post.imageUrls && post.imageUrls.length > 0
+                        ? post.imageUrls[0] : 'default-image-url.jpg'; // 이미지 URL이 없을 경우 기본 이미지 사용
 
-                // 게시물 요소 생성
-                const postElement = $(`
+                    // 게시물 요소 생성
+                    const postElement = $(`
                     <div class="card-box" data-post-id="${post.id}" style="cursor: pointer;">
                         <div class="image-box">
                             <img src="${imageUrl}" alt="Post Image" class="img-fluid" />
@@ -46,21 +54,45 @@ $(document).ready(function () {
                         </div>
                     </div>
                 `);
-                $container.append(postElement);
+                    $container.append(postElement);
 
-                // 게시물 클릭 시 postDetail 페이지로 이동
-                postElement.on('click', function (e) {
-                    // 좋아요 버튼을 클릭했을 경우에는 페이지 이동을 방지
-                    if ($(e.target).closest('.box').length === 0) {
-                        const postId = $(this).data('post-id');
-                        window.location.href = `/posts/postDetail/${postId}`;
-                    }
+                    // 게시물 클릭 시 postDetail 페이지로 이동
+                    postElement.on('click', function (e) {
+                        // 좋아요 버튼을 클릭했을 경우에는 페이지 이동을 방지
+                        if ($(e.target).closest('.box').length === 0) {
+                            const postId = $(this).data('post-id');
+                            window.location.href = `/posts/postDetail/${postId}`;
+                        }
+                    });
                 });
-            });
-        },
-        error: function () {
-            alert("관심 상품을 불러오지 못했습니다.");
+                // 페이지네이션 버튼 업데이트
+                currentPage = response.data.number;
+                const totalPages = response.data.totalPages;
+
+                $('#current-page').text(currentPage + 1);
+                $('#total-pages').text(totalPages);
+
+                $('#prev-page').prop('disabled', currentPage === 0);
+                $('#next-page').prop('disabled', currentPage === totalPages - 1);
+            },
+            error: function () {
+                alert("관심 상품을 불러오지 못했습니다.");
+            }
+        });
+    }
+    // 처음 로드할 때 첫 번째 페이지를 로드
+    fetchPosts(currentPage);
+
+    // 이전 페이지 버튼 클릭
+    $('#prev-page').on('click', function () {
+        if (currentPage > 0) {
+            fetchPosts(currentPage - 1);
         }
+    });
+
+    // 다음 페이지 버튼 클릭
+    $('#next-page').on('click', function () {
+        fetchPosts(currentPage + 1);
     });
 
     // 좋아요 버튼 클릭 이벤트 처리
@@ -69,9 +101,9 @@ $(document).ready(function () {
         const $post = $box.closest('.card-box');
         const postId = $post.data('post-id'); // 게시물 ID
 
-        const $likeCount = $box.closest('.like-section').find('.like-count');
+       /* const $likeCount = $box.closest('.like-section').find('.like-count');
         let currentCount = parseInt($likeCount.text(), 10);
-
+*/
         $box.toggleClass("off");
 
         if ($box.hasClass("off")) {
