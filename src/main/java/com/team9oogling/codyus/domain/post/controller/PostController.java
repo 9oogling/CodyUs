@@ -3,6 +3,9 @@ package com.team9oogling.codyus.domain.post.controller;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +32,7 @@ import com.team9oogling.codyus.global.security.UserDetailsImpl;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -80,7 +84,19 @@ public class PostController {
 
     // 게시물 선택 조회
     @GetMapping("/{postId}")
-    public ResponseEntity<DataResponseDto<PostResponseDto>> getPost(@PathVariable Long postId) {
+    public ResponseEntity<DataResponseDto<PostResponseDto>> getPost(
+            @PathVariable Long postId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String category,
+            @RequestParam(defaultValue = "createdAt") String sort) {
+
+        Pageable pageable;
+        if ("likes".equals(sort)) {
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "likeCount"));
+        } else {
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        }
 
         PostResponseDto post = postService.getPost(postId);
         return ResponseFactory.ok(post, StatusCode.SUCCESS_GET_POST);
@@ -115,9 +131,22 @@ public class PostController {
     // 카테고리별 게시물 조회
     @GetMapping("/category/{categoryName}")
     public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName) {
-        List<PostResponseDto> posts = postService.findPostsByCategory(categoryName);
+        List<PostResponseDto> posts;
+        if ("RANKING".equals(categoryName)) {
+            posts = postService.findPostsByLikes();
+        } else {
+            posts = postService.findPostsByCategory(categoryName);
+        }
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
+
+    @GetMapping("/likes")
+    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByLikes() {
+        List<PostResponseDto> posts = postService.findPostsByLikes();
+        return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTS_BY_LIKES);
+    }
+
+
 
 
 }

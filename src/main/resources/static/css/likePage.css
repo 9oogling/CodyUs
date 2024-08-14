@@ -139,3 +139,10 @@ main img {
     70% {transform: scale(0.9);}
     100% {transform: scale(1);}
 }
+
+.pagination {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center;
+    gap:5px;
+}

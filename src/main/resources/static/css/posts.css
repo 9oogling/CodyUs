@@ -91,6 +91,7 @@ body {
 .card-header .like-count {
     font-size: 1em;
     color: #333;
+    font-weight: bold;
 }
 
 .card-detail .content {
@@ -149,3 +150,4 @@ body {
     min-width: calc(25% - 20px); /* 빈 공간 크기 설정 */
     box-sizing: border-box; /* padding을 포함하여 크기 계산 */
 }
+
