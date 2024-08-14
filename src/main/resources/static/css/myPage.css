@@ -6,11 +6,13 @@ body {
 }
 
 .container {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     align-items: center; /* 중앙 정렬 */
+    position: relative;
+    left: -3%;
 }
 
 .wrapper {
@@ -29,7 +31,7 @@ body {
 /* 공통 박스 스타일 */
 .box1, .box2 {
     width: 430px;
-    height: 270px;
+    height: 560px;
     border: 1px solid black;
     padding: 25px 35px;
     font-weight: 300;
@@ -43,7 +45,7 @@ body {
     border-left: 1px solid black;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
-    padding: 25px 35px;
+    padding: 24.5px 35px;
     font-weight: 300;
     font-size: 15px;
     margin-bottom: 20px; /* 박스 사이 간격 */
@@ -79,37 +81,65 @@ body {
     border: 1px solid black;
     padding: 25px 35px;
 
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .title {
     font-weight: 500;
     font-size: 22px;
+    position: relative;
+    top: -3%;
 }
 
-.email, .password, .phone, .address {
+.title-1 {
+    font-weight: 500;
+    font-size: 22px;
+    position: relative;
+    top: -7%;
+}
+
+.email, .password, .phone, .address, .nickname {
     font-weight: 400;
     color: #ababab;
+    line-height: 5px;
 }
 
-.email1, .password1, .phone1, .address1 {
+.email1, .password1, .phone1, .address1, .nickname1 {
     font-weight: 400;
     color: #4d4d4d;
     border-bottom: 1px solid rgba(115, 115, 115, 0.3);
-    padding: 10px 0
+    padding: 10px 0;
+    line-height: 5px;
 }
 
-.email, .email1, .password, .password1, .phone, .phone1, .address, .address1{
-    line-height: 3px;
+.email, .email1, .password, .password1, .nickname, .nickname1 .phone, .phone1, .address, .address1{
+    /*line-height: 5px;*/
+}
+
+.email, .password, .nickname, .phone {
+    line-height: 0;
+}
+
+.nickname1 p {
+    line-height: 15px;
 }
 
 .con1, .con2 {
-    margin-top: 43px;
+    line-height: 8px;
+}
+
+.con2 p {
+    margin-bottom: 0;
+}
+
+.con3 {
+    margin-top: -8px;
 }
 
 /* 버튼 스타일 */
 .button {
     width: 60px;
+    height: 25px;
     text-align: center;
     color: #818181;
     font-size: 13px;
@@ -127,6 +157,20 @@ body {
 }
 
 .open-modal-button:hover {
+    background-color: #efefef;
+    color: #696969;
+}
+
+.open-modal-button1 {
+    border: 1px solid rgba(115, 115, 115, 0.39);
+    position: relative;
+    bottom: 30px;
+    left: 298px;
+    background-color: #ffffff;
+    color: #8c8c8c;
+}
+
+.open-modal-button1:hover {
     background-color: #efefef;
     color: #696969;
 }
@@ -156,8 +200,8 @@ dialog {
 
 .myPage-overlay {
     position: fixed;
-    top: -42%;
-    left: -27%;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(5px); /* 블러 효과 */
@@ -183,8 +227,19 @@ dialog {
 .dialog__content {
     padding: 0 55px 25px 55px;
     width: 500px;
-    height: 480px;
+    height: 450px;
 }
+
+.dialog__content h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content P {
+    margin-top: -25px;
+}
+
 
 .dialog__footer {
     width: 400px;
@@ -349,14 +404,35 @@ button.save-phone:hover {
 .dialog__content0 {
     width: 500px;
     height: 350px;
-    padding: 0 55px 25px 55px;
+    padding: 10px 55px 25px 55px;
+}
+
+.dialog__content0 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content0 P {
+    margin-top: -25px;
 }
 
 .dialog__content1 {
     width: 500px;
-    height: 650px;
+    height: 600px;
     padding: 0 55px 25px 55px;
     line-height: normal;
+    margin-bottom: 10%;
+}
+
+.dialog__content1 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content1 P {
+    margin-top: -25px;
 }
 
 .dialog__footer2 button:hover {
@@ -393,12 +469,12 @@ button.save-address:hover {
 }
 
 .like {
-    line-height: 13px;
+    line-height: 17px;
     font-weight: 400;
     color: #a4a4a4;
     cursor: pointer;
     position: relative;
-    top: -290px;
+    top: -310px;
 }
 
 .like:hover {

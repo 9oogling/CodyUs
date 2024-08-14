@@ -17,9 +17,12 @@ main img {
 
 .my-like-product {
     margin-bottom: 20px; /* 아래쪽에 여백을 추가하여 상품과의 간격 조절 */
-    margin-left: 450px;
+    /*margin-left: 450px;*/
     font-size: 17px;   /* 텍스트 크기를 약간 키움 */
     font-weight: bold;   /* 텍스트를 굵게 표시 */
+
+    position: relative;
+    left: 21.5%;
 }
 
 .responsive-container {
