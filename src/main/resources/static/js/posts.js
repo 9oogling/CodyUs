@@ -45,13 +45,10 @@ function displayPosts(posts) {
             </div>
             <div class="card-detail">
                 <div class="card-header">
-                    <div class="title">${post.title || 'No Title'}</div>
-                    <div class="like-section">
-                        <button class="like-btn" data-post-id="${post.id}">
-                            <span class="like-icon">❤️</span>
-                        </button>
-                        <span class="like-count">${post.likeCount || 0}</span>
-                    </div>
+                     <div class="nickname">${post.nickname || 'Anonymous'}</div>
+                    <div class="like-section" id="like-section-${post.id}">                      
+                         <span class="like-count">Loding likes..</span>
+                    </div>                  
                 </div>
                 <div class="content">
                     <p>${post.content || ''}</p>
@@ -69,15 +66,10 @@ function displayPosts(posts) {
       window.location.href = `/posts/postDetail/${postId}`;
     });
 
-    // 좋아요 버튼 클릭 시 이벤트 처리
-    postElement.find('.like-btn').click(function (e) {
-      e.stopPropagation(); // 클릭 이벤트 전파 방지
-      var postId = $(this).data('post-id');
-      handleLike(postId);
-    });
-
     // 게시물 컨테이너에 추가
     postsContainer.append(postElement);
+
+    fetchLikeCount(post.id);
   });
 
   // 이미지가 모두 로드된 후에 Masonry 레이아웃 적용
@@ -90,11 +82,21 @@ function displayPosts(posts) {
   });
 }
 
-// 좋아요 버튼 클릭 시 처리 함수
-function handleLike(postId) {
-  // 여기에서 좋아요 처리 로직을 추가합니다.
-  // 예를 들어 AJAX 요청을 통해 좋아요를 추가하거나 제거할 수 있습니다.
-  console.log('Like button clicked for post ID:', postId);
+// 좋아요 개수 가져오는 함수
+function fetchLikeCount(postId) {
+  $.ajax({
+    url: `/api/posts/${postId}/likes/count`,
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      const likeCount = response?.data ?? 0; // 데이터가 없으면 0으로 설정
+      $(`#like-section-${postId} .like-count`).text(`${likeCount} likes`);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error(`Failed to fetch like count for post ID: ${postId}`, textStatus, errorThrown);
+      $(`#like-section-${postId} .like-count`).text('Failed to load likes');
+    }
+  });
 }
 
 // 페이지 로드 시 게시물 불러오기
