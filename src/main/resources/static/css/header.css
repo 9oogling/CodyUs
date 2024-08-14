@@ -335,6 +335,14 @@ nav a {
   /*transition: text-shadow 300ms ease, color 300ms ease;*/
 }
 
+.center-bar .text {
+  font-weight: 400; /* 기본 굵기 */
+}
+
+.center-bar .bold .text {
+  font-weight: 800; /* 더 굵게: 800 (extra-bold) */
+}
+
 nav a .slide {
   position: absolute;
   left: 0;

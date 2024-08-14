@@ -111,6 +111,13 @@ public class PostService {
             .collect(Collectors.toList());
     }
 
+    public List<PostResponseDto> findPostsByLikes() {
+        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "likeCount"));
+        return posts.stream()
+                .map(PostResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     public List<PostResponseDto> findAllPost(int page, int size) {
         Page<Post> postsPage = postRepository.findAll(PageRequest.of(page, size));
         return postsPage.stream()

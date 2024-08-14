@@ -11,6 +11,8 @@ import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.exception.CustomException;
 import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,14 +66,12 @@ public class LikeService {
 
     // 사용자가 좋아요 한 목록 조회
     @Transactional
-    public List<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails) {
+    public Page<LikedPostResponseDto> getLikedPosts(UserDetailsImpl userDetails, Pageable pageable) {
         User user = userDetails.getUser();
 
-        List<Post> posts = likeRepository.findAllByUserId(user.getId()).stream()
-                .map(Like::getPost)
-                .toList();
+        Page<Like> likePage = likeRepository.findAllByUserId(user.getId(), pageable);
 
-        return posts.stream().map(LikedPostResponseDto::new).toList();
+        return likePage.map(like -> new LikedPostResponseDto(like.getPost()));
     }
 
     @Transactional
