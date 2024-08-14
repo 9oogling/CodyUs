@@ -154,7 +154,7 @@ dialog {
     z-index: 1001; /* 오버레이 위에 표시 */
 }
 
-.overlay {
+.mypage-overlay {
     position: fixed;
     top: -42%;
     left: -27%;
