@@ -109,7 +109,7 @@ public class PostController {
 		@RequestParam(defaultValue = "createdAt") String sortBy,
         @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        Page<PostResponseDto> myPosts = postService.findMyPosts(page,size,sortBy,userDetails);
+        Page<PostResponseDto> myPosts = postService.findMyPosts(page, size, sortBy, userDetails);
 
         return ResponseFactory.ok(myPosts, StatusCode.SUCCESS_GET_MYPOST);
     }
@@ -130,29 +130,38 @@ public class PostController {
 
     // 카테고리별 게시물 조회
     @GetMapping("/category/{categoryName}")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName,
-    @RequestParam(defaultValue = "1") int page,
-    @RequestParam(defaultValue = "20") int size,
-    @RequestParam(defaultValue = "id") String sortBy,
-    @RequestParam(defaultValue = "false") boolean descending
-    ) {
+    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(
+        @PathVariable String categoryName,
+        @RequestParam(defaultValue = "0") int page,  // 0부터 시작하도록 변경
+        @RequestParam(defaultValue = "20") int size,
+        @RequestParam(defaultValue = "id") String sortBy,
+        @RequestParam(defaultValue = "false") boolean descending) {
+
+        Pageable pageable = PageRequest.of(page, size, descending ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+
         List<PostResponseDto> posts;
         if ("RANKING".equals(categoryName)) {
-            posts = postService.findPostsByLikes(page, size, sortBy, descending);
+            posts = postService.findPostsByLikes(pageable);
         } else {
-            posts = postService.findPostsByCategory(categoryName, page, size, sortBy, descending);
+            posts = postService.findPostsByCategory(categoryName, pageable);
         }
+
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 
     @GetMapping("/likes")
     public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByLikes(
-        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "0") int page,  // 0부터 시작하도록 변경
         @RequestParam(defaultValue = "20") int size,
         @RequestParam(defaultValue = "id") String sortBy,
         @RequestParam(defaultValue = "false") boolean descending
     ) {
-        List<PostResponseDto> posts = postService.findPostsByLikes(page, size, sortBy, descending);
+        // Pageable 객체 생성
+        Pageable pageable = PageRequest.of(page, size, descending ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+
+        // Service에서 Pageable을 받아 처리
+        List<PostResponseDto> posts = postService.findPostsByLikes(pageable);
+
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTS_BY_LIKES);
     }
 

@@ -104,20 +104,26 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> findPostsByCategory(String categoryName, int page, int size,
-        String sortBy, boolean descending) {
-        List<Post> posts = postRepository.findByCategoryName(categoryName);
-        return posts.stream()
+    public List<PostResponseDto> findPostsByCategory(String categoryName, Pageable pageable) {
+        Page<Post> postsPage = postRepository.findByCategoryName(categoryName, pageable);
+        return postsPage.stream()
             .map(PostResponseDto::new)
             .collect(Collectors.toList());
     }
 
-    public List<PostResponseDto> findPostsByLikes(int page, int size,
-        String sortBy, boolean descending) {
-        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "likeCount"));
-        return posts.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public List<PostResponseDto> findPostsByLikes(Pageable pageable) {
+        // 기존 Pageable에서 페이지 번호와 크기를 가져와 새로운 Sort를 적용한 Pageable을 생성
+        Pageable sortedByLikes = PageRequest.of(
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            Sort.by(Sort.Direction.DESC, "likeCount")
+        );
+
+        Page<Post> postsPage = postRepository.findAll(sortedByLikes);
+        return postsPage.stream()
+            .map(PostResponseDto::new)
+            .collect(Collectors.toList());
     }
 
     public List<PostResponseDto> findAllPost(int page, int size) {
