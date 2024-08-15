@@ -112,9 +112,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 사용자 정보 가져운 후 렌더링
 function renderUserInfo() {
+    console.log("랜더링 전: " + token)
+    $.ajax({
+        url: '/api/user-info', // 사용자 정보를 가져올 엔드포인트
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        },
+        success: function(response) {
+            const userInfo = response.data;
 
+            // 이메일 업데이트
+            document.querySelector('.email1').textContent = userInfo.username;
 
+            // 닉네임 업데이트
+            document.querySelector('.nickname1').textContent = userInfo.nickName;
 
+            // 전화번호 업데이트
+            document.querySelector('.phone1').textContent = userInfo.phoneNumber;
+
+            // 주소 업데이트
+            document.querySelector('.address1').textContent = userInfo.address;
+        },
+        error: function(error) {
+            alert("오류: " + error.responseJSON.message)
+        }
+    });
 }
 
 
@@ -350,5 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).ready(function () {
         fetchPosts(currentPage); // 초기 페이지 로드 시 데이터 가져오기
         updatePaginationButtons(); // 초기 버튼 상태 업데이트
+        renderUserInfo(); // 유저 정보 업데이트
     });
     $(document).width();
