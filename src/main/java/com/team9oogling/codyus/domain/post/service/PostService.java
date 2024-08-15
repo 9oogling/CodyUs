@@ -104,25 +104,31 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> findPostsByCategory(String categoryName) {
-        List<Post> posts = postRepository.findByCategoryName(categoryName);
-        return posts.stream()
-            .map(PostResponseDto::new)
-            .collect(Collectors.toList());
+    public Page<PostResponseDto> findPostsByCategory(String categoryName, Pageable pageable) {
+        Page<Post> postsPage = postRepository.findByCategoryName(categoryName, pageable);
+        return postsPage.map(PostResponseDto::new);
     }
 
-    public List<PostResponseDto> findPostsByLikes() {
-        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "likeCount"));
-        return posts.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public Page<PostResponseDto> findPostsByLikes(Pageable pageable) {
+        // 'likeCount'를 기준으로 내림차순 정렬을 위한 Pageable 객체 생성
+        Pageable sortedPageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "likeCount")
+        );
+
+        // 'likeCount'를 기준으로 정렬된 게시물 조회
+        Page<Post> postsPage = postRepository.findAll(sortedPageable);
+
+        // Post 엔티티를 PostResponseDto로 변환
+        return postsPage.map(PostResponseDto::new);
     }
 
-    public List<PostResponseDto> findAllPost(int page, int size) {
-        Page<Post> postsPage = postRepository.findAll(PageRequest.of(page, size));
-        return postsPage.stream()
-                .map(PostResponseDto::new)
-                .collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public Page<PostResponseDto> findAllPost(Pageable pageable) {
+        Page<Post> postsPage = postRepository.findAll(pageable);
+        return postsPage.map(PostResponseDto::new);
     }
 
 
@@ -144,16 +150,11 @@ public class PostService {
     }
 
 
-    public Page<PostResponseDto> searchPosts(SearchType type, String keyword, int page, int size,
-                                             String sortBy, boolean descending) {
+    public Page<PostResponseDto> searchPosts(SearchType type, String keyword, Pageable pageable){
         //검색 타입이나 검색어가 비어있는 경우
         if (type == null || keyword == null || keyword.trim().isEmpty()) {
             throw new CustomException(StatusCode.INVALID_SEARCH_QUERY);
         }
-
-        Sort.Direction direction = descending ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Sort sort = Sort.by(direction, sortBy);
-        Pageable pageable = PageRequest.of(page, size, sort);
 
         //검색 수행
         Page<Post> postPage = postRepository.searchPosts(type, keyword, pageable);
@@ -167,11 +168,8 @@ public class PostService {
         return postPage.map(PostResponseDto::new);
     }
 
-    public Page<PostResponseDto> findMyPosts(int page, int size, String sortBy, UserDetailsImpl userDetails) {
+    public Page<PostResponseDto> findMyPosts(Pageable pageable, UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
-        Sort sort = Sort.by(Sort.Direction.DESC, sortBy);
-        Pageable pageable = PageRequest.of(page-1, size, sort);
-
         Page<Post> posts = postRepository.findByUser(user,pageable);
         return posts.map(post -> new PostResponseDto(post.getId(), post.getTitle(), post.getCreatedAt()));
     }
