@@ -87,28 +87,36 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const requestDto = {
+            password: currentPw,
+            newPassword: newPw,
+            checkPassword: confirmPw
+        }
+
         // 서버에 현재 비밀번호를 보내서 확인 (여기에 서버 요청 코드 추가)
         $.ajax({
-            url: '/check-password',  // 서버의 비밀번호 확인 엔드포인트
-            type: 'POST',
+            url: '/api/profile/password/my',  // 서버의 비밀번호 확인 엔드포인트
+            type: 'PUT',
             contentType: 'application/json',
-            data: JSON.stringify({currentPw: currentPw}),
+            data: JSON.stringify(requestDto),
             success: function (response) {
-                if (response.match === false) {
-                    alert("현재 비밀번호가 일치하지 않습니다.");
-                    return;
-                }
-
-                // 비밀번호 변경이 성공했을 때 모달이 닫히지 않도록 설정
                 alert("비밀번호가 성공적으로 변경되었습니다.");
                 // 비밀번호 변경 모달을 닫지 않음
             },
-            error: function () {
-                alert("비밀번호 확인 중 오류가 발생했습니다.");
+            error: function (error) {
+                alert("오류: " + error.responseJSON.message);
             }
         });
     });
 });
+
+// 사용자 정보 가져운 후 렌더링
+function renderUserInfo() {
+
+
+
+}
+
 
 // 주소 변경 모달 저장 버튼 클릭 시 모달 닫히기
 document.addEventListener('DOMContentLoaded', () => {
