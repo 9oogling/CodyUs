@@ -41,6 +41,7 @@
   height: 50%;
   margin-bottom: 20px;
   text-align: center;
+
 }
 
 .product-item img {
@@ -48,6 +49,12 @@
   height: 140px;
   object-fit: cover;
   border-radius: 10px;
+  cursor:pointer;
+  transition: transform 0.3s;
+}
+
+.product-item img:hover {
+  transform: scale(1.05); /* 마우스를 올렸을 때 이미지가 살짝 커지는 효과 (선택 사항) */
 }
 
 .product-name {
@@ -55,6 +62,10 @@
   margin-left: 4px;
   font-size: 14px;
   text-align: left;
+  max-width: 320px; /* 최대 너비 설정 */
+  overflow: hidden; /* 넘치는 내용 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 텍스트에 '...' 표시 */
+  white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
 }
 
 .category-title {
