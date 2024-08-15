@@ -22,7 +22,8 @@ main img {
     font-weight: bold;   /* 텍스트를 굵게 표시 */
 
     position: relative;
-    left: 21.5%;
+    left: 21%;
+    margin-top: 35px;
 }
 
 .responsive-container {
@@ -30,6 +31,7 @@ main img {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
 }
 
 .container {
@@ -126,12 +128,17 @@ main img {
 .box {
     width: 40px;
     height: 40px;
-    background: url("../images/redHeart.png")
-    no-repeat center / 25px; cursor: pointer; border:0; font-size:0; margin:50px auto; display:block;
+    background: url(https://blog.kakaocdn.net/dn/BedCA/btsI009q8Jy/xI8PDClhLxxqNklXMG1ul1/img.png)
+    no-repeat center / 25px;
+    cursor: pointer;
+    border:0;
+    font-size:0;
+    margin:5px auto;
+    display:block;
 }
 
 .box.off {
-    background: url("../images/whiteHeart.png")
+    background: url(https://blog.kakaocdn.net/dn/btjPdb/btsI1ovJ8w8/CzEgtcKXPLjZekMSWKaMVK/img.png)
     no-repeat center / 25px;
     animation: beating .5s 1 alternate;
 }

@@ -62,7 +62,7 @@ $(document).ready(function() {
             }),
             success: function(response) {
                 // 성공적으로 요청이 완료되었을 때의 처리
-                alert('문의가 등록되었습니다.');
+                alert('문의가 등록되었습니다.\n문의 답변은 이메일로 발송되며, 2-3일 정도 소요됩니다.');
                 // 폼 초기화
                 $('#userName').val('');
                 $('#userEmail').val('');
