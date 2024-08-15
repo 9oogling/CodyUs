@@ -88,7 +88,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     success: function (statusResponse) {
                         const isLiked = statusResponse?.data ?? false;
-                        $('#like-button').text(isLiked ? '❤️' : '🤍');
+                        $('#like-button').html(isLiked ? '<img src="/images/redHeart.png" alt="red heart">️' : '<img src="/images/whiteHeart.png" alt="white heart">');
                         $('#like-button').toggleClass('liked', isLiked);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -137,7 +137,7 @@ $(document).ready(function() {
                 let currentLikesText = $('#post-likes').text();
                 let likes = parseInt(currentLikesText.split(' ')[0], 10) || 0;
                 $('#post-likes').text(`${likes + (isLiked ? -1 : 1)} `);
-                $('#like-button').text(isLiked ? '🤍' : '❤️');
+                $('#like-button').html(isLiked ? '<img src="/images/whiteHeart.png" alt="white heart">' : '<img src="/images/redHeart.png" alt="red heart">');
                 $('#like-button').toggleClass('liked', !isLiked);
             },
             error: function (jqXHR, textStatus, errorThrown) {
