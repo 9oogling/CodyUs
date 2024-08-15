@@ -74,29 +74,22 @@ public class PostController {
 
     //게시물 전체조회
     @GetMapping
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getAllPost(
-            @RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "size", defaultValue = "20") int size) {
-        List<PostResponseDto> posts = postService.findAllPost(page - 1, size);
+    public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> getAllPost(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "20") int size,
+            @RequestParam(value = "sort", defaultValue = "createdAt") String sortBy,
+            @RequestParam(value = "desc", defaultValue = "true") boolean descending) {
 
+        Pageable pageable = PageRequest.of(page, size,
+                descending ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending());
+        Page<PostResponseDto> posts = postService.findAllPost(pageable);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_ALLPOST);
     }
 
-    // 게시물 선택 조회
+    // 게시물 상세 조회
     @GetMapping("/{postId}")
     public ResponseEntity<DataResponseDto<PostResponseDto>> getPost(
-            @PathVariable Long postId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(required = false) String category,
-            @RequestParam(defaultValue = "createdAt") String sort) {
-
-        Pageable pageable;
-        if ("likes".equals(sort)) {
-            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "likeCount"));
-        } else {
-            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
-        }
+            @PathVariable Long postId) {
 
         PostResponseDto post = postService.getPost(postId);
         return ResponseFactory.ok(post, StatusCode.SUCCESS_GET_POST);
@@ -104,12 +97,13 @@ public class PostController {
 
     @GetMapping("/my")
     public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> getMyPosts(
-        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "0") int page,
 		@RequestParam(defaultValue = "4") int size,
 		@RequestParam(defaultValue = "createdAt") String sortBy,
         @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        Page<PostResponseDto> myPosts = postService.findMyPosts(page,size,sortBy,userDetails);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
+        Page<PostResponseDto> myPosts = postService.findMyPosts(pageable, userDetails);
 
         return ResponseFactory.ok(myPosts, StatusCode.SUCCESS_GET_MYPOST);
     }
@@ -119,30 +113,41 @@ public class PostController {
     public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> searchPosts(
             @RequestParam(required = false) SearchType type,
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy, // Default sort by field
             @RequestParam(defaultValue = "false") boolean descending) { // Default sort direction) {
 
-        Page<PostResponseDto> posts = postService.searchPosts(type, keyword, page - 1, size, sortBy, descending);
+        Pageable pageable = PageRequest.of(page, size,
+                descending ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending());
+        Page<PostResponseDto> posts = postService.searchPosts(type, keyword, pageable);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_SEARCH_POSTS);
     }
 
     // 카테고리별 게시물 조회
     @GetMapping("/category/{categoryName}")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName) {
-        List<PostResponseDto> posts;
+    public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> getPostsByCategory(
+            @PathVariable String categoryName,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "20") int size,
+            @RequestParam(value = "sort", defaultValue = "createdAt") String sortBy,
+            @RequestParam(value = "desc", defaultValue = "true") boolean descending) {
+
+        Pageable pageable = PageRequest.of(page, size,
+                descending ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending());
+
+        Page<PostResponseDto> posts;
         if ("RANKING".equals(categoryName)) {
-            posts = postService.findPostsByLikes();
+            posts = postService.findPostsByLikes(pageable);
         } else {
-            posts = postService.findPostsByCategory(categoryName);
+            posts = postService.findPostsByCategory(categoryName, pageable);
         }
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 
     @GetMapping("/likes")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByLikes() {
-        List<PostResponseDto> posts = postService.findPostsByLikes();
+    public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> getPostsByLikes(Pageable pageable) {
+        Page<PostResponseDto> posts = postService.findPostsByLikes(pageable);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTS_BY_LIKES);
     }
 

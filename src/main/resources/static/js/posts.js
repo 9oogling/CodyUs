@@ -1,14 +1,43 @@
+let page = 0; // 현재 페이지 번호
+const size = 20; // 한 페이지당 불러올 게시물 수
+let isLoading = false; // 데이터 로딩 중 여부
+let hasMorePosts = true; // 추가 게시물이 있는지 여부
+
 // 게시물을 가져오는 함수
 function fetchPosts() {
+  if (isLoading || !hasMorePosts) return;
+
+  isLoading = true;
+  $('#loading').show(); // 로딩 메시지 표시
+  console.log(`게시물 가져오는 중... 현재 페이지: ${page}`);
+
   $.ajax({
     url: '/api/posts',
     method: 'GET',
     dataType: 'json',
+    data: {
+      page: page,
+      size: size
+    },
     success: function (response) {
       $('#loading').hide(); // 로딩 메시지 숨기기
-      console.log('서버 응답:', response); // 응답 데이터 확인
-      if (response && response.data && Array.isArray(response.data)) {
-        displayPosts(response.data);
+      isLoading = false;
+
+      console.log('서버 응답:', response);
+
+      if (response && response.data && Array.isArray(response.data.content)) {
+        // 새로운 게시물만 추가
+        displayPosts(response.data.content);
+
+        // 더 이상 게시물이 없는 경우
+        if (response.data.content.length < size) {
+          hasMorePosts = false;
+          console.log('더 이상 불러올 게시물이 없습니다.');
+        }
+
+        // 페이지 번호 증가
+        page++;
+
       } else {
         console.error('응답 데이터가 올바르지 않습니다:', response);
         $('#posts-container').html('<p>게시물 로딩 중 오류가 발생했습니다.</p>');
@@ -16,6 +45,7 @@ function fetchPosts() {
     },
     error: function (jqXHR, textStatus, errorThrown) {
       $('#loading').hide(); // 로딩 메시지 숨기기
+      isLoading = false;
       console.error('게시물 로딩 중 오류 발생:', textStatus, errorThrown);
       $('#posts-container').html('<p>게시물 로딩 중 오류가 발생했습니다.</p>');
     }
@@ -24,31 +54,24 @@ function fetchPosts() {
 
 // 게시물을 페이지에 표시하는 함수
 function displayPosts(posts) {
-  var postsContainer = $('#posts-container');
-  postsContainer.empty(); // 기존 게시물 초기화
+  const postsContainer = $('#posts-container');
 
-  if (posts.length === 0) {
-    postsContainer.html('<p>게시물이 없습니다.</p>');
-    return;
-  }
-
+  // 새로운 게시물만 추가
   posts.forEach(function (post) {
-    // 첫 번째 이미지 URL만 사용
-    var imageUrl = post.imageUrls && post.imageUrls.length > 0
-        ? post.imageUrls[0] : 'default-image-url.jpg'; // 이미지 URL이 없을 경우 기본 이미지 사용
+    const imageUrl = post.imageUrls && post.imageUrls.length > 0
+        ? post.imageUrls[0] : 'default-image-url.jpg';
 
-    // 게시물 요소 생성
-    var postElement = $(`
+    const postElement = $(`
         <div class="card-box" data-post-id="${post.id}">
             <div class="image-box">
                 <img src="${imageUrl}" alt="Post Image" class="img-fluid" />
             </div>
             <div class="card-detail">
                 <div class="card-header">
-                     <div class="nickname">${post.nickname || 'Anonymous'}</div>
-                    <div class="like-section" id="like-section-${post.id}">                      
-                         <span class="like-count">Loding likes..</span>
-                    </div>                  
+                    <div class="nickname">${post.nickname || '익명'}</div>
+                    <div class="like-section" id="like-section-${post.id}">
+                        <span class="like-count">좋아요 로딩 중...</span>
+                    </div>
                 </div>
                 <div class="content">
                     <p>${post.content || ''}</p>
@@ -60,9 +83,8 @@ function displayPosts(posts) {
         </div>
     `);
 
-    // 클릭 시 상세 페이지로 이동
     postElement.click(function () {
-      var postId = $(this).data('post-id');
+      const postId = $(this).data('post-id');
       window.location.href = `/posts/postDetail/${postId}`;
     });
 
@@ -72,13 +94,9 @@ function displayPosts(posts) {
     fetchLikeCount(post.id);
   });
 
-  // 이미지가 모두 로드된 후에 Masonry 레이아웃 적용
+  // Masonry 레이아웃 적용
   postsContainer.imagesLoaded(function () {
-    postsContainer.masonry({
-      itemSelector: '.card-box',
-      columnWidth: '.card-box', // 여기서 각 카드 박스의 너비를 기준으로 설정
-      gutter: 30 // 열 간격을 20px로 설정
-    });
+    postsContainer.masonry('layout'); // 레이아웃을 다시 적용
   });
 }
 
@@ -89,12 +107,12 @@ function fetchLikeCount(postId) {
     method: 'GET',
     dataType: 'json',
     success: function (response) {
-      const likeCount = response?.data ?? 0; // 데이터가 없으면 0으로 설정
-      $(`#like-section-${postId} .like-count`).text(`${likeCount} likes`);
+      const likeCount = response?.data ?? 0;
+      $(`#like-section-${postId} .like-count`).text(`${likeCount} Likes`);
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.error(`Failed to fetch like count for post ID: ${postId}`, textStatus, errorThrown);
-      $(`#like-section-${postId} .like-count`).text('Failed to load likes');
+      console.error(`게시물 ID: ${postId}의 좋아요 개수 가져오기 실패`, textStatus, errorThrown);
+      $(`#like-section-${postId} .like-count`).text('좋아요 로딩 실패');
     }
   });
 }
@@ -103,3 +121,18 @@ function fetchLikeCount(postId) {
 $(document).ready(function () {
   fetchPosts();
 });
+
+// 스크롤 이벤트 핸들러
+function onScroll() {
+  const scrollTop = $(window).scrollTop();
+  const scrollHeight = $(document).height();
+  const windowHeight = $(window).height();
+
+  console.log('스크롤 이벤트 발생.');
+
+  if (scrollTop + windowHeight >= scrollHeight - 50 && hasMorePosts && !isLoading) {
+    console.log('페이지 하단에 도달했습니다. 추가 게시물을 불러오는 중...');
+    fetchPosts();
+  }
+}
+$(window).on('scroll', onScroll);
