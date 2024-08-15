@@ -151,17 +151,32 @@ document.addEventListener('DOMContentLoaded', () => {
     saveAddressButton.addEventListener("click", (event) => {
         event.preventDefault();
         const dialog = saveAddressButton.closest('dialog');
-        const overlay = document.querySelector('.myPage-overlay');
-        if (dialog) {
-            dialog.classList.add("dialog__animate-out");
-            dialog.addEventListener('animationend', () => {
-                dialog.classList.remove("dialog__animate-out");
-                dialog.close();
-                // 모달 닫힐 때 내용 초기화
-                dialog.querySelectorAll('input').forEach(input => input.value = '');
-                overlay.style.display = 'none'; // Hide overlay
-            }, {once: true});
-        }
+
+        // 모달에서 입력된 주소 값들 가져오기
+        const postcode = dialog.querySelector('#sample6_postcode').value;
+        const address = dialog.querySelector('#sample6_address').value;
+        const detailAddress = dialog.querySelector('#sample6_detailAddress').value;
+
+        // 전체 주소 합치기
+        const fullAddress = `[${postcode}] ${address}, ${detailAddress}`;
+
+
+        // AJAX 요청 보내기
+        $.ajax({
+            url: '/api/profile/address/my',
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                address: fullAddress
+            }),
+            success: function(response) {
+                alert("주소가 변경되었습니다.");
+                location.reload();  // 페이지 새로고침
+            },
+            error: function(error) {
+                alert('오류: ' + error.responseJSON.message);
+            }
+        });
     });
 
     // 휴대폰 번호 변경 저장 버튼 클릭 시
@@ -201,75 +216,43 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
     }
 
-// 주소
-    const addrSearch = () => {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                let addr = '';
-                let extraAddr = '';
+// 주소 검색 및 입력 필드 채우기 함수
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function (data) {
+            let addr = ''; // 주소 변수
+            let extraAddr = ''; // 참고항목 변수
 
-                if (data.userSelectedType === 'R') {
-                    addr = data.roadAddress;
-                } else {
-                    addr = data.jibunAddress;
-                }
-                if (data.userSelectedType === 'R') {
-                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname))
-                        extraAddr += data.bname;
-
-                    if (data.buildingName !== '' && data.apartment === 'Y')
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-
-                    if (extraAddr !== '')
-                        extraAddr = ' (' + extraAddr + ')';
-
-                    document.getElementById("user_address").value = extraAddr;
-
-                } else {
-                    document.getElementById("user_address").value = '';
-                }
-
-                document.getElementById("user_address").value = addr;
-                document.getElementById("user_address").focus();
+            // 사용자가 도로명 주소를 선택했을 경우
+            if (data.userSelectedType === 'R') {
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우
+                addr = data.jibunAddress;
             }
-        }).open();
-    }
 
-// 상세주소
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                let addr = ''; // 주소 변수
-                let extraAddr = ''; // 참고항목 변수
-
-                if (data.userSelectedType === 'R') {
-                    addr = data.roadAddress;
-                } else {
-                    addr = data.jibunAddress;
+            // 참고항목 (동, 건물명 등) 추가
+            if (data.userSelectedType === 'R') {
+                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                    extraAddr += data.bname;
                 }
-
-                if (data.userSelectedType === 'R') {
-                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                        extraAddr += data.bname;
-                    }
-                    if (data.buildingName !== '' && data.apartment === 'Y') {
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    if (extraAddr !== '') {
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
+                if (data.buildingName !== '' && data.apartment === 'Y') {
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
-
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                document.getElementById("sample6_detailAddress").focus();
+                if (extraAddr !== '') {
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                document.getElementById("sample6_extraAddress").value = extraAddr;
+            } else {
+                document.getElementById("sample6_extraAddress").value = '';
             }
-        }).open();
-    }
+
+            // 최종적으로 우편번호, 주소 값 할당
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            document.getElementById("sample6_detailAddress").focus(); // 상세주소 입력으로 포커스 이동
+        }
+    }).open();
+}
 
     function fetchPosts(page) {
         $.ajax({
