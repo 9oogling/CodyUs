@@ -10,7 +10,7 @@
 }
 
 .container {
-  margin: 0 auto;
+  margin: 70px auto;
   width: 1320px;
   display: flex;
   flex-wrap: wrap;
@@ -29,12 +29,16 @@
 .product-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
   width: 100%;
+  min-height: 360px; /* 최소 높이 */
+  max-height: 360px;
+
 }
 
 .product-item {
-  width: calc(1320px / 5 - 10px);
+  width: calc(1300px / 5 );
+  height: 50%;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -69,3 +73,35 @@
   margin-bottom: 4px;
   margin-left: 4px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.pagination button {
+  font-size: 15px;
+  padding: 8px 12px;
+  margin: 0 5px;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  border: none;
+}
+
+.pagination button.active {
+  background-color: transparent;
+  color: black;
+  font-weight: bold;
+  border: none;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  color: #6b7684;
+  opacity: 0.5;
+}
+
