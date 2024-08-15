@@ -5,6 +5,22 @@ body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 .create-container {
     max-width: 600px; /* 고정된 너비 */
     margin: 0 auto;

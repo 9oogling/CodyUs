@@ -1,3 +1,19 @@
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 .post-container {
     max-width: 800px;
     margin: 20px auto;

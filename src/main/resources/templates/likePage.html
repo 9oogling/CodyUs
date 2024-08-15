@@ -16,6 +16,7 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
+<div class="page-transition">
 <div class="container"></div>
 <main>
     <div class="my-like-product"><span>나의 관심 상품</span></div>
@@ -30,6 +31,7 @@
         <button id="next-page" disabled>다음</button>
     </div>
 </main>
+</div>
 
 <div th:insert="footer :: footer-content"></div>
 <script src="/js/likePage.js"></script>
