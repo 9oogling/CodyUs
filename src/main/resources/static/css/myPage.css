@@ -5,6 +5,22 @@ body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 .container {
     margin-top: 70px;
     margin-bottom: 50px;
@@ -194,6 +210,7 @@ dialog {
     animation: appear 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     box-shadow: 15px 15px 15px -20px #000000;
     position: fixed;
+    top: -10%;
 
     z-index: 1001; /* 오버레이 위에 표시 */
 }
@@ -299,7 +316,7 @@ button.close1:hover {
 }
 
 /* 팝업창 내용 입력칸 */
-.CgPw input, .CgInfo input, .CgInfo1 input{
+.CgPw input, .CgInfo input, .CgInfo1 input, .CgInfo2 input{
     display: block;
     border: none;
     border-bottom: 1px solid rgba(115, 115, 115, 0.3);
@@ -310,6 +327,10 @@ button.close1:hover {
     width: 100%;
     outline: none;
     font-size: 13px;
+}
+
+.CgInfo2 {
+    margin-top: 50px;
 }
 
 input::placeholder {
@@ -326,13 +347,13 @@ input:-ms-input-placeholder {
     color: #cecece;
 }
 
-.CgPw span, .CgInfo span, .CgInfo1 span {
+.CgPw span, .CgInfo span, .CgInfo1 span, .CgInfo2 span {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
 }
 
-.CgInfo label, .CgInfo1 label {
+.CgInfo label, .CgInfo1 label, .CgInfo2 label {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
@@ -343,6 +364,42 @@ input:-ms-input-placeholder {
     color: #9d9d9d;
     outline: 0;
     margin-top: 10px;
+}
+
+.dialog__footer0 {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog__footer0 button {
+    border: 1px solid rgba(0, 0, 0, 0.32);
+    color: #656565;
+    width: 200px;
+    height: 30px;
+    bottom: 45px;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: #ffffff;
+}
+
+.dialog__footer0 button:hover {
+    background-color: #efefef;
+    color: #656565;
+}
+
+button.save-name {
+    background-color: black;
+    color: white;
+}
+
+button.save-name:hover {
+    border: 1px solid rgb(49, 49, 49);
+    background-color: rgb(49, 49, 49);
+    color: white;
 }
 
 .dialog__footer1 {
@@ -399,6 +456,22 @@ button.save-phone:hover {
     margin-top: 20px;
     margin-right: 10px;
     background-color: #ffffff;
+}
+
+.dialog__content00 {
+    width: 500px;
+    height: 300px;
+    padding: 10px 55px 25px 55px;
+}
+
+.dialog__content00 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 2%;
+}
+
+.dialog__content00 P {
+    margin-top: -10px;
 }
 
 .dialog__content0 {

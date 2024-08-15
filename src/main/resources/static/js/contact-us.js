@@ -3,7 +3,7 @@ const container = document.querySelector(".container");
 
 document.body.addEventListener("mousemove", e => {
     const x = e.clientX;
-    const y = e.clientY -240;
+    const y = e.clientY -160;
     gsap.to(container, {
         y: y
     });

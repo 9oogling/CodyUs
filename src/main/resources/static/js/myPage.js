@@ -1,12 +1,12 @@
 let currentPage = 1;
 let totalPages = 1;
 const token = getToken();
-if(!token){
-    window.location.href='/login';
+if (!token) {
+    window.location.href = '/login';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const openModalButtons = document.querySelectorAll('.open-modal-button');
+    const openModalButtons = document.querySelectorAll('.open-modal-button, .open-modal-button1');
     const closeModalButtons = document.querySelectorAll('.close, .close2');
 
     // Open modal event listeners
@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
     const saveAddressButton = document.querySelector(".save-address");
     const savePhoneButton = document.querySelector(".save-phone");
+    const saveNameButton = document.querySelector(".save-name");
 
     // 주소 변경 저장 버튼 클릭 시
     saveAddressButton.addEventListener("click", (event) => {
@@ -148,181 +149,198 @@ document.addEventListener('DOMContentLoaded', () => {
             }, {once: true});
         }
     });
+
+    // 휴대폰 번호 변경 저장 버튼 클릭 시
+    saveNameButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const dialog = saveNameButton.closest('dialog');
+        const overlay = document.querySelector('.mypage-overlay');
+        if (dialog) {
+            dialog.classList.add("dialog__animate-out");
+            dialog.addEventListener('animationend', () => {
+                dialog.classList.remove("dialog__animate-out");
+                dialog.close();
+                // 모달 닫힐 때 내용 초기화
+                dialog.querySelectorAll('input').forEach(input => input.value = '');
+                overlay.style.display = 'none'; // Hide overlay
+            }, {once: true});
+        }
+    });
 });
 
 // 휴대폰 번호 변환
-const hypenTel = (target) => {
-    target.value = target.value
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-}
+    const hypenTel = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
 
 // 주소
-const addrSearch = () => {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            let addr = '';
-            let extraAddr = '';
+    const addrSearch = () => {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = '';
+                let extraAddr = '';
 
-            if (data.userSelectedType === 'R') {
-                addr = data.roadAddress;
-            } else {
-                addr = data.jibunAddress;
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+                if (data.userSelectedType === 'R') {
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname))
+                        extraAddr += data.bname;
+
+                    if (data.buildingName !== '' && data.apartment === 'Y')
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
+                    if (extraAddr !== '')
+                        extraAddr = ' (' + extraAddr + ')';
+
+                    document.getElementById("user_address").value = extraAddr;
+
+                } else {
+                    document.getElementById("user_address").value = '';
+                }
+
+                document.getElementById("user_address").value = addr;
+                document.getElementById("user_address").focus();
             }
-            if (data.userSelectedType === 'R') {
-                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname))
-                    extraAddr += data.bname;
-
-                if (data.buildingName !== '' && data.apartment === 'Y')
-                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-
-                if (extraAddr !== '')
-                    extraAddr = ' (' + extraAddr + ')';
-
-                document.getElementById("user_address").value = extraAddr;
-
-            } else {
-                document.getElementById("user_address").value = '';
-            }
-
-            document.getElementById("user_address").value = addr;
-            document.getElementById("user_address").focus();
-        }
-    }).open();
-}
+        }).open();
+    }
 
 // 상세주소
-function sample6_execDaumPostcode() {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            let addr = ''; // 주소 변수
-            let extraAddr = ''; // 참고항목 변수
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = ''; // 주소 변수
+                let extraAddr = ''; // 참고항목 변수
 
-            if (data.userSelectedType === 'R') {
-                addr = data.roadAddress;
-            } else {
-                addr = data.jibunAddress;
-            }
-
-            if (data.userSelectedType === 'R') {
-                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                    extraAddr += data.bname;
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
                 }
-                if (data.buildingName !== '' && data.apartment === 'Y') {
-                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+
+                if (data.userSelectedType === 'R') {
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraAddr += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
                 }
-                if (extraAddr !== '') {
-                    extraAddr = ' (' + extraAddr + ')';
+
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
+
+    function fetchPosts(page) {
+        $.ajax({
+            url: `/api/posts/my?page=${page}`,
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            },
+            success: function (response) {
+                if (response.statusCode === "OK") {
+                    totalPages = response.data.totalPages;
+                    renderSales(response.data.content); // 데이터 렌더링
+                    updatePagination(page); // 페이지네이션 업데이트
+                    updatePaginationButtons();
                 }
-                document.getElementById("sample6_extraAddress").value = extraAddr;
-
-            } else {
-                document.getElementById("sample6_extraAddress").value = '';
+            },
+            error: function (xhr) {
+                console.error('데이터를 가져오는데 실패했습니다.', xhr)
             }
-
-            document.getElementById('sample6_postcode').value = data.zonecode;
-            document.getElementById("sample6_address").value = addr;
-            document.getElementById("sample6_detailAddress").focus();
-        }
-    }).open();
-}
-
-function fetchPosts(page) {
-    $.ajax({
-        url: `/api/posts/my?page=${page}`,
-        method: 'GET',
-        headers: {
-            'Authorization': token
-        },
-        success: function (response) {
-            if (response.statusCode === "OK") {
-                totalPages = response.data.totalPages;
-                renderSales(response.data.content); // 데이터 렌더링
-                updatePagination(page); // 페이지네이션 업데이트
-                updatePaginationButtons();
-            }
-        },
-        error: function (xhr) {
-            console.error('데이터를 가져오는데 실패했습니다.', xhr)
-        }
-    });
-}
+        });
+    }
 
 // 데이터 렌더링 함수
-function renderSales(posts) {
-    const salesList = $('.sales-list');
-    salesList.empty(); // 기존 목록 비우기
+    function renderSales(posts) {
+        const salesList = $('.sales-list');
+        salesList.empty(); // 기존 목록 비우기
 
-    posts.forEach(post => {
-        const saleItem = $(`
+        posts.forEach(post => {
+            const saleItem = $(`
             <a href="/posts/postDetail/${post.id}" class="post-link"><p class="sale">- ${post.title}</p></a>`);
-        salesList.append(saleItem);
-    });
-}
+            salesList.append(saleItem);
+        });
+    }
 
 // 페이지네이션 업데이트 함수
-function updatePagination(page) {
-    const pageNumbers = $('#page-numbers');
-    pageNumbers.empty(); // 기존 페이지 번호 비우기
+    function updatePagination(page) {
+        const pageNumbers = $('#page-numbers');
+        pageNumbers.empty(); // 기존 페이지 번호 비우기
 
-    const maxPageButtons = 5; // 최대 페이지 버튼 수 설정
-    let startPage, endPage;
+        const maxPageButtons = 5; // 최대 페이지 버튼 수 설정
+        let startPage, endPage;
 
-    if (totalPages <= maxPageButtons) {
-        // 전체 페이지 수가 최대 버튼 수보다 작거나 같을 때
-        startPage = 1;
-        endPage = totalPages;
-    } else {
-        // 전체 페이지 수가 최대 버튼 수보다 클 때
-        const halfMaxPageButtons = Math.floor(maxPageButtons / 2);
-        if (page <= halfMaxPageButtons) {
+        if (totalPages <= maxPageButtons) {
+            // 전체 페이지 수가 최대 버튼 수보다 작거나 같을 때
             startPage = 1;
-            endPage = maxPageButtons;
-        } else if (page + halfMaxPageButtons >= totalPages) {
-            startPage = totalPages - maxPageButtons + 1;
             endPage = totalPages;
         } else {
-            startPage = page - halfMaxPageButtons;
-            endPage = page + halfMaxPageButtons;
+            // 전체 페이지 수가 최대 버튼 수보다 클 때
+            const halfMaxPageButtons = Math.floor(maxPageButtons / 2);
+            if (page <= halfMaxPageButtons) {
+                startPage = 1;
+                endPage = maxPageButtons;
+            } else if (page + halfMaxPageButtons >= totalPages) {
+                startPage = totalPages - maxPageButtons + 1;
+                endPage = totalPages;
+            } else {
+                startPage = page - halfMaxPageButtons;
+                endPage = page + halfMaxPageButtons;
+            }
         }
-    }
 
-    for (let i = startPage; i <= endPage; i++) {
-        const pageNum = $('<button></button>')
-            .text(i)
-            .on('click', () => changePage(i));
-        if (i === page) {
-            pageNum.prop('disabled', true); // 현재 페이지 비활성화
+        for (let i = startPage; i <= endPage; i++) {
+            const pageNum = $('<button></button>')
+                .text(i)
+                .on('click', () => changePage(i));
+            if (i === page) {
+                pageNum.prop('disabled', true); // 현재 페이지 비활성화
+            }
+            pageNumbers.append(pageNum);
         }
-        pageNumbers.append(pageNum);
     }
-}
 
 // 페이지 변경 함수
-function changePage(page) {
-    console.log(page + " <= page" + totalPages);
-    if (page < 1 || page > totalPages) return; // 페이지 범위 체크
-    currentPage = page;
-    fetchPosts(currentPage); // 새 페이지 데이터 가져오기
-    updatePaginationButtons();
-}
+    function changePage(page) {
+        console.log(page + " <= page" + totalPages);
+        if (page < 1 || page > totalPages) return; // 페이지 범위 체크
+        currentPage = page;
+        fetchPosts(currentPage); // 새 페이지 데이터 가져오기
+        updatePaginationButtons();
+    }
 
-function updatePaginationButtons() {
-    const prevButton = document.querySelector('.prev-page');
-    const nextButton = document.querySelector('.next-page');
+    function updatePaginationButtons() {
+        const prevButton = document.querySelector('.prev-page');
+        const nextButton = document.querySelector('.next-page');
 
-    prevButton.classList.toggle('disabled', currentPage === 1); // 첫 페이지일 때 비활성화
-    nextButton.classList.toggle('disabled', currentPage === totalPages); // 마지막 페이지일 때 비활성화
-}
+        prevButton.classList.toggle('disabled', currentPage === 1); // 첫 페이지일 때 비활성화
+        nextButton.classList.toggle('disabled', currentPage === totalPages); // 마지막 페이지일 때 비활성화
+    }
 
 
-document.getElementById('postMoreLink').addEventListener('click', function () {
-    window.location.href = '/posts'; // 원하는 URL로 이동
-});
+    document.getElementById('postMoreLink').addEventListener('click', function () {
+        window.location.href = '/posts'; // 원하는 URL로 이동
+    });
 
 // 초기 데이터 가져오기
-$(document).ready(function () {
-    fetchPosts(currentPage); // 초기 페이지 로드 시 데이터 가져오기
-    updatePaginationButtons(); // 초기 버튼 상태 업데이트
-});
-$(document).width();
+    $(document).ready(function () {
+        fetchPosts(currentPage); // 초기 페이지 로드 시 데이터 가져오기
+        updatePaginationButtons(); // 초기 버튼 상태 업데이트
+    });
+    $(document).width();
