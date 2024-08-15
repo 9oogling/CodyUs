@@ -98,20 +98,24 @@
     color: #333;
     padding: 0 5px;
 }
+#chat-button{
+    outline: none;
+}
+
+#chat-button img{
+    width: 30px;
+    height: 30px;
+}
 
 /* 기본 하트 색상 */
 #like-button {
-    background: none;
-    border: none;
-    font-size: 24px;
+    outline: none;
     cursor: pointer;
-    color: #fff; /* 기본 색상 */
 }
 
-/* 좋아요 상태일 때 하트 색상 */
-#like-button.liked {
-    color: red; /* 하트 색상 */
-    padding: 5px; /* 여백 추가 */
+#like-button img{
+    width:30px;
+    height: 30px;
 }
 
 .post-caption {

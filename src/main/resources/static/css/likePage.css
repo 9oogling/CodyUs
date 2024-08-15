@@ -123,12 +123,12 @@ main img {
 .box {
     width: 40px;
     height: 40px;
-    background: url(https://blog.kakaocdn.net/dn/BedCA/btsI009q8Jy/xI8PDClhLxxqNklXMG1ul1/img.png)
+    background: url("../images/redHeart.png")
     no-repeat center / 25px; cursor: pointer; border:0; font-size:0; margin:50px auto; display:block;
 }
 
 .box.off {
-    background: url(https://blog.kakaocdn.net/dn/btjPdb/btsI1ovJ8w8/CzEgtcKXPLjZekMSWKaMVK/img.png)
+    background: url("../images/whiteHeart.png")
     no-repeat center / 25px;
     animation: beating .5s 1 alternate;
 }
