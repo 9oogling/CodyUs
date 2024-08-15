@@ -46,8 +46,9 @@ public class LikeService {
             throw new CustomException(StatusCode.ALREADY_EXIST_LIKE);
         } else {
             Like like = new Like(user, post);
-
             likeRepository.save(like);
+            post.incrementLikeCount(); // 좋아요 수 증가
+            postRepository.save(post); // 변경된 좋아요 수 저장
         }
     }
 
@@ -60,6 +61,9 @@ public class LikeService {
                 -> new CustomException(StatusCode.NOT_FOUND_LIKE));
 
         likeRepository.delete(checkLike);
+        Post post = checkLike.getPost();
+        post.decrementLikeCount(); // 좋아요 수 감소
+        postRepository.save(post); // 변경된 좋아요 수 저장
     }
 
 

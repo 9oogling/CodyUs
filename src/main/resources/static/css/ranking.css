@@ -1,0 +1,327 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* 기본 폰트 설정 */
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  min-height: 100vh; /* 화면 높이를 최소한으로 설정하여 푸터가 하단에 위치하도록 함 */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  flex: 1; /* 푸터를 하단에 위치시키기 위한 flex 설정 */
+}
+
+.tab-content {
+  width: 1400px;
+  margin: 0 auto; /* 가운데 정렬 */
+  min-height: calc(100vh - 100px); /* 화면 전체 높이에서 푸터 높이를 뺀 값 */
+  padding-bottom: 20px; /* 푸터와의 간격을 위해 패딩 추가 */
+}
+
+.tabs {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc; /* 밑줄 추가 */
+}
+
+.tab {
+  padding: 10px 20px;
+  margin-right: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid #fff;
+}
+
+.tab.active {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
+
+#style-content, #product-content {
+  min-height: calc(100vh - 200px); /* 100vh에서 헤더와 푸터 높이를 뺀 최소 높이 */
+  margin-bottom: 50px; /* 푸터와의 간격을 위해 여유 공간을 추가 */
+}
+
+#style-content {
+  max-width: 1400px; /* 4열 * 300px + (3 * 30px) = 1320px */
+  margin: 0 auto; /* 중앙 정렬 */
+  display: grid;
+  grid-template-columns: repeat(4, 300px); /* 4개의 동일한 열을 생성 */
+  gap: 30px; /* 게시물 간의 간격 */
+  box-sizing: border-box; /* 패딩을 포함하여 크기 계산 */
+}
+
+/* 스타일 탭의 이미지 스타일 */
+#style-content .card-box {
+  width: 300px; /* 그리드 셀의 전체 너비를 차지하도록 설정 */
+  border: 0 solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-sizing: border-box; /* 패딩을 포함하여 크기 계산 */
+  margin-bottom: 20px; /* 카드 사이 간격 추가 */
+}
+
+#style-content .card-box:hover {
+  transform: scale(1.02); /* 마우스 오버 시 크기 확대 */
+}
+
+#style-content .image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border-bottom: 0 solid #ddd;
+  object-fit: cover; /* 이미지가 박스를 채우도록 조정 */
+}
+
+#style-content .card-detail {
+  padding: 5px;
+  display: flex;
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  align-items: flex-start; /* 요소들을 왼쪽 정렬 */
+}
+
+#style-content .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#style-content .card-header .nickname {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+#style-content .card-header .like-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#style-content .card-header .like-count {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+#style-content .content {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+#style-content .hashtags {
+  margin-top: 5px;
+}
+
+#style-content .hashtag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* 상품 탭의 이미지 스타일 */
+#product-content {
+  display: flex;
+  flex-wrap: wrap; /* 이미지들이 줄 바꿈되도록 설정 */
+  max-width: 1400px; /* 전체 컨테이너의 최대 너비를 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+}
+
+#product-content .product-card-box {
+  width: 210px; /* 각 이미지의 너비 설정 */
+  margin: 10px; /* 이미지 간 간격 */
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#product-content .product-image-box img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+#product-content .product-card-detail {
+  margin-top: 10px;
+}
+
+#product-content .product-nickname {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+#product-content .product-content p {
+  font-size: 13px;
+  color: #555;
+  margin: 5px 0;
+}
+
+#product-content .product-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e74c3c; /* 가격 텍스트 색상 */
+  margin-top: 5px;
+}
+
+/* 기존 CSS 코드 포함 */
+.create-post {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1080px;
+  margin: 30px auto 20px;
+}
+
+.card-box {
+  width: 300px;
+  border: 0 solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.card-box:hover {
+  transform: scale(1.02);
+}
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border-bottom: 0 solid #ddd;
+  object-fit: cover;
+}
+
+.card-detail {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-header .title {
+  font-size: 15px;
+  font-weight: normal;
+  color: #333;
+  flex: 1;
+}
+
+.card-header .like-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-header .like-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #ff0000;
+}
+
+.card-header .like-count {
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+}
+
+.card-detail .content {
+  font-size: 14px;
+  color: #333;
+}
+
+.content p {
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+}
+
+.card-detail .hashtags {
+  margin-top: 3px;
+}
+
+.card-detail .hashtag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: #555;
+}
+
+.post-create-btn {
+  background-color: #000000;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.post-create-btn:hover {
+  background-color: #ffffff;
+  color: black;
+  border: black;
+}
+
+.post-create-btn:active {
+  background-color: #3e8e41;
+}
+
+/* 빈 공간을 추가하여 4개 칸을 유지하도록 설정 */
+.post-container::after {
+  content: "";
+  flex: 1 1 calc(25% - 20px);
+  min-width: calc(25% - 20px);
+  box-sizing: border-box;
+}

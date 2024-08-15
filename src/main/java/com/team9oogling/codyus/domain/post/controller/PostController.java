@@ -142,6 +142,7 @@ public class PostController {
         } else {
             posts = postService.findPostsByCategory(categoryName, pageable);
         }
+
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 
