@@ -129,10 +129,10 @@ function renderUserInfo() {
             document.querySelector('.nickname1').textContent = userInfo.nickName;
 
             // 전화번호 업데이트
-            document.querySelector('.phone1').textContent = userInfo.phoneNumber;
+            document.querySelector('.phone1').textContent = userInfo.phoneNumber || "표시할 정보가 없습니다.";
 
             // 주소 업데이트
-            document.querySelector('.address1').textContent = userInfo.address;
+            document.querySelector('.address1').textContent = userInfo.address || "표시할 정보가 없습니다.";
         },
         error: function(error) {
             alert("오류: " + error.responseJSON.message)
@@ -168,36 +168,31 @@ document.addEventListener('DOMContentLoaded', () => {
     savePhoneButton.addEventListener("click", (event) => {
         event.preventDefault();
         const dialog = savePhoneButton.closest('dialog');
-        const overlay = document.querySelector('.myPage-overlay');
-        if (dialog) {
-            dialog.classList.add("dialog__animate-out");
-            dialog.addEventListener('animationend', () => {
-                dialog.classList.remove("dialog__animate-out");
-                dialog.close();
-                // 모달 닫힐 때 내용 초기화
-                dialog.querySelectorAll('input').forEach(input => input.value = '');
-                overlay.style.display = 'none'; // Hide overlay
-            }, {once: true});
-        }
-    });
 
-    // 휴대폰 번호 변경 저장 버튼 클릭 시
-    saveNameButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        const dialog = saveNameButton.closest('dialog');
-        const overlay = document.querySelector('.mypage-overlay');
-        if (dialog) {
-            dialog.classList.add("dialog__animate-out");
-            dialog.addEventListener('animationend', () => {
-                dialog.classList.remove("dialog__animate-out");
-                dialog.close();
-                // 모달 닫힐 때 내용 초기화
-                dialog.querySelectorAll('input').forEach(input => input.value = '');
-                overlay.style.display = 'none'; // Hide overlay
-            }, {once: true});
-        }
+        // 입력된 전화 번호 가져오기 (올바른 선택자 사용)
+        const phoneInput = dialog.querySelector('input[name="name"]');
+
+        // 전화번호 값 변환 (하이픈 추가)
+        hypenTel(phoneInput);
+        // 변환된 전화번호 가져오기
+        const phoneNumber = phoneInput.value;
+        // AJAX 요청 보내기
+        $.ajax({
+            url: '/api/profile/phone/my',
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({ phoneNumber: phoneNumber }), // phoneNumber 값을 전달
+            success: function(response) {
+                alert("휴대폰 번호가 변경되었습니다.")
+                location.reload();
+                },
+            error: function(error) {
+                alert('오류: ' + error.responseJSON.message );
+            }
+        });
     });
 });
+
 
 // 휴대폰 번호 변환
     const hypenTel = (target) => {
