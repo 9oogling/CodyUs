@@ -82,16 +82,17 @@ public class SecurityConfig {
         .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
             // 1. 중복 url 삭제 2. 파일명 -> API 로 변경
-            .requestMatchers("chat","/api/users/signup", "/main.html", "/health"
-                , "/posts", "/api/posts", "posts/postDetail/", "/chatting/**", "/posts/**",
+            .requestMatchers("chat","/api/users/signup", "/main.html", "/health",
+                "/ranking", "/man", "/woman", "/season", "/posts", "/api/posts",
+                "posts/postDetail/", "/chatting/**", "/posts/**",
                 "/posts/postCreate", "/chat", "/admin/signup", "/admin/back-office", "/login/find-email",
-                "/login/find-password", "/api/admin/category","api/posts/likes/my",
+                "/login/find-password", "/api/admin/category","api/posts/likes/my", "/api/posts/category/**",
                 "/api/users/token/refresh", "/api/users/login", "/login", "/home", "/like", "/help", "/my-page",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()
             .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts","/api/posts/likes/my"
                 , "/api/posts/{postId}/likes/count", "/api/users/email/find-by-phone", "/api/users/exists-by-email",
-                "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search", "/api/posts/category/{categoryName}",
+                "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search",
                 "/posts/postCreate", "api/posts/search/**").permitAll()
             .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
             .anyRequest().authenticated())

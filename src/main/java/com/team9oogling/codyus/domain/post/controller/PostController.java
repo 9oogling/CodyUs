@@ -130,19 +130,29 @@ public class PostController {
 
     // 카테고리별 게시물 조회
     @GetMapping("/category/{categoryName}")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName) {
+    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByCategory(@PathVariable String categoryName,
+    @RequestParam(defaultValue = "1") int page,
+    @RequestParam(defaultValue = "20") int size,
+    @RequestParam(defaultValue = "id") String sortBy,
+    @RequestParam(defaultValue = "false") boolean descending
+    ) {
         List<PostResponseDto> posts;
         if ("RANKING".equals(categoryName)) {
-            posts = postService.findPostsByLikes();
+            posts = postService.findPostsByLikes(page, size, sortBy, descending);
         } else {
-            posts = postService.findPostsByCategory(categoryName);
+            posts = postService.findPostsByCategory(categoryName, page, size, sortBy, descending);
         }
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 
     @GetMapping("/likes")
-    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByLikes() {
-        List<PostResponseDto> posts = postService.findPostsByLikes();
+    public ResponseEntity<DataResponseDto<List<PostResponseDto>>> getPostsByLikes(
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "20") int size,
+        @RequestParam(defaultValue = "id") String sortBy,
+        @RequestParam(defaultValue = "false") boolean descending
+    ) {
+        List<PostResponseDto> posts = postService.findPostsByLikes(page, size, sortBy, descending);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTS_BY_LIKES);
     }
 

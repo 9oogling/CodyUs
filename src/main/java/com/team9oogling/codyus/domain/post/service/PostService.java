@@ -104,14 +104,16 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> findPostsByCategory(String categoryName) {
+    public List<PostResponseDto> findPostsByCategory(String categoryName, int page, int size,
+        String sortBy, boolean descending) {
         List<Post> posts = postRepository.findByCategoryName(categoryName);
         return posts.stream()
             .map(PostResponseDto::new)
             .collect(Collectors.toList());
     }
 
-    public List<PostResponseDto> findPostsByLikes() {
+    public List<PostResponseDto> findPostsByLikes(int page, int size,
+        String sortBy, boolean descending) {
         List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "likeCount"));
         return posts.stream()
                 .map(PostResponseDto::new)

@@ -87,4 +87,24 @@ public class HomeController {
     return "myPage";
   }
 
+  @GetMapping("/ranking")
+  public String ranking() {
+    return "ranking";
+  }
+
+  @GetMapping("/man")
+  public String man() {
+    return "man";
+  }
+
+  @GetMapping("/woman")
+  public String woman() {
+    return "woman";
+  }
+
+  @GetMapping("/season")
+  public String season() {
+    return "season";
+  }
+
 }

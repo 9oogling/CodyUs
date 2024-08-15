@@ -4,11 +4,13 @@ import com.team9oogling.codyus.global.dto.SecurityResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
@@ -21,6 +23,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
   // 인증되지 않은 요청을 처리하는 로직
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+    log.debug("Unauthorized request to: {}", request.getRequestURI());
     securityResponse.sendResponse(response, HttpStatus.UNAUTHORIZED, "로그인 후 이용해 주세요.");
   }
 

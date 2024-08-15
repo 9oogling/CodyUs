@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/css/ranking.css">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/footer.css">
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <title>RANKING</title>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="tabs" w-tid="8">
+  <div class="tab active" id="style-tab" w-tid="12">
+    스타일
+  </div>
+  <div class="tab" id="product-tab" w-tid="13">
+    상품
+  </div>
+</div>
+
+<div id="style-content" class="tab-content">
+</div>
+
+<div id="product-content" class="tab-content" style="display: none;">
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/basic.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/ranking.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.tab-content {
+  width: 1200px;
+  margin: 0 auto; /* 가운데 정렬 */
+}
+
+.tab-content ul {
+  list-style-type: none; /* 리스트 마커 제거 */
+  padding-left: 0; /* 왼쪽 패딩 제거 (필요 시) */
+}
+
+.tab-content li {
+  margin-bottom: 10px; /* 각 리스트 아이템 사이 간격 (옵션) */
+}
+
+.tabs {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc; /* 밑줄 추가 */
+
+}
+
+.tab {
+  padding: 10px 20px;
+  margin-right: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.3s;
+  border-bottom: 1px solid #fff;
+}
+
+.tab.active {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+}
