@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 사용자 정보 가져운 후 렌더링
 function renderUserInfo() {
-    console.log("랜더링 전: " + token)
+    console.log("렌더링 전: " + token)
     $.ajax({
         url: '/api/user-info', // 사용자 정보를 가져올 엔드포인트
         method: 'GET',
@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savePhoneButton = document.querySelector(".save-phone");
     const saveNameButton = document.querySelector(".save-name");
 
+
     // 주소 변경 저장 버튼 클릭 시
     saveAddressButton.addEventListener("click", (event) => {
         event.preventDefault();
@@ -179,18 +180,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 닉네임 변경 저장 버튼 클릭 시
+    saveNameButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const dialog = saveNameButton.closest('dialog');
+
+        // 입력된 닉네임 가져오기
+        const nickNameInput = dialog.querySelector('#change6').value;
+
+        // AJAX 요청 보내기
+        $.ajax({
+            url: '/api/profile/nickname/my',
+            method: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({ nickName: nickNameInput }),
+            success: function(response) {
+                alert("닉네임이 변경되었습니다.")
+                location.reload();
+            },
+            error: function(error) {
+                alert('오류: ' + error.responseJSON.message );
+            }
+        });
+    });
+
     // 휴대폰 번호 변경 저장 버튼 클릭 시
     savePhoneButton.addEventListener("click", (event) => {
         event.preventDefault();
         const dialog = savePhoneButton.closest('dialog');
 
-        // 입력된 전화 번호 가져오기 (올바른 선택자 사용)
+        // 입력된 전화번호 가져오기 (올바른 선택자 사용)
         const phoneInput = dialog.querySelector('input[name="name"]');
 
         // 전화번호 값 변환 (하이픈 추가)
         hypenTel(phoneInput);
         // 변환된 전화번호 가져오기
         const phoneNumber = phoneInput.value;
+
         // AJAX 요청 보내기
         $.ajax({
             url: '/api/profile/phone/my',

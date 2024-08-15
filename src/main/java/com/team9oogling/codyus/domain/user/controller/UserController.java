@@ -1,12 +1,6 @@
 package com.team9oogling.codyus.domain.user.controller;
 
-import com.team9oogling.codyus.domain.user.dto.FindEmailByPhoneNumberResponseDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfileAddressRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePasswordRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePhoneNumberRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserInfoDto;
-import com.team9oogling.codyus.domain.user.dto.UserSignupRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserWithDrawalRequestDto;
+import com.team9oogling.codyus.domain.user.dto.*;
 import com.team9oogling.codyus.domain.user.entity.UserRole;
 import com.team9oogling.codyus.domain.user.service.UserService;
 import com.team9oogling.codyus.global.dto.DataResponseDto;
@@ -84,6 +78,15 @@ public class UserController {
     userService.withdrawal(requestDto, userDetails);
 
     return ResponseFactory.ok(StatusCode.SUCCESS_WITHDRAWAL);
+  }
+
+  @PutMapping("/profile/nickname/my")
+  public ResponseEntity<MessageResponseDto> updateNickname(
+          @AuthenticationPrincipal UserDetailsImpl userDetails,
+          @Valid @RequestBody UpdateProfileNicknameRequestDto requestDto) {
+    userService.updateNickname(requestDto, userDetails);
+
+    return ResponseFactory.ok(StatusCode.SUCCESS_UPDATE_NICKNAME);
   }
 
   @PutMapping("/profile/password/my")
