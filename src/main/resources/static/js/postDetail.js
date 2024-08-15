@@ -141,8 +141,7 @@ $(document).ready(function() {
                 $('#like-button').toggleClass('liked', !isLiked);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('#post-likes').text('좋아요 처리 중 오류가 발생했습니다.');
-                console.error('좋아요 처리 중 오류가 발생했습니다.', textStatus, errorThrown);
+                alert("오류: " + jqXHR.responseJSON.message)
             }
         });
     });
