@@ -16,24 +16,16 @@ $(document).ready(function () {
 
   $.ajax({
     type: 'GET',
-    url: `/users/user-info`,
+    url: `/api/user-info`,
     contentType: 'application/json',
   })
   .done(function (res, status, xhr) {
-    const nickname = res.nickname;
-    const isAdmin = !!res.admin;
+
+    const nickname = res.data.nickName;
+    const isAdmin = res.data.admin;
 
     if (!nickname) {
-      window.location.href = '/login-page';
-      return;
-    }
-
-    $('#navUsername').text(nickname);
-    if (isAdmin) {
-      // $('#admin').text(true);
-      // showProduct();
-    } else {
-      // showProduct();
+      window.location.href = '/login';
     }
   });
 });
