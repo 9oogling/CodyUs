@@ -603,7 +603,8 @@ function createImageOverlay() {
             expandedImage.src = avatar.src; // 클릭한 이미지 src를 확대 이미지에 설정
             overlay.style.display = 'flex'; // 오버레이 표시
             expandedImage.style.display = 'block'; // 확대 이미지 표시
-            expandedImage.style.transform = 'translate(-50%, -50%) scale(1.5)'; // 확대 비율 조정
+            expandedImage.style.transform = 'translate(-50%, -50%) scale(1.3)'; // 확대 비율 조정
+            expandedImage.style.borderRadius= '50%';
         });
     });
     // 오버레이 클릭 시 숨기기
