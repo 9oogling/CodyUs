@@ -542,12 +542,15 @@ button.save-address:hover {
 }
 
 .like {
-    line-height: 17px;
     font-weight: 400;
     color: #a4a4a4;
     cursor: pointer;
     position: relative;
-    top: -310px;
+    line-height: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
 }
 
 .like:hover {
