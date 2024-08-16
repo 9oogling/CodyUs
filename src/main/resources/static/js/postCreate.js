@@ -1,12 +1,9 @@
 $(document).ready(function () {
-    function getToken() {
-        return localStorage.getItem('Authorization'); // 쿠키 대신 로컬 스토리지에서 토큰을 가져옵니다.
-    }
-    const auth = getToken();
+    token = localStorage.getItem('Authorization');
 
-    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        jqXHR.setRequestHeader('Authorization', auth);
-    });
+    if (!token) {
+        window.location.href = "/login";
+    }
 
     $('#createPostForm').on('submit', function (e) {
         e.preventDefault(); // 기본 폼 제출 방지

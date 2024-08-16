@@ -1,17 +1,10 @@
 $(document).ready(function () {
     // 로컬 스토리지에서 토큰 가져오기
-    function getToken() {
-        return localStorage.getItem('Authorization');
+    token = localStorage.getItem('Authorization');
+
+    if (!token) {
+        window.location.href = "/login";
     }
-
-    const auth = getToken();
-
-    // 모든 AJAX 요청에 Authorization 헤더 추가
-    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        if (auth) {
-            jqXHR.setRequestHeader('Authorization', auth);
-        }
-    });
 
     const pageSize = 9; // 페이지당 게시물 수
     let currentPage = 0; // 현재 페이지 번호 (0부터 시작)
