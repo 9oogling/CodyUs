@@ -113,8 +113,9 @@ $(document).ready(function () {
                 type: 'DELETE',
                 success: function () {
                     alert("관심 상품에서 삭제되었습니다.");
-                    $likeCount.text(currentCount - 1);
-                    $post.remove(); // 게시물 DOM에서 제거
+                    // $likeCount.text(currentCount - 1);
+                    // $post.remove(); // 게시물 DOM에서 제거
+                    location.reload();  // 페이지 새로고침
                 },
                 error: function () {
                     alert("좋아요 취소에 실패했습니다.");
@@ -128,7 +129,6 @@ $(document).ready(function () {
                 type: 'POST',
                 success: function () {
                     alert("관심 상품으로 등록되었습니다.");
-                    $likeCount.text(currentCount + 1);
                 },
                 error: function () {
                     alert("좋아요 등록에 실패했습니다.");

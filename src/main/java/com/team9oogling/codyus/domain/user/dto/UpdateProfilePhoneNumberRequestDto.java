@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class UpdateProfilePhoneNumberRequestDto {
 
-  @Pattern(regexp = "^$|^[0-9]{11}$", message = "올바른 휴대폰 번호가 아닙니다.")
+  @Pattern(regexp = "^010-\\d{4}-\\d{4}$", message = "올바른 휴대폰 번호가 아닙니다.")
   private String phoneNumber;
 
 }

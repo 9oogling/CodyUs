@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"
@@ -18,38 +19,29 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
-<div class="all-all">
-    <main>
-        <div class="box">
-            <div class="title">
-                <p class="b-title">상담 문의</p>
-                <p class="b-title1"> 이름 및 이메일을 정확하게 입력해 주세요.</p>
-            </div>
-            <div class="all">
-                <div class="b-content">
-                    <span>이름</span>
-                    <input type="text" id="userName" placeholder="* 이름을 입력해 주세요.">
-                    <span>이메일</span>
-                    <input type="email" id="userEmail" placeholder="* ex) codyus@email.com">
-                    <span>문의 내용</span>
+<div class="page-transition">
+    <div class="all-all">
+        <main>
+            <div class="box">
+                <div class="title">
+                    <p class="b-title">상담 문의</p>
+                    <p class="b-title1"> 이름 및 이메일을 정확하게 입력해 주세요.</p>
                 </div>
-                <div class="q-a1">
-                    <textarea id="userInquiry" placeholder="* 문의 내용을 500자 이내로 입력해 주세요."></textarea>
-                    <div id="charCount">0 / 500자</div> <!-- 여기에 글자 수를 표시 -->
+                <div class="all">
+                    <div class="b-content">
+                        <span>이름</span>
+                        <input type="text" id="userName" placeholder="* 이름을 입력해 주세요.">
+                        <span>이메일</span>
+                        <input type="email" id="userEmail" placeholder="* ex) codyus@email.com">
+                        <span>문의 내용</span>
+                    </div>
+                    <div class="q-a1">
+                        <textarea id="userInquiry" placeholder="* 문의 내용을 500자 이내로 입력해 주세요."></textarea>
+                        <div id="charCount">0 / 500자</div> <!-- 여기에 글자 수를 표시 -->
+                    </div>
                 </div>
-            </div>
-            <div class="font">
-                <ul class="menu">
-                    <li>Contact</li>
-                    <li>us ,</li>
-                    <li>1 : 1</li>
-                    <li>Inquiry ,</li>
-                    <li>Q&A ,</li>
-                    <li>-</li>
-                    <li>CodyUs</li>
-                </ul>
-                <div class="container">
-                    <ul class="menu-mask">
+                <div class="font">
+                    <ul class="menu">
                         <li>Contact</li>
                         <li>us ,</li>
                         <li>1 : 1</li>
@@ -58,14 +50,25 @@
                         <li>-</li>
                         <li>CodyUs</li>
                     </ul>
-                </div>
-                <div class="b-button">
-                    <button class="save-btn" id="submitBtn">등록</button>
-                    <button class="save-btn1" id="cancelBtn">취소</button>
+                    <div class="container">
+                        <ul class="menu-mask">
+                            <li>Contact</li>
+                            <li>us ,</li>
+                            <li>1 : 1</li>
+                            <li>Inquiry ,</li>
+                            <li>Q&A ,</li>
+                            <li>-</li>
+                            <li>CodyUs</li>
+                        </ul>
+                    </div>
+                    <div class="b-button">
+                        <button class="save-btn" id="submitBtn">등록</button>
+                        <button class="save-btn1" id="cancelBtn">취소</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 </div>
 
 <div th:insert="footer :: footer-content"></div>
@@ -73,3 +76,4 @@
 <script src="/js/header.js"></script>
 <script src="/js/basic.js"></script>
 </body>
+</html>

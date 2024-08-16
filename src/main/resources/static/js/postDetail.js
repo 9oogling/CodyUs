@@ -44,7 +44,7 @@ $(document).ready(function() {
                         </div>
                         <div class="post-hashtag">
                         ${hashtagsArray.map(tag => `<span class="hashtag">${tag.trim()}</span>`).join(' ')}
-                    </div>
+                        </div>
                     `);
 
                 // 두 번째 이미지 URL이 있으면 상품 이미지로 사용
@@ -141,8 +141,7 @@ $(document).ready(function() {
                 $('#like-button').toggleClass('liked', !isLiked);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('#post-likes').text('좋아요 처리 중 오류가 발생했습니다.');
-                console.error('좋아요 처리 중 오류가 발생했습니다.', textStatus, errorThrown);
+                alert("오류: " + jqXHR.responseJSON.message)
             }
         });
     });

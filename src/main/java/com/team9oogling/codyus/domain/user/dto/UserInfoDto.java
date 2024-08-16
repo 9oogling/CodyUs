@@ -10,4 +10,6 @@ public class UserInfoDto {
 	String username;
 	boolean isAdmin;
 	String nickName;
+	String phoneNumber;
+	String address;
 }
