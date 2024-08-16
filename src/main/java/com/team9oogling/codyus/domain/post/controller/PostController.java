@@ -143,9 +143,6 @@ public class PostController {
             posts = postService.findPostsByCategory(categoryName, PageRequest.of(page - 1, size, Sort.by(sortBy).descending()));
         }
 
-        // 디버깅을 위한 로그 출력
-        System.out.println("Page requested: " + page + ", Number of posts: " + posts.getContent().size());
-
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 
