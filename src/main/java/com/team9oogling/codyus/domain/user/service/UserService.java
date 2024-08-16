@@ -14,7 +14,6 @@ import com.team9oogling.codyus.global.security.UserDetailsImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import java.time.Duration;
@@ -22,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -73,8 +71,8 @@ public class UserService {
       throw new CustomException(StatusCode.CHECK_PASSWORD);
     }
 
-    String encrytionPassword = passwordEncoder.encode(requestDto.getPassword());
-    user.encryptionPassword(encrytionPassword);
+    String encryptionPassword = passwordEncoder.encode(requestDto.getPassword());
+    user.encryptionPassword(encryptionPassword);
 
     userRepository.save(user);
   }
@@ -172,7 +170,7 @@ public class UserService {
   }
 
   @Transactional
-  public FindEmailByPhoneNumberResponseDto FindEmail(String phoneNumber) {
+  public FindEmailByPhoneNumberResponseDto findEmail(String phoneNumber) {
     User user = userRepository.findByPhoneNumber(phoneNumber)
         .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_PHONENUMBER));
 
@@ -197,19 +195,7 @@ public class UserService {
   }
 
   private String getRefreshToken(HttpServletRequest request) {
-    Cookie[] cookies = request.getCookies();
-
-    if (cookies == null) {
-      throw new CustomException(StatusCode.NOT_FOUND_COOKIE);
-    }
-
-    for (Cookie cookie : cookies) {
-      if ("refreshToken".equals(cookie.getName())) {
-        return cookie.getValue();
-      }
-    }
-
-    return null;
+    return request.getHeader("x-refresh-token");
   }
 
   private HttpHeaders validateToken(String token) {
@@ -238,12 +224,10 @@ public class UserService {
     String accessToken = jwtProvider.createAccessToken(user.getEmail(), user.getRole());
     String refreshToken = jwtProvider.generateToken(user.getEmail(), user.getRole(),
         info.getExpiration());
-    ResponseCookie responseCookie = jwtProvider.createCookieRefreshToken(refreshToken,
-        info.getExpiration());
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", "Bearer " + accessToken);
-    headers.add(HttpHeaders.SET_COOKIE, responseCookie.toString());
+    headers.set("x-refresh-token", refreshToken);  // Refresh Token을 헤더에 추가
 
     user.updateRefreshToken(refreshToken);
 

@@ -58,7 +58,9 @@ public class KakaoService {
     user.updateRefreshToken(refreshToken);
     userRepository.save(user);
 
-    // 6. JWT 토큰 반환
+    log.info("JWT Token 생성됨: " + jwtToken);
+
+    // 6. JWT 토큰을 반환
     return jwtToken;
   }
 

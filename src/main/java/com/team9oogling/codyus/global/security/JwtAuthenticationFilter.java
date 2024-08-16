@@ -12,11 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -79,7 +77,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     if (optionalUser.isEmpty()) {
       securityResponse.sendResponse(response, HttpStatus.BAD_REQUEST, "아이디, 비밀번호를 확인해주세요.");
-
       return;
     }
 
@@ -91,6 +88,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     sendLoginResponse(response, user, accessToken, refreshToken);
     log.info("accessToken : " + accessToken);
+    log.info("refreshToken : " + refreshToken);
   }
 
   @Override
@@ -105,11 +103,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     user.updateRefreshToken(refreshToken);
     userRepository.save(user);
 
-    ResponseCookie refreshTokenCookie = jwtProvider.createCookieRefreshToken(refreshToken);
     response.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
-    response.addHeader(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
+    response.addHeader("x-refresh-token", refreshToken);  // Refresh Token을 헤더에 추가
     securityResponse.sendResponse(response, HttpStatus.OK, "로그인에 성공했습니다.");
-
   }
 
 }

@@ -1,15 +1,15 @@
 package com.team9oogling.codyus.domain.oauth.controller;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team9oogling.codyus.domain.oauth.service.KakaoService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 @RequestMapping("/api")
 public class OAuthController {
@@ -21,17 +21,12 @@ public class OAuthController {
   }
 
   @GetMapping("/user/kakao/callback")
-  public String kakaoLogin(@RequestParam String code, HttpServletResponse response)
-      throws JsonProcessingException {
-    String token = kakaoService.kakaoLogin(code);
+  public String kakaoLogin(@RequestParam String code) throws JsonProcessingException {
 
-    Cookie cookie = new Cookie("Authorization", token);
-    cookie.setPath("/");
-    response.addCookie(cookie);
+    // 카카오 로그인 후 JWT 토큰 생성
+    String jwtToken = kakaoService.kakaoLogin(code);
 
-    System.out.println("Cookie Set: " + cookie.getName() + "=" + cookie.getValue());
-
-    return "redirect:/home";
+    // JWT 토큰을 URL 파라미터로 포함하여 홈 페이지로 리다이렉트
+    return "redirect:/home?token=" + jwtToken;
   }
-
 }

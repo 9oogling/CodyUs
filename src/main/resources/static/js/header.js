@@ -10,8 +10,7 @@ $(document).ready(function() {
     }
   };
 
-  const token = Cookies.get('Authorization');
-  console.log('Authorization token:', token);
+  const token = localStorage.getItem('Authorization');  // 쿠키에서 로컬 스토리지로 변경
 
   // 로그인 상태에 따라 링크 텍스트 및 기능 설정
   if (token) {
@@ -22,7 +21,7 @@ $(document).ready(function() {
 
   // 로그아웃 함수
   window.logout = function() {
-    Cookies.remove('Authorization', { path: '/' });
+    localStorage.removeItem('Authorization');  // 쿠키에서 로컬 스토리지로 변경
     alert('로그아웃 되었습니다.');
     location.href = '/home';
   };
@@ -61,7 +60,6 @@ $(document).ready(function() {
       inputField.val(''); // 입력된 텍스트를 지움
       searchSvg.css('opacity', '1'); // 검색창을 닫을 때 돋보기가 다시 나타나도록 설정
     }
-
   });
 
   // 텍스트 입력 시 선이 계속 보이도록 설정
