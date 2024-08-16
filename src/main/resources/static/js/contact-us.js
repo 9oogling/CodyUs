@@ -14,11 +14,11 @@ document.body.addEventListener("mousemove", e => {
 
 $(document).ready(function() {
 
-    const token = getToken();
-
-    if(!token) {
-        window.location.href ='/login'
+    const token = localStorage.getItem('Authorization');
+    if (!token) {
+        window.location.href = '/login';
     }
+
     $('#submitBtn').click(function(e) {
         e.preventDefault(); // 기본 폼 제출 방지
 
