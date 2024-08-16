@@ -554,6 +554,11 @@ button.save-address:hover {
     text-decoration: underline #818181;
 }
 
+.likes-list{
+    position: relative;
+    top:-290px;
+}
+
 .sales-list {
     position: relative;
     top: -290px;
