@@ -154,14 +154,15 @@
       <div class="box3">
         <p class="title-1">관심</p>
         <div class="box">
-          <p class="more1">더보기</p>
+          <p class="more1" id="likepostMoreLink">더보기</p>
         </div>
         <br>
-        <p class="like"> - 셀린느 로고 티셔츠 [L] </p>
-        <p class="like"> - 코디어스 와이드 팬츠 [M] </p>
-        <p class="like"> - COS 코튼 와이셔츠 [100] </p>
-        <p class="like"> - 슈프림 백팩 [OS] </p>
-        <p class="like"> - 메종마르지엘라 지갑 </p>
+        <div class="likes-list"></div>
+      </div>
+      <div class="pagination likes-pagination">
+        <button class="prev-page2" onclick="changeLikesPage(currentLikePage - 1)">이전</button>
+        <span id="likepage-numbers"></span>
+        <button class="next-page2" onclick="changeLikesPage(currentLikePage + 1)">다음</button>
       </div>
       <div class="box4">
         <p class="title-1">내 게시물 목록</p>
@@ -171,7 +172,7 @@
         <br>
         <div class="sales-list"></div>
       </div>
-      <div class="pagination">
+      <div class="pagination sales-pagination">
         <button class="prev-page" onclick="changePage(currentPage - 1)">이전</button>
         <span id="page-numbers"></span>
         <button class="next-page" onclick="changePage(currentPage + 1)">다음</button>
