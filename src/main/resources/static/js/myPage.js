@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+});
 
 // 비밀번호 변경 알림
 document.addEventListener("DOMContentLoaded", () => {
@@ -141,6 +142,7 @@ function renderUserInfo() {
         }
     });
 }
+
 
 
 // 주소 변경 모달 저장 버튼 클릭 시 모달 닫히기
@@ -282,11 +284,6 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-// 초기 데이터 가져오기
-fetchPosts(currentPage);
-fetchLikes(currentLikePage);
-})
-;
 
 function fetchPosts(page) {
     $.ajax({
@@ -486,3 +483,9 @@ document.getElementById('likepostMoreLink').addEventListener('click', function (
     window.location.href = '/like'; // 원하는 URL로 이동
 });
 
+// 초기 데이터 가져오기
+$(document).ready(function () {
+    renderUserInfo()
+    fetchPosts(currentPage);
+    fetchLikes(currentLikePage);
+});
