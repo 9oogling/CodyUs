@@ -1,88 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Search Results</title>
-    <link rel="stylesheet" type="text/css" href="/css/posts.css">
+    <link rel="stylesheet" type="text/css" href="/css/searchResult.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.css">
-
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-
-    <style>
-        .tabs {
-            display: flex;
-            cursor: pointer;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ccc; /* 밑줄 추가 */
-
-        }
-
-        .tab {
-            padding: 10px 20px;
-            margin-right: 5px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px 4px 0 0;
-            transition: background-color 0.3s;
-            border-bottom: 1px solid #fff;
-        }
-
-        .tab.active {
-            background-color: #fff;
-            border-bottom: 1px solid #fff;
-            font-weight: bold;
-        }
-
-        .tab:hover {
-            background-color: #e0e0e0;
-        }
-
-        /*.tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 0 0 4px 4px;
-        }*/
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <title>Search Results</title>
 </head>
 <body>
 <div th:insert="header :: header-content"></div>
 
-<div class="create-post">
-    <div class="create-button">
-        <button type="button" class="btn btn-primary" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
+<div class="content-wrapper">
+    <div class="header-row">
+        <h1 id="search-title">SEARCH</h1>
+        <div class="create-post">
+            <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
+        </div>
     </div>
-</div>
-
-<div class ="tabs" w-tid="8">
-    <div class ="tab active" id ="product-tab" w-tid="12">
-        상품
+    <div id="style-content">
     </div>
-    <div class="tab" id="style-tab" w-tid="13"> 스타일</div>
-</div>
-
-<div class="post-container" id="search-results">
-    <!-- 검색 결과가 여기에 표시됩니다. -->
-</div>
-
-<div class="pagination" id="pagination">
-    <!-- 페이지네이션 링크가 여기에 표시됩니다. -->
 </div>
 
 <div th:insert="footer :: footer-content"></div>
 
 <script src="/js/header.js"></script>
+<script src="/js/basic.js"></script>
 <script src="/js/searchResult.js"></script>
 </body>
 </html>

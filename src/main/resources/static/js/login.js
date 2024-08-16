@@ -12,9 +12,6 @@ $(document).ready(function () {
   if (token) {
     console.log("JWT 토큰 감지, 로컬 스토리지에 저장...");
     localStorage.setItem('Authorization', 'Bearer ' + token);
-
-    // 홈 페이지로 리다이렉트
-    window.location.href = host + '/home';
     return;
   }
 
