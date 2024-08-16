@@ -47,7 +47,7 @@ body {
 /* 공통 박스 스타일 */
 .box1, .box2 {
     width: 430px;
-    height: 560px;
+    height: 580px;
     border: 1px solid black;
     padding: 25px 35px;
     font-weight: 300;
@@ -552,6 +552,11 @@ button.save-address:hover {
 
 .like:hover {
     text-decoration: underline #818181;
+}
+
+.likes-list{
+    position: relative;
+    top:-290px;
 }
 
 .sales-list {
