@@ -11,7 +11,6 @@ $(document).ready(function() {
   };
 
   const token = Cookies.get('Authorization');
-  console.log('Authorization token:', token);
 
   // 로그인 상태에 따라 링크 텍스트 및 기능 설정
   if (token) {

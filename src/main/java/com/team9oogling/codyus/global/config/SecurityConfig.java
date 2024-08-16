@@ -90,7 +90,7 @@ public class SecurityConfig {
                 "/api/users/token/refresh", "/api/users/login", "/login", "/home", "/like", "/help", "/my-page",
                 "/api/user-info", "/signup", "/shop", "/searchResult.html", "api/posts/search")
             .permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/user/kakao/callback", "/api/posts","/api/posts/likes/my"
+            .requestMatchers(HttpMethod.GET, "/api/user/kakao/**", "/api/posts","/api/posts/likes/my"
                 , "/api/posts/{postId}/likes/count", "/api/users/email/find-by-phone", "/api/users/exists-by-email",
                 "/api/user-info", "/login", "/api/posts/{postId}", "/posts/search",
                 "/posts/postCreate", "api/posts/search/**").permitAll()

@@ -1,7 +1,11 @@
 const host = 'http://' + window.location.host;
 
 function getToken() {
-  return Cookies.get('Authorization');
+  const token = Cookies.get('Authorization');
+  if (token) {
+    return 'Bearer ' + token;
+  }
+  return undefined;
 }
 
 $(document).ready(function () {
@@ -11,6 +15,7 @@ $(document).ready(function () {
   if (auth !== undefined && auth !== '') {
     $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
       jqXHR.setRequestHeader('Authorization', auth);
+      console.log("Authorization:", auth);
     });
   }
 
