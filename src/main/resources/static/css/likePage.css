@@ -120,6 +120,13 @@ main img {
     flex-direction: column;
 }
 
+.title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
 .product-title {
     margin-top: 15px;
     font-size: 14px;
