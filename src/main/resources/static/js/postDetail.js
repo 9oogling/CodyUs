@@ -73,6 +73,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     success: function (likeResponse) {
                         const likeCount = likeResponse?.data ?? '좋아요 수를 불러올 수 없습니다';
+                        $('#like-button').html('<img src="/images/whiteHeart.png" alt="white heart">');
                         $('#post-likes').text(`${likeCount}`);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
