@@ -19,7 +19,7 @@ public class webSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(final StompEndpointRegistry registry) {
 		// STOP 엔드포인트 등록 클라이언트는 이 엔드 포인트를 통해 서버와 연결
-		registry.addEndpoint("/chatting").setAllowedOrigins("*").withSockJS();
+		registry.addEndpoint("/chatting").setAllowedOriginPatterns("*").withSockJS();
 	}
 
 	@Override
