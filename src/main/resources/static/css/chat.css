@@ -329,6 +329,10 @@ body {
     margin: 0;
     font-size: 16px;
     font-weight: bold;
+    white-space: nowrap;     /* 텍스트를 한 줄로 표시 */
+    overflow: hidden;        /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis;
+    width: 80%;
 }
 
 #price {

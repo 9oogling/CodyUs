@@ -52,14 +52,6 @@ public class LikeController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
-            System.out.println("Authentication is null");
-        } else {
-            System.out.println("Authentication: " + authentication.getName());
-            System.out.println("Authorities: " + authentication.getAuthorities());
-        }
-
         Pageable pageable = PageRequest.of(page,size);
         Page<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails,pageable);
 
