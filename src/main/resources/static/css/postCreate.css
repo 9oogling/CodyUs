@@ -23,27 +23,30 @@ body {
 
 .create-container {
     max-width: 600px; /* 고정된 너비 */
-    margin: 0 auto;
-    padding: 20px; /* 페이지 내 여백 */
+    margin: 70px auto 70px auto;
+    padding: 30px; /* 페이지 내 여백 */
+    border: 1px solid black;
 }
 
 h1 {
-    text-align: center;
     color: #262626;
+    margin: 0 auto auto auto;
+    font-weight: 600;
+    font-size: 23px;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
 }
 
 .price-label::before {
-    content: '💲';
+    /*content: '💲';*/
     margin-right: 5px; /* Add some space between the symbol and the label */
 }
 
 label {
-    margin-top: 16px;
     margin-bottom: 8px;
     font-weight: bold;
     color: #262626;
@@ -52,6 +55,7 @@ label {
 .post-create-form .image-upload{
     display: flex;
     gap: 20px;
+    margin-top: 10px;
 }
 
 input[type="number"],
@@ -59,10 +63,15 @@ textarea,
 .post-create-form select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #dbdbdb;
-    border-radius: 6px;
+    border: 1px solid #d0d0d0;
     font-size: 16px;
     background-color: #ffffff; /* 필요한 경우 배경 색상 추가 */
+    margin-top: 10px;
+    outline: none;
+}
+
+.post-create-form select {
+    margin-bottom: 20px;
 }
 
 .gender-section, .season-section {
@@ -80,28 +89,37 @@ textarea,
     display: block;
     padding: 10px;
     background-color: #f0f0f0;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 14px;
 }
 .gender-option input:checked + label, .season-option input:checked + label {
-    background-color: #ff4081;
+    background-color: #000000;
     color: white;
 }
 
 
 .post-create-form div {
     margin-bottom: 15px; /* 입력 칸 사이의 여백을 설정합니다 */
+    margin-top: 10px;
 }
 
-#title,
+#title {
+    margin-bottom: 10px;
+    width: 100%; /* 전체 너비를 사용 */
+    padding: 15px; /* 내부 여백을 증가시켜 더 많은 공간을 제공 */
+    font-size: 16px; /* 폰트 크기를 키워 가독성을 높임 */
+    border: 1px solid #d0d0d0; /* 테두리 스타일 */
+    box-sizing: border-box; /* padding과 border를 포함한 너비 조정 */
+    font-weight: 400;
+}
 #hashtags {
     width: 100%; /* 전체 너비를 사용 */
     padding: 15px; /* 내부 여백을 증가시켜 더 많은 공간을 제공 */
     font-size: 16px; /* 폰트 크기를 키워 가독성을 높임 */
-    border: 1px solid #dbdbdb; /* 테두리 스타일 */
-    border-radius: 3px; /* 테두리 모서리를 둥글게 */
+    border: 1px solid #d0d0d0; /* 테두리 스타일 */
     box-sizing: border-box; /* padding과 border를 포함한 너비 조정 */
+    margin-top: 20px;
 }
 
 input[type="file"] {
@@ -124,18 +142,18 @@ input[type="file"] {
 
 
 button {
-    background-color: #0095f6;
+    background-color: #000000;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 button:hover {
-    background-color: #0077c5;
+    background-color: #464646;
 }
 
 .hashtag-container {

@@ -288,6 +288,7 @@ header > .logo img {
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
 }
 
 .search input.expanded ~ .search-options {

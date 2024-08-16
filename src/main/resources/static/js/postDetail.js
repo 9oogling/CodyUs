@@ -44,7 +44,7 @@ $(document).ready(function() {
                         </div>
                         <div class="post-hashtag">
                         ${hashtagsArray.map(tag => `<span class="hashtag">${tag.trim()}</span>`).join(' ')}
-                    </div>
+                        </div>
                     `);
 
                 // 두 번째 이미지 URL이 있으면 상품 이미지로 사용
