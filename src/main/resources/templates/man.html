@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/css/man.css">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/footer.css">
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+  <title>MAN</title>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="content-wrapper">
+  <div class="header-row">
+    <h1 id="man-title">MAN</h1>
+    <div class="create-post">
+      <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
+    </div>
+  </div>
+  <div id="style-content">
+  </div>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/basic.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/man.js"></script>
+</body>
+</html>

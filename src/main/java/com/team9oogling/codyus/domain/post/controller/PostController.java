@@ -80,7 +80,7 @@ public class PostController {
             @RequestParam(value = "sort", defaultValue = "createdAt") String sortBy,
             @RequestParam(value = "desc", defaultValue = "true") boolean descending) {
 
-        Pageable pageable = PageRequest.of(page, size,
+        Pageable pageable = PageRequest.of(page -1, size,
                 descending ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending());
         Page<PostResponseDto> posts = postService.findAllPost(pageable);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_ALLPOST);
@@ -138,10 +138,14 @@ public class PostController {
 
         Page<PostResponseDto> posts;
         if ("RANKING".equals(categoryName)) {
-            posts = postService.findPostsByLikes(pageable);
+            posts = postService.findPostsByLikes(PageRequest.of(page - 1, size, Sort.by(sortBy).descending()));
         } else {
-            posts = postService.findPostsByCategory(categoryName, pageable);
+            posts = postService.findPostsByCategory(categoryName, PageRequest.of(page - 1, size, Sort.by(sortBy).descending()));
         }
+
+        // 디버깅을 위한 로그 출력
+        System.out.println("Page requested: " + page + ", Number of posts: " + posts.getContent().size());
+
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_GET_POSTSBYCATEGORY);
     }
 

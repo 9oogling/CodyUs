@@ -5,6 +5,22 @@ body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 /* 헤더 적용에 따라 다름 */
 .all-all {
     padding-top: 70px;
@@ -17,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 70px auto;
     padding: 35px;
 }
 
@@ -69,6 +85,10 @@ span {
 
     outline: none;
     font-size: 13px;
+}
+
+.title {
+    margin-bottom: 30px;
 }
 
 .b-title1 {
@@ -133,11 +153,19 @@ textarea::placeholder {
 
     position: absolute;
     left: 50%;
+    top: 14.5%;
+}
+
+.font ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    white-space: nowrap;
 }
 
 .container {
     position: relative;
-    top: 4.5%;
     height: 50px;
     overflow: hidden;
     outline: 1px transparent;
@@ -145,11 +173,12 @@ textarea::placeholder {
 
 .container ul {
     position: absolute;
-    top: 5%;
+    top: 0;
     left: 0;
     list-style: none;
     white-space: nowrap;
 }
+
 
 .menu {
     height: 600px;
@@ -161,8 +190,8 @@ textarea::placeholder {
     width: 330px;
 
     position: absolute;
-    top: 88.2%;
-    left: 7%;
+    top: 94%;
+    left: 10%;
 
     display: flex;
     justify-content: center;

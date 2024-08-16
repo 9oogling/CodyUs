@@ -11,12 +11,12 @@ $(document).ready(function () {
     console.log(`Loading page ${page}...`); // 디버깅용 로그
 
     $.ajax({
-      url: `/api/posts?page=${page}&size=${pageSize}`,
+      url: `/api/posts/category/RANKING?page=${page}&size=${pageSize}`,
       method: 'GET',
       dataType: 'json',
       success: function (response) {
         console.log('Server response:', response); // 전체 응답을 로그로 출력
-        let postsContainer = $('.post-container');
+        let postsContainer = $('#style-content');
         if (response && Array.isArray(response.data.content)) {
           if (page === 1) {
             postsContainer.empty(); // 첫 페이지 로드일 때만 기존 게시물 초기화
@@ -50,15 +50,14 @@ $(document).ready(function () {
                   </div>
                 `);
 
+                fetchLikeCount(post.id);
+
                 postElement.click(function () {
                   var postId = $(this).data('post-id');
                   window.location.href = `/posts/postDetail/${postId}`;
                 });
 
                 postsContainer.append(postElement);
-
-                // 각 게시물의 좋아요 수 가져오기
-                fetchLikeCount(post.id);
               }
             });
 
@@ -95,7 +94,7 @@ $(document).ready(function () {
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error('Error fetching images:', jqXHR, textStatus, errorThrown);
-        $('.post-container').html('<p>이미지를 로드하는 중 오류가 발생했습니다.</p>');
+        $('#style-content').html('<p>이미지를 로드하는 중 오류가 발생했습니다.</p>');
         hasMorePosts = false;
       },
       complete: function () {

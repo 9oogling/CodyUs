@@ -2,6 +2,8 @@
 
 /* 기본 폰트 설정 */
 body {
+    overflow-x: hidden;
+    overflow-y: auto;
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
@@ -15,11 +17,31 @@ main img {
     display: block;
 }
 
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 .my-like-product {
     margin-bottom: 20px; /* 아래쪽에 여백을 추가하여 상품과의 간격 조절 */
-    margin-left: 450px;
+    /*margin-left: 450px;*/
     font-size: 17px;   /* 텍스트 크기를 약간 키움 */
     font-weight: bold;   /* 텍스트를 굵게 표시 */
+
+    position: relative;
+    left: 21%;
+    margin-top: 35px;
 }
 
 .responsive-container {
@@ -27,6 +49,7 @@ main img {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 70px;
 }
 
 .container {
@@ -123,12 +146,17 @@ main img {
 .box {
     width: 40px;
     height: 40px;
-    background: url("../images/redHeart.png")
-    no-repeat center / 25px; cursor: pointer; border:0; font-size:0; margin:50px auto; display:block;
+    background: url(https://blog.kakaocdn.net/dn/BedCA/btsI009q8Jy/xI8PDClhLxxqNklXMG1ul1/img.png)
+    no-repeat center / 25px;
+    cursor: pointer;
+    border:0;
+    font-size:0;
+    margin:5px auto;
+    display:block;
 }
 
 .box.off {
-    background: url("../images/whiteHeart.png")
+    background: url(https://blog.kakaocdn.net/dn/btjPdb/btsI1ovJ8w8/CzEgtcKXPLjZekMSWKaMVK/img.png)
     no-repeat center / 25px;
     animation: beating .5s 1 alternate;
 }
@@ -145,4 +173,9 @@ main img {
     align-items: center; /* Center items vertically */
     justify-content: center;
     gap:5px;
+}
+
+footer {
+    position: relative;
+    margin-top: 13.05%;
 }

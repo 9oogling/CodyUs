@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>SHOP</title>
   <link rel="stylesheet" type="text/css" href="/css/footer.css">
   <link rel="stylesheet" type="text/css" href="/css/header.css">
   <link rel="stylesheet" type="text/css" href="/css/shop.css">
@@ -16,267 +16,143 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
+<div class="page-transition">
 <div class="container">
-
+  <div class="create-post">
+    <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
+  </div>
   <div class="category-title">TOPS</div>
   <div class="category_sub_title">상의</div>
-  <div class="product-container">
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 1">
-      <div class="product-name">상품 1</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 2">
-      <div class="product-name">상품 2</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 3">
-      <div class="product-name">상품 3</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 4">
-      <div class="product-name">상품 4</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 5">
-      <div class="product-name">상품 5</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 6">
-      <div class="product-name">상품 6</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 7">
-      <div class="product-name">상품 7</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 8">
-      <div class="product-name">상품 8</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 9">
-      <div class="product-name">상품 9</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 10">
-      <div class="product-name">상품 10</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 11">
-      <div class="product-name">상품 11</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 12">
-      <div class="product-name">상품 12</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 13">
-      <div class="product-name">상품 13</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 14">
-      <div class="product-name">상품 14</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 15">
-      <div class="product-name">상품 15</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 16">
-      <div class="product-name">상품 16</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 17">
-      <div class="product-name">상품 17</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 18">
-      <div class="product-name">상품 18</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 19">
-      <div class="product-name">상품 19</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 20">
-      <div class="product-name">상품 20</div>
-    </div>
+  <div class="product-container" id="TOPS">
+  </div>
+
+  <div class="pagination" id="TOPS-pagination">
+    <button class="prev-page" onclick="changePage('TOPS', currentPage['TOPS'] - 1)">이전</button>
+    <span id="TOPS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('TOPS', currentPage['TOPS'] + 1)">다음</button>
   </div>
 
   <div class="category-title">BOTTOMS</div>
   <div class="category_sub_title">하의</div>
-  <div class="product-container">
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 21">
-      <div class="product-name">상품 21</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 22">
-      <div class="product-name">상품 22</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 23">
-      <div class="product-name">상품 23</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 24">
-      <div class="product-name">상품 24</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 25">
-      <div class="product-name">상품 25</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 26">
-      <div class="product-name">상품 26</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 27">
-      <div class="product-name">상품 27</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 28">
-      <div class="product-name">상품 28</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 29">
-      <div class="product-name">상품 29</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 30">
-      <div class="product-name">상품 30</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 31">
-      <div class="product-name">상품 31</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 32">
-      <div class="product-name">상품 32</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 33">
-      <div class="product-name">상품 33</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 34">
-      <div class="product-name">상품 34</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 35">
-      <div class="product-name">상품 35</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 36">
-      <div class="product-name">상품 36</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 37">
-      <div class="product-name">상품 37</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 38">
-      <div class="product-name">상품 38</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 39">
-      <div class="product-name">상품 39</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 40">
-      <div class="product-name">상품 40</div>
-    </div>
+  <div class="product-container" id="BOTTOMS">
+  </div>
+
+  <div class="pagination" id="BOTTOMS-pagination">
+    <button class="prev-page" onclick="changePage('BOTTOMS', currentPage['BOTTOMS'] - 1)">이전
+    </button>
+    <span id="BOTTOMS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('BOTTOMS', currentPage['BOTTOMS'] + 1)">다음
+    </button>
   </div>
 
   <div class="category-title">DRESS</div>
-  <div class="category_sub_title">상의</div>
-  <div class="product-container">
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 41">
-      <div class="product-name">상품 41</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 42">
-      <div class="product-name">상품 42</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 43">
-      <div class="product-name">상품 43</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 44">
-      <div class="product-name">상품 44</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 45">
-      <div class="product-name">상품 45</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 46">
-      <div class="product-name">상품 46</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 47">
-      <div class="product-name">상품 47</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 48">
-      <div class="product-name">상품 48</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 49">
-      <div class="product-name">상품 49</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 50">
-      <div class="product-name">상품 50</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 51">
-      <div class="product-name">상품 51</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 52">
-      <div class="product-name">상품 52</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 53">
-      <div class="product-name">상품 53</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 54">
-      <div class="product-name">상품 54</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 55">
-      <div class="product-name">상품 55</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 56">
-      <div class="product-name">상품 56</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 57">
-      <div class="product-name">상품 57</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 58">
-      <div class="product-name">상품 58</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 59">
-      <div class="product-name">상품 59</div>
-    </div>
-    <div class="product-item">
-      <img src="https://via.placeholder.com/250x140" alt="상품 60">
-      <div class="product-name">상품 60</div>
-    </div>
+  <div class="category_sub_title">드레스</div>
+  <div class="product-container" id="DRESS">
   </div>
 
+  <div class="pagination" id="DRESS-pagination">
+    <button class="prev-page" onclick="changePage('DRESS', currentPage['DRESS'] - 1)">이전</button>
+    <span id="DRESS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('DRESS', currentPage['DRESS'] + 1)">다음</button>
+  </div>
+
+
+  <div class="category-title">FOOTWEAR</div>
+  <div class="category_sub_title">신발</div>
+  <div class="product-container" id="FOOTWEAR">
+  </div>
+
+  <div class="pagination" id="FOOTWEAR-pagination">
+    <button class="prev-page" onclick="changePage('FOOTWEAR', currentPage['FOOTWEAR'] - 1)">이전
+    </button>
+    <span id="FOOTWEAR-page-numbers"></span>
+    <button class="next-page" onclick="changePage('FOOTWEAR', currentPage['FOOTWEAR'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">BAGS</div>
+  <div class="category_sub_title">가방</div>
+  <div class="product-container" id="BAGS">
+  </div>
+
+  <div class="pagination" id="BAGS-pagination">
+    <button class="prev-page" onclick="changePage('BAGS', currentPage['BAGS'] - 1)">이전
+    </button>
+    <span id="BAGS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('BAGS', currentPage['BAGS'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">HAT</div>
+  <div class="category_sub_title">모자</div>
+  <div class="product-container" id="HAT">
+  </div>
+
+  <div class="pagination" id="HAT-pagination">
+    <button class="prev-page" onclick="changePage('HAT', currentPage['HAT'] - 1)">이전
+    </button>
+    <span id="HAT-page-numbers"></span>
+    <button class="next-page" onclick="changePage('HAT', currentPage['HAT'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">SUNGLASSES</div>
+  <div class="category_sub_title">선글라스</div>
+  <div class="product-container" id="SUNGLASSES">
+  </div>
+
+  <div class="pagination" id="SUNGLASSES-pagination">
+    <button class="prev-page" onclick="changePage('SUNGLASSES', currentPage['SUNGLASSES'] - 1)">이전
+    </button>
+    <span id="SUNGLASSES-page-numbers"></span>
+    <button class="next-page" onclick="changePage('SUNGLASSES', currentPage['SUNGLASSES'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">JEWELRY</div>
+  <div class="category_sub_title">쥬얼리</div>
+  <div class="product-container" id="JEWELRY">
+  </div>
+
+  <div class="pagination" id="JEWELRY-pagination">
+    <button class="prev-page" onclick="changePage('JEWELRY', currentPage['JEWELRY'] - 1)">이전
+    </button>
+    <span id="JEWELRY-page-numbers"></span>
+    <button class="next-page" onclick="changePage('JEWELRY', currentPage['JEWELRY'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">WATCH</div>
+  <div class="category_sub_title">시계</div>
+  <div class="product-container" id="WATCH">
+  </div>
+
+  <div class="pagination" id="WATCH-pagination">
+    <button class="prev-page" onclick="changePage('WATCH', currentPage['WATCH'] - 1)">이전
+    </button>
+    <span id="WATCH-page-numbers"></span>
+    <button class="next-page" onclick="changePage('WATCH', currentPage['WATCH'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">WALLETS</div>
+  <div class="category_sub_title">지갑</div>
+  <div class="product-container" id="WALLETS">
+  </div>
+
+  <div class="pagination" id="WALLETS-pagination">
+    <button class="prev-page" onclick="changePage('WALLETS', currentPage['WALLETS'] - 1)">이전
+    </button>
+    <span id="WALLETS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('WALLETS', currentPage['WALLETS'] + 1)">다음
+    </button>
+  </div>
+</div>
 </div>
 
 <div th:insert="footer :: footer-content"></div>
 <script src="/js/basic.js"></script>
 <script src="/js/header.js"></script>
+<script src="/js/shop.js"></script>
 </body>
 </html>

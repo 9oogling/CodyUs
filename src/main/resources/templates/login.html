@@ -17,6 +17,7 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
+<div class="page-transition">
 <div class="container">
     <div class="login-logo">
         <img src="/images/codyus.png" alt="CodyUsLogo">
@@ -41,6 +42,7 @@
             onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=2a8bb218fc28dc7c54e61faf0de6060c&redirect_uri=http://localhost:8080/api/user/kakao/callback&response_type=code'">
         카카오 로그인
     </button>
+</div>
 </div>
 
 <div th:insert="footer :: footer-content"></div>

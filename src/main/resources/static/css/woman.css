@@ -1,0 +1,249 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between; /* h1과 버튼을 양쪽 끝으로 배치 */
+  align-items: center; /* h1과 버튼을 수직으로 가운데 정렬 */
+  width: 100%;
+  max-width: 1300px; /* 적절한 너비로 조정 */
+  margin: 0 auto 20px; /* 중앙 정렬 및 하단 여백 추가 */
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center; /* 자식 요소를 가로로 중앙 정렬 */
+  align-items: center; /* 자식 요소를 세로로 중앙 정렬 (필요한 경우) */
+  flex-direction: column;
+  width: 100%; /* 부모 요소의 너비를 100%로 설정 */
+}
+
+#ranking-title {
+  margin: 0; /* 기본 h1 여백 제거 */
+  font-size: 2em; /* 제목 크기 조정 */
+  font-weight: bold;
+}
+
+.create-post {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  left: 45px;
+}
+
+.post-create-btn {
+  background-color: #000000; /* 원하는 배경색으로 변경 */
+  color: white; /* 글자 색상 */
+  padding: 7px 11px; /* 버튼 크기 (상하, 좌우 여백) */
+  font-size: 12px; /* 글자 크기 */
+  border: none; /* 테두리 없애기 */
+  cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
+  display: inline-block; /* 버튼을 인라인 블록으로 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  text-decoration: none; /* 텍스트 밑줄 없애기 */
+  margin: 4px 2px; /* 외부 여백 */
+  transition-duration: 0.4s; /* 호버 시 애니메이션 지속 시간 */
+}
+
+.post-create-btn:hover {
+  background-color: #2f2f2f;
+}
+
+#style-content {
+  max-width: 1400px; /* 4열 * 300px + (3 * 30px) = 1320px */
+  margin: 0 auto; /* 중앙 정렬 */
+  display: grid;
+  grid-template-columns: repeat(4, 300px); /* 4개의 동일한 열을 생성 */
+  gap: 30px; /* 게시물 간의 간격 */
+  box-sizing: border-box; /* 패딩을 포함하여 크기 계산 */
+  margin-bottom: 50px; /* 푸터와의 간격을 위해 여유 공간을 추가 */
+}
+
+/* 스타일 탭의 이미지 스타일 */
+#style-content .card-box {
+  width: 300px; /* 그리드 셀의 전체 너비를 차지하도록 설정 */
+  border: 0 solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-sizing: border-box; /* 패딩을 포함하여 크기 계산 */
+  margin-bottom: 20px; /* 카드 사이 간격 추가 */
+}
+
+#style-content .card-box:hover {
+  transform: scale(1.02); /* 마우스 오버 시 크기 확대 */
+}
+
+#style-content .image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border-bottom: 0 solid #ddd;
+  object-fit: cover; /* 이미지가 박스를 채우도록 조정 */
+}
+
+#style-content .card-detail {
+  padding: 5px;
+  display: flex;
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  align-items: flex-start; /* 요소들을 왼쪽 정렬 */
+}
+
+#style-content .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#style-content .card-header .nickname {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+#style-content .card-header .like-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#style-content .card-header .like-count {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+#style-content .content {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}
+
+#style-content .hashtags {
+  margin-top: 5px;
+}
+
+#style-content .hashtag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* 기존 CSS 코드 포함 */
+.create-post {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1080px;
+  margin: 30px auto 20px;
+}
+
+.card-box {
+  width: 300px;
+  border: 0 solid black;
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.card-box:hover {
+  transform: scale(1.02);
+}
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border-bottom: 0 solid #ddd;
+  object-fit: cover;
+}
+
+.card-detail {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.card-header .title {
+  font-size: 15px;
+  font-weight: normal;
+  color: #333;
+  flex: 1;
+}
+
+.card-header .like-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-header .like-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #ff0000;
+}
+
+.card-header .like-count {
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+}
+
+.card-detail .content {
+  font-size: 14px;
+  color: #333;
+}
+
+.content p {
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+}
+
+.card-detail .hashtags {
+  margin-top: 3px;
+}
+
+.card-detail .hashtag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  color: #555;
+}
+
+/* 빈 공간을 추가하여 4개 칸을 유지하도록 설정 */
+.post-container::after {
+  content: "";
+  flex: 1 1 calc(25% - 20px);
+  min-width: calc(25% - 20px);
+  box-sizing: border-box;
+}
