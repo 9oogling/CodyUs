@@ -82,8 +82,8 @@ public class UserController {
 
   @PutMapping("/profile/nickname/my")
   public ResponseEntity<MessageResponseDto> updateNickname(
-          @AuthenticationPrincipal UserDetailsImpl userDetails,
-          @Valid @RequestBody UpdateProfileNicknameRequestDto requestDto) {
+      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      @Valid @RequestBody UpdateProfileNicknameRequestDto requestDto) {
     userService.updateNickname(requestDto, userDetails);
 
     return ResponseFactory.ok(StatusCode.SUCCESS_UPDATE_NICKNAME);
@@ -117,10 +117,10 @@ public class UserController {
   }
 
   @GetMapping("/users/email/find-by-phone")
-  public ResponseEntity<DataResponseDto<FindEmailByPhoneNumberResponseDto>> FindEmail(
+  public ResponseEntity<DataResponseDto<FindEmailByPhoneNumberResponseDto>> findEmail(
       @RequestParam String phoneNumber) {
 
-    FindEmailByPhoneNumberResponseDto responseDto = userService.FindEmail(phoneNumber);
+    FindEmailByPhoneNumberResponseDto responseDto = userService.findEmail(phoneNumber);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_FIND_EMAIL);
   }

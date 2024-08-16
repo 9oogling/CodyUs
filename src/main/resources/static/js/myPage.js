@@ -3,7 +3,7 @@ let totalPages = 1;
 let currentLikePage = 1;
 let totalLikePages = 1;
 
-const token = getToken();
+const token = localStorage.getItem('Authorization');
 if (!token) {
     window.location.href = '/login';
 }

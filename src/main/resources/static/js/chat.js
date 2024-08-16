@@ -25,7 +25,7 @@ const images = [
 ];
 document.addEventListener('DOMContentLoaded',
     () => {
-        token = getToken();
+        token = localStorage.getItem('Authorization');
 
         if (!token) {
             window.location.href = "/login";

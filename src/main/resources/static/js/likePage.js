@@ -1,15 +1,20 @@
 $(document).ready(function () {
+    // 로컬 스토리지에서 토큰 가져오기
     function getToken() {
-        return Cookies.get('Authorization');
+        return localStorage.getItem('Authorization');
     }
 
     const auth = getToken();
+
+    // 모든 AJAX 요청에 Authorization 헤더 추가
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        if (auth) {
+            jqXHR.setRequestHeader('Authorization', auth);
+        }
+    });
+
     const pageSize = 9; // 페이지당 게시물 수
     let currentPage = 0; // 현재 페이지 번호 (0부터 시작)
-
-    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-        jqXHR.setRequestHeader('Authorization', auth);
-    });
 
     // 페이지 로드 시 좋아요한 게시물 목록을 가져와서 표시
     function fetchPosts(page=0) {
@@ -21,6 +26,7 @@ $(document).ready(function () {
                 'Authorization': auth
             },
             success: function (response) {
+                console.log("Authorization Header Sent: ", auth);
                 const likedPosts = response.data.content;
                 const $container = $('#liked-posts-container');
                 $container.empty();
@@ -75,7 +81,8 @@ $(document).ready(function () {
                 $('#prev-page').prop('disabled', currentPage === 0);
                 $('#next-page').prop('disabled', currentPage === totalPages - 1);
             },
-            error: function () {
+            error: function (xhr) {
+                console.error("Error response: ", xhr);
                 alert("관심 상품을 불러오지 못했습니다.");
             }
         });

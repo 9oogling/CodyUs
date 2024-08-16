@@ -12,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +51,14 @@ public class LikeController {
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "9") int size) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            System.out.println("Authentication is null");
+        } else {
+            System.out.println("Authentication: " + authentication.getName());
+            System.out.println("Authorities: " + authentication.getAuthorities());
+        }
 
         Pageable pageable = PageRequest.of(page,size);
         Page<LikedPostResponseDto> likedPosts = likeService.getLikedPosts(userDetails,pageable);

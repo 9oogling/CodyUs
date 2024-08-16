@@ -9,12 +9,8 @@ import com.team9oogling.codyus.domain.user.entity.UserRole;
 import com.team9oogling.codyus.domain.user.entity.UserStatus;
 import com.team9oogling.codyus.domain.user.repository.UserRepository;
 import com.team9oogling.codyus.global.jwt.JwtProvider;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.Optional;
-
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +40,7 @@ public class KakaoService {
   private final RestTemplate restTemplate;
   private final JwtProvider jwtProvider;
 
-  public String kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
+  public String kakaoLogin(String code) throws JsonProcessingException {
     // 1. "인가 코드"로 "액세스 토큰" 요청
     String accessToken = getToken(code);
 
@@ -54,7 +50,7 @@ public class KakaoService {
     // 3. 필요시 사용자 정보를 저장하거나 업데이트
     User user = saveOrUpdateUser(kakaoUserInfo);
 
-    // 4. JWT 토큰 생성 (Bearer 제거)
+    // 4. JWT 토큰 생성
     String jwtToken = jwtProvider.createAccessToken(kakaoUserInfo.getEmail(), UserRole.USER);
 
     // 5. Refresh Token 생성 및 저장
@@ -62,24 +58,10 @@ public class KakaoService {
     user.updateRefreshToken(refreshToken);
     userRepository.save(user);
 
-    // 6. JWT 토큰을 쿠키에 저장 (Bearer 없이)
-    Cookie accessTokenCookie = new Cookie("Authorization", jwtToken);  // Bearer 제거
-    accessTokenCookie.setPath("/");
-    accessTokenCookie.setHttpOnly(false); // JavaScript에서 접근 불가하게 설정
-    accessTokenCookie.setMaxAge(60 * 60 * 24); // 쿠키 유효 기간: 1일
-    response.addCookie(accessTokenCookie);
+    log.info("JWT Token 생성됨: " + jwtToken);
 
-    // 7. Refresh Token도 필요한 경우 쿠키에 저장 (선택사항)
-    Cookie refreshTokenCookie = new Cookie("RefreshToken", refreshToken);
-    refreshTokenCookie.setPath("/");
-    refreshTokenCookie.setHttpOnly(false);
-    refreshTokenCookie.setMaxAge(60 * 60 * 24 * 7); // 쿠키 유효 기간: 1주일
-    response.addCookie(refreshTokenCookie);
-
-    log.info("JWT Token and Refresh Token saved in cookies");
-
-    // 8. JWT 토큰 반환
-    return jwtToken;  // JWT 토큰 반환
+    // 6. JWT 토큰을 반환
+    return jwtToken;
   }
 
   private String getToken(String code) throws JsonProcessingException {

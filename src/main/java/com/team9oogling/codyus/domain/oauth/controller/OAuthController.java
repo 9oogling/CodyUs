@@ -1,6 +1,5 @@
 package com.team9oogling.codyus.domain.oauth.controller;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team9oogling.codyus.domain.oauth.service.KakaoService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,17 +21,12 @@ public class OAuthController {
   }
 
   @GetMapping("/user/kakao/callback")
-  public String kakaoLogin(@RequestParam String code, HttpServletResponse response)
-      throws JsonProcessingException {
+  public String kakaoLogin(@RequestParam String code) throws JsonProcessingException {
 
-    // 1. 카카오 로그인 후 JWT 토큰 생성
-    String token = kakaoService.kakaoLogin(code, response);
+    // 카카오 로그인 후 JWT 토큰 생성
+    String jwtToken = kakaoService.kakaoLogin(code);
 
-    // 2. 응답 헤더에 Bearer 추가
-    response.setHeader("Authorization", "Bearer " + token);
-
-    // 3. 홈 페이지로 리다이렉트
-    return "redirect:/home";
+    // JWT 토큰을 URL 파라미터로 포함하여 홈 페이지로 리다이렉트
+    return "redirect:/home?token=" + jwtToken;
   }
-
 }

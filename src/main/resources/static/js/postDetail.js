@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function getToken() {
-        return Cookies.get('Authorization');
+        return localStorage.getItem('Authorization'); // 쿠키 대신 로컬 스토리지에서 토큰을 가져옵니다.
     }
     const auth = getToken();
 

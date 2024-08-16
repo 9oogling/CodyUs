@@ -11,7 +11,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +39,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-  log.info("header : " + request.getHeader("Authorization"));
+    log.info("Authorization Header: " + request.getHeader("Authorization"));
 
     String tokenValue = jwtProvider.getAccessTokenFromHeader(request);
 
@@ -49,42 +48,33 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         // 블랙리스트에 있는 토큰인지 확인
         if (userService.isTokenBlacklisted(tokenValue)) {
           securityResponse.sendResponse(response, HttpStatus.UNAUTHORIZED, "이 토큰은 사용이 금지되었습니다.");
+          return; // 여기서 필터 체인을 중단
         }
 
-        Claims info = jwtProvider.getClaimsFromToken(tokenValue);
-        setAuthentication(info.getSubject());
+        Claims claims = jwtProvider.getClaimsFromToken(tokenValue);
+        setAuthentication(claims.getSubject());
 
       } catch (ExpiredJwtException e) {
         securityResponse.sendResponse(response, HttpStatus.UNAUTHORIZED, "만료된 토큰 입니다.");
-
         return;
       } catch (JwtException e) {
         securityResponse.sendResponse(response, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰 입니다.");
-
         return;
       }
-
     }
 
     filterChain.doFilter(request, response);
-
   }
 
-  public void setAuthentication(String userId) {
-
+  private void setAuthentication(String userId) {
     Authentication authentication = createAuthentication(userId);
-
     SecurityContext context = SecurityContextHolder.createEmptyContext();
     context.setAuthentication(authentication);
     SecurityContextHolder.setContext(context);
-
   }
 
   private Authentication createAuthentication(String userId) {
-
     UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
-
     return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
   }
-
 }
