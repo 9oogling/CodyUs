@@ -5,12 +5,30 @@ body {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
 .container {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     align-items: center; /* 중앙 정렬 */
+    position: relative;
+    left: -3%;
 }
 
 .wrapper {
@@ -29,7 +47,7 @@ body {
 /* 공통 박스 스타일 */
 .box1, .box2 {
     width: 430px;
-    height: 270px;
+    height: 580px;
     border: 1px solid black;
     padding: 25px 35px;
     font-weight: 300;
@@ -39,14 +57,14 @@ body {
 
 .box3, .box4 {
     width: 300px;
-    height: 270px;
+    height: 280px;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
-    padding: 25px 35px;
+    padding: 24.5px 35px;
     font-weight: 300;
     font-size: 15px;
-    margin-bottom: 20px; /* 박스 사이 간격 */
+    /*margin-bottom: 20px; !* 박스 사이 간격 *!*/
 }
 
 .box {
@@ -75,41 +93,69 @@ body {
 
 .more1, .more2 {
     width: 130px;
-    height: 270px;
+    height: 280px;
     border: 1px solid black;
     padding: 25px 35px;
 
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .title {
     font-weight: 500;
     font-size: 22px;
+    position: relative;
+    top: -3%;
 }
 
-.email, .password, .phone, .address {
+.title-1 {
+    font-weight: 500;
+    font-size: 22px;
+    position: relative;
+    top: -7%;
+}
+
+.email, .password, .phone, .address, .nickname {
     font-weight: 400;
     color: #ababab;
+    line-height: 5px;
 }
 
-.email1, .password1, .phone1, .address1 {
+.email1, .password1, .phone1, .address1, .nickname1 {
     font-weight: 400;
     color: #4d4d4d;
     border-bottom: 1px solid rgba(115, 115, 115, 0.3);
-    padding: 10px 0
+    padding: 10px 0;
+    line-height: 5px;
 }
 
-.email, .email1, .password, .password1, .phone, .phone1, .address, .address1{
-    line-height: 3px;
+.email, .email1, .password, .password1, .nickname, .nickname1 .phone, .phone1, .address, .address1{
+    /*line-height: 5px;*/
+}
+
+.email, .password, .nickname, .phone {
+    line-height: 0;
+}
+
+.nickname1 p {
+    line-height: 15px;
 }
 
 .con1, .con2 {
-    margin-top: 43px;
+    line-height: 8px;
+}
+
+.con2 p {
+    margin-bottom: 0;
+}
+
+.con3 {
+    margin-top: -8px;
 }
 
 /* 버튼 스타일 */
 .button {
     width: 60px;
+    height: 25px;
     text-align: center;
     color: #818181;
     font-size: 13px;
@@ -127,6 +173,20 @@ body {
 }
 
 .open-modal-button:hover {
+    background-color: #efefef;
+    color: #696969;
+}
+
+.open-modal-button1 {
+    border: 1px solid rgba(115, 115, 115, 0.39);
+    position: relative;
+    bottom: 30px;
+    left: 298px;
+    background-color: #ffffff;
+    color: #8c8c8c;
+}
+
+.open-modal-button1:hover {
     background-color: #efefef;
     color: #696969;
 }
@@ -150,14 +210,15 @@ dialog {
     animation: appear 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     box-shadow: 15px 15px 15px -20px #000000;
     position: fixed;
+    top: -10%;
 
     z-index: 1001; /* 오버레이 위에 표시 */
 }
 
 .myPage-overlay {
     position: fixed;
-    top: -42%;
-    left: -27%;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(5px); /* 블러 효과 */
@@ -183,8 +244,19 @@ dialog {
 .dialog__content {
     padding: 0 55px 25px 55px;
     width: 500px;
-    height: 480px;
+    height: 450px;
 }
+
+.dialog__content h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content P {
+    margin-top: -25px;
+}
+
 
 .dialog__footer {
     width: 400px;
@@ -244,7 +316,7 @@ button.close1:hover {
 }
 
 /* 팝업창 내용 입력칸 */
-.CgPw input, .CgInfo input, .CgInfo1 input{
+.CgPw input, .CgInfo input, .CgInfo1 input, .CgInfo2 input{
     display: block;
     border: none;
     border-bottom: 1px solid rgba(115, 115, 115, 0.3);
@@ -255,6 +327,10 @@ button.close1:hover {
     width: 100%;
     outline: none;
     font-size: 13px;
+}
+
+.CgInfo2 {
+    margin-top: 50px;
 }
 
 input::placeholder {
@@ -271,13 +347,13 @@ input:-ms-input-placeholder {
     color: #cecece;
 }
 
-.CgPw span, .CgInfo span, .CgInfo1 span {
+.CgPw span, .CgInfo span, .CgInfo1 span, .CgInfo2 span {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
 }
 
-.CgInfo label, .CgInfo1 label {
+.CgInfo label, .CgInfo1 label, .CgInfo2 label {
     font-weight: 400;
     font-size: 14px;
     color: #000000;
@@ -288,6 +364,42 @@ input:-ms-input-placeholder {
     color: #9d9d9d;
     outline: 0;
     margin-top: 10px;
+}
+
+.dialog__footer0 {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog__footer0 button {
+    border: 1px solid rgba(0, 0, 0, 0.32);
+    color: #656565;
+    width: 200px;
+    height: 30px;
+    bottom: 45px;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: #ffffff;
+}
+
+.dialog__footer0 button:hover {
+    background-color: #efefef;
+    color: #656565;
+}
+
+button.save-name {
+    background-color: black;
+    color: white;
+}
+
+button.save-name:hover {
+    border: 1px solid rgb(49, 49, 49);
+    background-color: rgb(49, 49, 49);
+    color: white;
 }
 
 .dialog__footer1 {
@@ -346,17 +458,54 @@ button.save-phone:hover {
     background-color: #ffffff;
 }
 
+.dialog__content00 {
+    width: 500px;
+    height: 300px;
+    padding: 10px 55px 25px 55px;
+}
+
+.dialog__content00 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 2%;
+}
+
+.dialog__content00 P {
+    margin-top: -10px;
+}
+
 .dialog__content0 {
     width: 500px;
     height: 350px;
-    padding: 0 55px 25px 55px;
+    padding: 10px 55px 25px 55px;
+}
+
+.dialog__content0 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content0 P {
+    margin-top: -25px;
 }
 
 .dialog__content1 {
     width: 500px;
-    height: 650px;
+    height: 600px;
     padding: 0 55px 25px 55px;
     line-height: normal;
+    margin-bottom: 10%;
+}
+
+.dialog__content1 h4 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1%;
+}
+
+.dialog__content1 P {
+    margin-top: -25px;
 }
 
 .dialog__footer2 button:hover {
@@ -393,21 +542,29 @@ button.save-address:hover {
 }
 
 .like {
-    line-height: 13px;
     font-weight: 400;
     color: #a4a4a4;
     cursor: pointer;
     position: relative;
-    top: -290px;
+    line-height: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
 }
 
 .like:hover {
     text-decoration: underline #818181;
 }
 
+.likes-list{
+    position: relative;
+    top:-320px;
+}
+
 .sales-list {
     position: relative;
-    top: -290px;
+    top: -320px;
 }
 .sale {
     line-height: 13px;
@@ -424,15 +581,15 @@ button.save-address:hover {
     text-decoration: underline #818181;
 }
 
- .post-link {
-     text-decoration: none;
- }
+.post-link {
+    text-decoration: none;
+}
 
- .pagination {
-     position: relative;
-     top: -50px;
-     text-align: center;
- }
+.pagination {
+    position: relative;
+    top: -40px;
+    text-align: center;
+}
 
 .pagination button {
     font-weight: 400;
@@ -440,13 +597,13 @@ button.save-address:hover {
     border: none; /* 기본 테두리 제거 */
     color: black; /* 글자 색상 */
     padding: 0 8px; /* 버튼 패딩 */
-    font-size: 16px; /* 글자 크기 */
+    font-size: 15px; /* 글자 크기 */
     cursor: pointer; /* 커서 모양 변경 */
     transition: color 0.3s; /* 색상 변화 애니메이션 */
 }
 
 .pagination button:hover {
-    color: #0056b3; /* 마우스 오버 시 색상 변화 */
+    color: #949494; /* 마우스 오버 시 색상 변화 */
 }
 
 .pagination button:disabled {

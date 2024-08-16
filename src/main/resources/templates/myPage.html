@@ -20,6 +20,7 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
+<div class="page-transition">
 <div class="container">
   <div class="wrapper">
     <div class="wrap">
@@ -28,7 +29,7 @@
         <p class="title">내 계정</p>
         <div class="con1">
           <p class="email">이메일</p>
-          <p class="email1">codyus@email.com</p>
+          <p class="email1">ex) codyus@email.com</p>
           <br>
           <p class="password">비밀번호</p>
           <p class="password1">********</p>
@@ -58,15 +59,33 @@
             </div>
           </div>
         </dialog>
-      </div>
-      <!-- box2 -->
-      <div class="box2">
         <p class="title">개인 정보</p>
         <div class="con2">
+          <p class="nickname">닉네임</p>
+          <p class="nickname1">봉평동 차은우</p>
+          <button class="button open-modal-button1" type="button" data-target="#modal2-0">변경</button>
+          <dialog id="modal2-0">
+            <div class="dialog__inner">
+              <button class="button button-close close">╳</button>
+              <div class="dialog__content00">
+                <h4>닉네임 수정</h4>
+                <p>개인정보를 최신 상태로 유지하세요.</p>
+                <div class="CgInfo2">
+                  <br>
+                  <label>닉네임</label>
+                  <input id="change6" name="name" type="text" placeholder="닉네임을 입력해 주세요.">
+                </div>
+                <footer class="dialog__footer0">
+                  <button class="save-name" type="submit">저장</button>
+                  <button class="close2">취소</button>
+                </footer>
+              </div>
+            </div>
+          </dialog>
           <p class="phone">휴대폰 번호</p>
           <p class="phone1">010-1***-*678</p>
         </div>
-        <button class="button open-modal-button" type="button" data-target="#modal2">변경</button>
+        <button class="button open-modal-button1" type="button" data-target="#modal2">변경</button>
         <dialog id="modal2">
           <div class="dialog__inner">
             <button class="button button-close close">╳</button>
@@ -133,32 +152,34 @@
     </div>
     <div class="wrap1">
       <div class="box3">
-        <p class="title">관심</p>
+        <p class="title-1">관심</p>
         <div class="box">
-          <p class="more1">더보기</p>
+          <p class="more1" id="likepostMoreLink">더보기</p>
         </div>
         <br>
-        <p class="like"> - 셀린느 로고 티셔츠 [L] </p>
-        <p class="like"> - 코디어스 와이드 팬츠 [M] </p>
-        <p class="like"> - COS 코튼 와이셔츠 [100] </p>
-        <p class="like"> - 슈프림 백팩 [OS] </p>
-        <p class="like"> - 메종마르지엘라 지갑 </p>
+        <div class="likes-list"></div>
+      </div>
+      <div class="pagination likes-pagination">
+        <button class="prev-page2" onclick="changeLikesPage(currentLikePage - 1)"> &#9001</button>
+        <span id="likepage-numbers"></span>
+        <button class="next-page2" onclick="changeLikesPage(currentLikePage + 1)">&#9002</button>
       </div>
       <div class="box4">
-        <p class="title">내 게시물 목록</p>
+        <p class="title-1">내 게시물 목록</p>
         <div class="box">
           <p class="more2" id="postMoreLink">더보기</p>
         </div>
         <br>
         <div class="sales-list"></div>
       </div>
-      <div class="pagination">
-        <button class="prev-page" onclick="changePage(currentPage - 1)">이전</button>
+      <div class="pagination sales-pagination">
+        <button class="prev-page" onclick="changePage(currentPage - 1)"> &#9001</button>
         <span id="page-numbers"></span>
-        <button class="next-page" onclick="changePage(currentPage + 1)">다음</button>
+        <button class="next-page" onclick="changePage(currentPage + 1)">&#9002</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 <div th:insert="footer :: footer-content"></div>
 <script src="/js/basic.js"></script>

@@ -45,7 +45,7 @@ body {
   display: inline-block; /* 버튼을 인라인 블록으로 설정 */
   text-align: center; /* 텍스트 중앙 정렬 */
   text-decoration: none; /* 텍스트 밑줄 없애기 */
-  margin: 4px 2px; /* 외부 여백 */
+  margin: 4px -9px; /* 외부 여백 */
   transition-duration: 0.4s; /* 호버 시 애니메이션 지속 시간 */
 }
 

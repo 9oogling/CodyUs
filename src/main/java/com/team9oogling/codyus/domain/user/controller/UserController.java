@@ -1,12 +1,6 @@
 package com.team9oogling.codyus.domain.user.controller;
 
-import com.team9oogling.codyus.domain.user.dto.FindEmailByPhoneNumberResponseDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfileAddressRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePasswordRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePhoneNumberRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserInfoDto;
-import com.team9oogling.codyus.domain.user.dto.UserSignupRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserWithDrawalRequestDto;
+import com.team9oogling.codyus.domain.user.dto.*;
 import com.team9oogling.codyus.domain.user.entity.UserRole;
 import com.team9oogling.codyus.domain.user.service.UserService;
 import com.team9oogling.codyus.global.dto.DataResponseDto;
@@ -46,9 +40,11 @@ public class UserController {
     String email = userDetails.getUser().getEmail();
     UserRole role = userDetails.getUser().getRole();
     String nickName = userDetails.getUser().getNickname();
+    String phoneNumber = userDetails.getUser().getPhoneNumber();
+    String address = userDetails.getUser().getAddress();
     boolean isAdmin = (role == UserRole.ADMIN);
 
-    UserInfoDto responseDto = new UserInfoDto(email, isAdmin, nickName);
+    UserInfoDto responseDto = new UserInfoDto(email, isAdmin, nickName, phoneNumber, address);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_GET_USERINFO);
   }
@@ -82,6 +78,15 @@ public class UserController {
     userService.withdrawal(requestDto, userDetails);
 
     return ResponseFactory.ok(StatusCode.SUCCESS_WITHDRAWAL);
+  }
+
+  @PutMapping("/profile/nickname/my")
+  public ResponseEntity<MessageResponseDto> updateNickname(
+          @AuthenticationPrincipal UserDetailsImpl userDetails,
+          @Valid @RequestBody UpdateProfileNicknameRequestDto requestDto) {
+    userService.updateNickname(requestDto, userDetails);
+
+    return ResponseFactory.ok(StatusCode.SUCCESS_UPDATE_NICKNAME);
   }
 
   @PutMapping("/profile/password/my")

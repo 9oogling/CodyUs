@@ -16,6 +16,7 @@
 <body>
 <div th:insert="header :: header-content"></div>
 
+<div class="page-transition">
 <div class="container">
   <div class="create-post">
     <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
@@ -146,6 +147,7 @@
     <button class="next-page" onclick="changePage('WALLETS', currentPage['WALLETS'] + 1)">다음
     </button>
   </div>
+</div>
 </div>
 
 <div th:insert="footer :: footer-content"></div>

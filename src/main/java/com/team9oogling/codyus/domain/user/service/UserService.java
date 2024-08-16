@@ -1,11 +1,6 @@
 package com.team9oogling.codyus.domain.user.service;
 
-import com.team9oogling.codyus.domain.user.dto.FindEmailByPhoneNumberResponseDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfileAddressRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePasswordRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UpdateProfilePhoneNumberRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserSignupRequestDto;
-import com.team9oogling.codyus.domain.user.dto.UserWithDrawalRequestDto;
+import com.team9oogling.codyus.domain.user.dto.*;
 import com.team9oogling.codyus.domain.user.entity.User;
 import com.team9oogling.codyus.domain.user.entity.UserRole;
 import com.team9oogling.codyus.domain.user.entity.UserStatus;
@@ -268,4 +263,12 @@ public class UserService {
         .orElseThrow(() -> new CustomException(StatusCode.NOT_FOUND_USER));
   }
 
+  @Transactional
+  public void updateNickname(UpdateProfileNicknameRequestDto requestDto, UserDetailsImpl userDetails) {
+
+    User user = userDetails.getUser();
+    user.updateNickname(requestDto.getNickName());
+
+    userRepository.save(user);
+  }
 }

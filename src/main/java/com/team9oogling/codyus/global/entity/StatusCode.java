@@ -36,7 +36,7 @@ public enum StatusCode {
   SUCCESS_FIND_CHATTING_ROOM_POST(HttpStatus.OK, "채팅방 게시물을 조회에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_MESSAGE_OFFSET(HttpStatus.OK, "메세지 오프셋 조회에 성공했습니다."),
   SUCCESS_CREATE_CATEGORY(HttpStatus.CREATED, "카테고리 생성에 성공했습니다."),
-  SUCCESS_GET_LIKECOUNT(HttpStatus.OK, "좋아요 수를 조회를 성공하였습니다."),
+  SUCCESS_GET_LIKECOUNT(HttpStatus.OK, "좋아요 수 조회를 성공하였습니다."),
   SUCCESS_GET_LIKESTATUS(HttpStatus.OK, "좋아요 상태를 확인했습니다."),
   SUCCESS_CHECK_EMAIL(HttpStatus.OK, "이메일 존재 여부 확인에 성공했습니다."),
   NOT_FOUND_PHONENUMBER(HttpStatus.OK, "해당 휴대폰번호는 존재하지 않습니다."), // 휴대폰 찾기에 에러가 뜨기 때문에 ok 로 변경
@@ -46,6 +46,7 @@ public enum StatusCode {
   SUCCESS_GET_POSTS_BY_STATUS(HttpStatus.OK, "거래 상태 조회에 성공했습니다."),
   SUCCESS_CREATE_USER_QUESTION(HttpStatus.CREATED, "Q n A 생성에 성공했습니다."),
   SUCCESS_GET_POSTS_BY_LIKES(HttpStatus.OK, "좋아요 순 게시물 조회에 성공했습니다"),
+  SUCCESS_UPDATE_NICKNAME(HttpStatus.OK, "닉네임 수정에 성공했습니다."),
 
 
   // 400번대

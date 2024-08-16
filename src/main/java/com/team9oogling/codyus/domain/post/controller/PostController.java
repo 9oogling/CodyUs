@@ -113,12 +113,12 @@ public class PostController {
     public ResponseEntity<DataResponseDto<Page<PostResponseDto>>> searchPosts(
             @RequestParam(required = false) SearchType type,
             @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy, // Default sort by field
             @RequestParam(defaultValue = "false") boolean descending) { // Default sort direction) {
 
-        Pageable pageable = PageRequest.of(page, size,
+        Pageable pageable = PageRequest.of(page-1, size,
                 descending ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending());
         Page<PostResponseDto> posts = postService.searchPosts(type, keyword, pageable);
         return ResponseFactory.ok(posts, StatusCode.SUCCESS_SEARCH_POSTS);
