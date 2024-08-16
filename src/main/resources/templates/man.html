@@ -2,7 +2,7 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/css/ranking.css">
+  <link rel="stylesheet" type="text/css" href="/css/man.css">
   <link rel="stylesheet" type="text/css" href="/css/header.css">
   <link rel="stylesheet" type="text/css" href="/css/footer.css">
   <link rel="stylesheet" as="style" crossorigin
@@ -13,14 +13,14 @@
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
-  <title>RANKING</title>
+  <title>MAN</title>
 </head>
 <body>
 <div th:insert="header :: header-content"></div>
 
 <div class="content-wrapper">
   <div class="header-row">
-    <h1 id="ranking-title">RANKING</h1>
+    <h1 id="man-title">MAN</h1>
     <div class="create-post">
       <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
     </div>
@@ -32,6 +32,6 @@
 <div th:insert="footer :: footer-content"></div>
 <script src="/js/basic.js"></script>
 <script src="/js/header.js"></script>
-<script src="/js/ranking.js"></script>
+<script src="/js/man.js"></script>
 </body>
 </html>

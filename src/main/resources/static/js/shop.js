@@ -1,12 +1,26 @@
 const currentPage = {
     TOPS: 1,
     BOTTOMS: 1,
-    DRESS: 1
+    DRESS: 1,
+    FOOTWEAR: 1,
+    BAGS: 1,
+    HAT: 1,
+    SUNGLASSES: 1,
+    JEWELRY: 1,
+    WATCH: 1,
+    WALLETS: 1
 };
 const totalPagesByCategory = {
     TOPS: 1,
     BOTTOMS: 1,
-    DRESS: 1
+    DRESS: 1,
+    FOOTWEAR: 1,
+    BAGS: 1,
+    HAT: 1,
+    SUNGLASSES: 1,
+    JEWELRY: 1,
+    WATCH: 1,
+    WALLETS: 1
 };
 
 const pageSize = 10;
@@ -15,7 +29,7 @@ function fetchPostsByCategory(categoryName, page, size, sortBy, descending) {
     $.ajax({
         url: `/api/posts/category/${categoryName}`,
         method: 'GET',
-        data: {page: page - 1, size, sort: sortBy, desc: descending},
+        data: {page: page, size, sort: sortBy, desc: descending},
         dataType: 'json',
         success: function (response) {
             renderProduct(categoryName, response.data.content);
@@ -122,4 +136,11 @@ $(document).ready(function () {
     fetchPostsByCategory('TOPS', currentPage['TOPS'], pageSize, 'createdAt', true);
     fetchPostsByCategory('BOTTOMS', currentPage['BOTTOMS'], pageSize, 'createdAt', true);
     fetchPostsByCategory('DRESS', currentPage['DRESS'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('FOOTWEAR', currentPage['FOOTWEAR'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('BAGS', currentPage['BAGS'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('HAT', currentPage['HAT'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('SUNGLASSES', currentPage['SUNGLASSES'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('JEWELRY', currentPage['JEWELRY'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('WATCH', currentPage['WATCH'], pageSize, 'createdAt', true);
+    fetchPostsByCategory('WALLETS', currentPage['WALLETS'], pageSize, 'createdAt', true);
 });
