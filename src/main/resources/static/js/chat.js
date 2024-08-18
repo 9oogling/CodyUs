@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded',
                 const selectedImage = images[randomIndex];
                 const userAvatar = document.querySelector('.user-avatar');
                 userAvatar.src = selectedImage;
+                chattingRoomList(page, size);
                 connectToSocket();
             })
 
@@ -91,7 +92,6 @@ document.addEventListener('DOMContentLoaded',
 
                             }
 
-
                             // 메시지 내용 업데이트 (chat-preview 클래스를 가진 요소)
                             const messageElement = existingItem.querySelector('.chat-preview');
                             messageElement.textContent = msg.message || ''; // 새로운 메시지 내용으로 업데이트
@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded',
                 }
             );
         }
-        chattingRoomList(page, size);
     });
 
 
