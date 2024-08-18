@@ -16,10 +16,10 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             headers: {
-                'Authorization': auth
+                'Authorization': token
             },
             success: function (response) {
-                console.log("Authorization Header Sent: ", auth);
+                console.log("Authorization Header Sent: ", token);
                 const likedPosts = response.data.content;
                 const $container = $('#liked-posts-container');
                 $container.empty();

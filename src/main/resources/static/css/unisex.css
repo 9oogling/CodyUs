@@ -22,7 +22,7 @@ body {
   width: 100%; /* 부모 요소의 너비를 100%로 설정 */
 }
 
-#search-title {
+#man-title {
   margin: 0; /* 기본 h1 여백 제거 */
   font-size: 2em; /* 제목 크기 조정 */
   font-weight: bold;

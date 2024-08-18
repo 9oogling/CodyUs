@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class HomeController {
 
+  @GetMapping("/")
+  public String root() {
+    return "index";
+  }
+
   @GetMapping("/home")
   public String home() {
     return "index";
@@ -100,6 +105,11 @@ public class HomeController {
   @GetMapping("/woman")
   public String woman() {
     return "woman";
+  }
+
+  @GetMapping("/unisex")
+  public String unisex() {
+    return "unisex";
   }
 
   @GetMapping("/season")

@@ -78,14 +78,14 @@ public class SecurityConfig {
             .requestMatchers("/api/posts/likes/my").authenticated()
             .requestMatchers(
                 "chat", "/api/users/signup", "/main.html", "/health", "/ranking", "/man",
-                "/woman", "/season", "/posts", "/api/posts", "posts/postDetail/",
+                "/woman", "/season", "/posts", "/unisex","/api/posts", "posts/postDetail/",
                 "/chatting/**", "/posts/**", "/posts/postCreate", "/chat",
                 "/admin/signup", "/admin/back-office", "/login/find-email",
                 "/login/find-password", "/api/admin/category",
                 "/api/posts/category/**", "/api/users/token/refresh",
                 "/api/users/login", "/login", "/home", "/like", "/help",
                 "/my-page", "/api/user-info", "/signup", "/shop", "/searchResult.html",
-                "api/posts/search"
+                "api/posts/search", "/"
             ).permitAll()
             .requestMatchers(HttpMethod.GET,
                 "/api/user/kakao/**", "/api/posts", "/api/posts/{postId}/likes/count",

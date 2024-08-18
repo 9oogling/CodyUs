@@ -1,3 +1,10 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
 /* 페이지 전환 애니메이션 */
 @keyframes fadeIn {
     0% {
@@ -104,6 +111,7 @@
 
 .post-likes {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .chat-actions {
@@ -117,14 +125,16 @@
     color: #333;
     padding: 0 5px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 #chat-button{
     outline: none;
 }
 
 #chat-button img{
-    width: 25px;
-    height: 25px;
+    width: 23px;
+    height: 23px;
+    margin-top: 3px;
 }
 
 /* 기본 하트 색상 */
@@ -134,9 +144,8 @@
 }
 
 #like-button img{
-    width: 25px;
-    height: 25px;
-    margin-bottom: 5px;
+    width: 23px;
+    height: 23px;
 }
 
 .post-caption {
@@ -159,6 +168,7 @@
     text-decoration: none; /* 링크의 밑줄 제거 */
     font-weight: bold;
     cursor: pointer;
+    margin: 5px 5px;
 }
 
 .post-hashtag:hover {

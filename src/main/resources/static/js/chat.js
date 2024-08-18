@@ -97,13 +97,18 @@ document.addEventListener('DOMContentLoaded',
                             messageElement.textContent = msg.message || ''; // 새로운 메시지 내용으로 업데이트
 
                             // 마지막 타임스탬프 업데이트
-                            const lastTimestampElement = existingItem.querySelector('.chat-lastTimeStamp');
-                            lastTimestampElement.textContent = msg.timestamp
-                                ? new Date(msg.timestamp).toLocaleTimeString([], {
+                            const lastTimestamp = msg.timestamp
+                                ? new Date(new Date(msg.timestamp).getTime() + (9 * 60 * 60 * 1000)).toLocaleTimeString('ko-KR', {
                                     hour: '2-digit',
                                     minute: '2-digit'
                                 })
                                 : '';
+
+                            const lastTimestampElement = existingItem.querySelector('.chat-lastTimeStamp');
+                            if (lastTimestampElement) {
+                                lastTimestampElement.textContent = lastTimestamp;
+                            }
+
                             // 채팅룸 리스트 아이템을 맨 위로 이동
                             const chatList = document.querySelector('.chat-list');
                             chatList.insertBefore(existingItem, chatList.firstChild);
@@ -163,7 +168,7 @@ function chattingRoomList(page, size) {
                       ${chat.unReadMessageCount !== null ? chat.unReadMessageCount : ''}
                     </span>`;
                 const lastTimestamp = chat.lastTimestamp
-                    ? new Date(chat.lastTimestamp).toLocaleTimeString([], {
+                    ? new Date(new Date(chat.lastTimestamp).getTime() + (9 * 60 * 60 * 1000)).toLocaleTimeString('ko-KR', {
                         hour: '2-digit',
                         minute: '2-digit'
                     })
@@ -203,7 +208,11 @@ function topicChattingRoom(chattingRoomId) {
 
         const msg = JSON.parse(message.body);
         const messageDiv = document.createElement('div');
-        const formattedTime = new Date(msg.timestamp).toLocaleTimeString([], {
+        // UTC 시간을 KST로 변환
+        const kstTime = new Date(new Date(msg.timestamp).getTime() + (9 * 60 * 60 * 1000));
+
+// 변환된 시간을 원하는 형식으로 포맷팅
+        const formattedTime = kstTime.toLocaleTimeString('ko-KR', {
             hour: '2-digit',
             minute: '2-digit'
         });
@@ -439,39 +448,43 @@ function renderMessages(messages) {
     }
 
     messageOffset(chattingroomsId)
-        .then(data => {
-            const offsetMessageId = data.data.messageOffset.lastReadMessageId; // 수정된 부분
+    .then(data => {
+        const offsetMessageId = data.data.messageOffset.lastReadMessageId; // 수정된 부분
 
-            // 메시지를 렌더링하는 부분을 여기로 이동
-            message.forEach(message => {
-                // 새로운 그룹을 시작
-                const messageDiv = document.createElement('div');
-                const formattedTime = new Date(message.timestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
+        // 메시지를 렌더링하는 부분을 여기로 이동
+        message.forEach(message => {
+            // 새로운 그룹을 시작
+            const messageDiv = document.createElement('div');
 
-                if (message.email !== email) {
-                    messageDiv.className = 'message';
-                    messageDiv.innerHTML = `
+            // msg 대신 message 사용
+            const kstTime = new Date(new Date(message.timestamp).getTime() + (9 * 60 * 60 * 1000));
+
+            const formattedTime = kstTime.toLocaleTimeString('ko-KR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            if (message.email !== email) {
+                messageDiv.className = 'message';
+                messageDiv.innerHTML = `
                         <div class="message-content" data-message-id="${message.messageId}">${message.message}</div>
                         <div class="message-info">${formattedTime}</div>
                     `;
-                } else {
-                    messageDiv.className = 'message user-message';
-                    messageDiv.innerHTML = `
+            } else {
+                messageDiv.className = 'message user-message';
+                messageDiv.innerHTML = `
                         <div class="message-read" data-message-read-id="${message.messageId}">${offsetMessageId >= message.messageId ? '읽음' : ''}</div>
                         <div class="message-info">${formattedTime}</div>
                         <div class="message-content" data-message-id="${message.messageId}">${message.message}</div>
                     `;
-                }
+            }
 
-                container.appendChild(messageDiv);
-            }); // forEach 닫기
-        }) // then 닫기
-        .catch(error => {
-            console.error('메세지 오프셋 오류 발생:', error);
-        });
+            container.appendChild(messageDiv);
+        }); // forEach 닫기
+    }) // then 닫기
+    .catch(error => {
+        console.error('메세지 오프셋 오류 발생:', error);
+    });
 }
 
 
@@ -686,10 +699,12 @@ function getChattingrooms(chattingroomsId) {
                                     </div>
                                     <div class="chat-preview">${newResponse.lastMessage}</div>
                                 </div>
-                                <div class="chat-lastTimeStamp">${new Date(newResponse.lastTimestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                })}</div>
+                                <div class="chat-lastTimeStamp">${
+                    new Date(new Date(newResponse.lastTimestamp).getTime() + (9 * 60 * 60 * 1000)).toLocaleTimeString('ko-KR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })
+                }</div>
                             `;
                 chatList.insertBefore(listItem, chatList.firstChild);
             }

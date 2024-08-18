@@ -19,7 +19,7 @@ $(document).ready(function () {
     // 검색 결과를 가져와서 표시
     fetchResults(keyword, type, page, size);
 
-    function fetchResults(searchQuery, searchType, page = 1, size = 10) {
+    function fetchResults(searchQuery, searchType, page = 1, size = 10, callback) {
         if (page < 1) {
             page = 1;
         }
@@ -39,7 +39,9 @@ $(document).ready(function () {
                 $('#loading').hide(); // 로딩 메시지 숨기기
                 console.log('서버 응답:', response); // 응답 데이터 확인
                 if (response && response.data && Array.isArray(response.data.content)) {
+                    console.log('응답이 정상입니다. displayPosts를 호출합니다.');
                     displayPosts(response.data.content);
+                    if (callback) callback();
                 } else {
                     console.error('응답 데이터가 올바르지 않습니다:', response);
                     $('#search-results').html('<p>게시물 로딩 중 오류가 발생했습니다.</p>');
@@ -54,35 +56,55 @@ $(document).ready(function () {
     }
 
     function displayPosts(posts) {
-        var postsContainer = $('#search-results');
-        postsContainer.empty(); // 기존 게시물 초기화
+        console.log('displayPosts 함수 호출됨. posts:', posts);
 
-        if (posts.length === 0) {
-            postsContainer.html('<p>게시물이 없습니다.</p>');
+        var postsContainer = $('#style-content');
+        if (currentPage === 1) {
+            postsContainer.empty(); // 첫 페이지 로드일 때만 기존 게시물 초기화
+        }
+
+        if (posts.length === 0 && currentPage === 1) {
+            postsContainer.html('<p>표시할 게시물이 없습니다.</p>');
+            hasMorePosts = false;
             return;
         }
 
         posts.forEach(function (post) {
-            // 첫 번째 이미지 URL만 사용
-            var imageUrl = post.imageUrls && post.imageUrls.length > 0 ? post.imageUrls[0] : 'default-image-url.jpg'; // 기본 이미지 URL
+            console.log('현재 처리 중인 게시물:', post);
 
-            // 게시물 요소 생성
-            var postElement = $('<div class="post" data-post-id="' + post.id + '"></div>');
-            postElement.html(`
-        <div class="image-container">
-          <img src="${imageUrl}" alt="Post Image" class="img-fluid" />
-        </div>
-        <div class="nickname">${post.nickname || 'Unknown'}</div>
-      `);
+            if (post.imageUrls && post.imageUrls.length > 0) {
+                var postElement = $(`
+                  <div class="card-box" data-post-id="${post.id}">
+                    <div class="image-box">
+                      <img src="${post.imageUrls[0]}" alt="Style Image" class="img-fluid" />
+                    </div>
+                    <div class="card-detail">
+                      <div class="card-header">
+                        <div class="nickname">${post.nickname || 'Anonymous'}</div>
+                        <div class="like-section" id="like-section-${post.id}">                      
+                          <span class="like-count">Loading likes...</span>
+                        </div>                  
+                      </div>
+                      <div class="content">
+                        <p>${post.content || ''}</p>
+                      </div>
+                      <div class="hashtags">
+                        ${post.hashtags ? post.hashtags.split(',').map(tag => `<span class="hashtag">#${tag.trim()}</span>`).join(' ') : ''}
+                      </div>
+                    </div>
+                  </div>
+                `);
 
-            // 클릭 시 상세 페이지로 이동
-            postElement.click(function () {
-                var postId = $(this).data('post-id');
-                window.location.href = `/posts/postDetail/${postId}`;
-            });
+                postElement.click(function () {
+                    var postId = $(this).data('post-id');
+                    window.location.href = `/posts/postDetail/${postId}`;
+                });
 
-            // 게시물 컨테이너에 추가
-            postsContainer.append(postElement);
+                postsContainer.append(postElement);
+
+                // 각 게시물의 좋아요 개수 가져오기
+                fetchLikeCount(post.id);
+            }
         });
     }
 
@@ -137,10 +159,17 @@ $(document).ready(function () {
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
             // 사용자가 페이지의 하단에 가까워지면 다음 페이지 로드
-            loadImages(currentPage);
+            if (!loading && hasMorePosts) {
+                currentPage++;
+                fetchResults(keyword, type, currentPage, size);
+            }
         }
     });
 
-    // 초기 로드 시 첫 페이지 로드
-    loadImages(currentPage);
+    // 초기 로드 시 첫 페이지 로드 후 추가 작업 수행
+    fetchResults(keyword, type, currentPage, size, function() {
+        // 첫 페이지 게시물 로드 후 수행할 작업들
+        console.log("게시물 로드 후 수행할 작업");
+        // 여기서 추가 로드 작업을 수행할 수 있습니다.
+    });
 });
