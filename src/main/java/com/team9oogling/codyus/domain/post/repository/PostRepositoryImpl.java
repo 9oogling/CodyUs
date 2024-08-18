@@ -44,8 +44,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom{
                 predicate = post.title.containsIgnoreCase(keyword);
                 break;
             case CONTENT:
-                predicate = post.title.containsIgnoreCase(keyword)
-                        .or(post.content.containsIgnoreCase(keyword));
+                predicate = post.content.containsIgnoreCase(keyword);
                 break;
             case HASHTAGS:
                 predicate = post.hashtags.containsIgnoreCase(keyword);
