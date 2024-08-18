@@ -70,7 +70,7 @@ $(document).ready(function () {
                         <div class="product-item">
                             <img src="${productImageUrl}" alt="상품 이미지" />
                             <div class="product-name">상품 이름</div>
-                           <div class="product-price">$${price}</div> <!-- 가격 표시 -->
+                           <div class="product-price">${price}원</div> <!-- 가격 표시 -->
                         </div>
                     `);
 
