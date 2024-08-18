@@ -1,6 +1,8 @@
+let auth;
 $(document).ready(function() {
   // 페이지 로드 시 검색창 텍스트 초기화
-  const inputField = $('.search input');
+
+    const inputField = $('.search input');
   inputField.val(''); // 페이지 로드 시 입력된 텍스트를 지움
 
   // 페이지가 뒤로 가기로 돌아왔을 때 검색 텍스트 초기화
@@ -11,8 +13,10 @@ $(document).ready(function() {
   };
 
   const token = localStorage.getItem('Authorization');  // 쿠키에서 로컬 스토리지로 변경
+    auth = token;
+    pollUnReadChatCount(); // 처음 즉시 실행
 
-  // 로그인 상태에 따라 링크 텍스트 및 기능 설정
+    // 로그인 상태에 따라 링크 텍스트 및 기능 설정
   if (token) {
     $('#login-logout-link').text('로그아웃').attr('onclick', 'logout()');
   } else {
@@ -109,6 +113,45 @@ $(document).ready(function() {
   });
 
 });
+
+function pollUnReadChatCount() {
+    if(!auth) {
+        return;
+    }
+    fetch('/api/chat/unreadcount', {
+      method: 'GET',
+      headers: {
+        'Authorization': auth
+      }
+    })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("unread Network Error");
+          }
+          return response.json();
+        })
+        .then(data => {
+          updateUnReadChatCount(data.data);
+        })
+        .catch(error => console.error('Error unread chat count', error));
+  }
+
+
+  setInterval(pollUnReadChatCount, 10000) //이후 10초로 설정
+
+function updateUnReadChatCount(data) {
+    const unreadCount = data.unReadCount;
+    const unreadCountElement = document.getElementById('unread-count');
+
+    if (unreadCount > 0) {
+      unreadCountElement.textContent = `${unreadCount}`;
+      unreadCountElement.style.display ='block';
+    } else {
+      unreadCountElement.textContent = ''; // Hide if count is 0
+      unreadCountElement.style.display ='none';
+    }
+}
+
 
 $(document).ready(function() {
   const currentPath = window.location.pathname;

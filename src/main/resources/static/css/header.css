@@ -395,3 +395,21 @@ nav a:focus {
 .right-container ul li a:hover {
   color: #b7b7b7;
 }
+
+.liChat {
+  position: relative;
+}
+
+#unread-count {
+  position: absolute;
+  top:-7px;
+  right: 3px;
+  font-size: 12px;
+  display: none; /* 플렉스 박스 설정 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  background: dimgray;
+  border-radius: 50%;
+  color: white;
+  padding: 0 5px;
+}
