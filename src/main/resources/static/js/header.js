@@ -144,11 +144,15 @@ window.onload = function () {
   loadLibraries(function() {
     const url = new URL(window.location.href);
     headerAuth =  localStorage.getItem('Authorization');
-    if (!headerAuth || headerStompClient || url.pathname === '/chat') {
+    if(!headerAuth) {
+      return;
+    }
+    UnReadChatCount();
+
+    if (headerStompClient || url.pathname === '/chat') {
       return;
     }
     userInfo(headerAuth);
-    UnReadChatCount();
     const socket = new SockJS('/chatting', null, { transports: ["websocket", "xhr-streaming", "xhr-polling"] });
     headerStompClient = Stomp.over(socket);
 

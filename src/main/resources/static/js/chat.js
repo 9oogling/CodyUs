@@ -26,7 +26,6 @@ const images = [
 document.addEventListener('DOMContentLoaded',
     () => {
         token = localStorage.getItem('Authorization');
-
         if (!token) {
             window.location.href = "/login";
         }
@@ -64,9 +63,9 @@ document.addEventListener('DOMContentLoaded',
             stompClient.connect(headers, (frame) => {
 
                     stompClient.subscribe('/topic/user/' + email, (message) => {
+                        updateUnReadChatCount(++unReadCount);
                         const msg = JSON.parse(message.body);
                         const existingItem = document.getElementById('chat-room-' + msg.chattingRoomId);
-
                         var unreadCountElement;
                         if (existingItem) {
                             // 읽지 않은 메시지 수 업데이트
@@ -236,6 +235,8 @@ function topicChattingRoom(chattingRoomId) {
                 `;
         }
 
+        updateUnReadChatCount(--unReadCount);
+
         container.prepend(messageDiv);
         container.scrollTop = container.scrollHeight;
     });
@@ -338,6 +339,9 @@ function openChat(chattingRoomId, partnerNickname) {
 
     const existingItem = document.getElementById('chat-room-' + chattingRoomId);
     const unreadCountElement = existingItem.querySelector('.unread-count');
+    const currentUnreadCount = parseInt(unreadCountElement.textContent, 10) || 0;
+    const count = unReadCount - currentUnreadCount;
+        updateUnReadChatCount(count);
     unreadCountElement.classList.add("hidden");
     unreadCountElement.textContent = '';
 }
@@ -733,6 +737,19 @@ function getParamChattingrooms(){
         partnerName = partnerName.replace(spanText, '').trim(); // span의 텍스트를 제거
     }
     openChat(roomId, partnerName);
+}
+
+function updateUnReadChatCount(count) {
+    unReadCount = count;
+    const unreadCountElement = document.getElementById('unread-count');
+
+    if (unReadCount > 0) {
+        unreadCountElement.textContent = `${unReadCount}`;
+        unreadCountElement.style.display ='block';
+    } else {
+        unreadCountElement.textContent = ''; // Hide if count is 0
+        unreadCountElement.style.display ='none';
+    }
 }
 
 document.getElementById('messageInput').addEventListener('keypress', function (e) {
