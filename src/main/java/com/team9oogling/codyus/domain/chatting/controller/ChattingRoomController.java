@@ -19,6 +19,7 @@ import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomCreateResponseDto
 import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomGetPostResponseDto;
 import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomResponseDto;
 import com.team9oogling.codyus.domain.chatting.dto.MessageOffsetResponseDto;
+import com.team9oogling.codyus.domain.chatting.dto.UnReadChattingCountResponseDto;
 import com.team9oogling.codyus.domain.chatting.service.ChattingService;
 import com.team9oogling.codyus.global.dto.DataResponseDto;
 import com.team9oogling.codyus.global.dto.MessageResponseDto;
@@ -91,5 +92,11 @@ public class ChattingRoomController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		chattingRoomService.chattingRoomExit(chattingroomsId, userDetails);
 		return ResponseFactory.ok(SUCCESS_CHATTINGROOMS_EXIT);
+	}
+
+	@GetMapping("/chat/unreadcount")
+	public ResponseEntity<DataResponseDto<UnReadChattingCountResponseDto>> unReadChatCount(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+		UnReadChattingCountResponseDto responseDto = chattingRoomService.unReadChatCount(userDetails);
+		return ResponseFactory.ok(responseDto, SUCCESS_CHATTINGROOMS_UNREAD_COUNT);
 	}
 }

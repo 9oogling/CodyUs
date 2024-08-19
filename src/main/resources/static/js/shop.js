@@ -54,7 +54,7 @@ function renderProduct(categoryName, data) {
                 <div class="product-price-likes">
                     <span class="product-price">${product.price.toLocaleString()}원</span>
                     <span class="product-likes" id="like-section-${product.id}">
-                        <img src="/images/redHeart.png" alt="likes" class="likes-icon" />
+                        <img src="/images/redHeart.png" alt="likes" class="likes-icon" data-post-id="${product.id}"/>
                         <span class="like-count">Loading likes...</span>
                     </span>
                 </div>
