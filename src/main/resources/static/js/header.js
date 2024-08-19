@@ -16,7 +16,6 @@ $(document).ready(function() {
   };
 
   const token = localStorage.getItem('Authorization');  // 쿠키에서 로컬 스토리지로 변경
-  headerAuth = token;
     // 로그인 상태에 따라 링크 텍스트 및 기능 설정
   if (token) {
     $('#login-logout-link').text('로그아웃').attr('onclick', 'logout()');
@@ -144,17 +143,12 @@ function loadLibraries(callback) {
 window.onload = function () {
   loadLibraries(function() {
     const url = new URL(window.location.href);
-    console.log(headerStompClient);
-    console.log(headerAuth);
-    console.log(url.searchParams.has('chat'));
-
+    headerAuth =  localStorage.getItem('Authorization');
     if (!headerAuth || headerStompClient || url.pathname === '/chat') {
       return;
     }
-
     userInfo(headerAuth);
     UnReadChatCount();
-
     const socket = new SockJS('/chatting', null, { transports: ["websocket", "xhr-streaming", "xhr-polling"] });
     headerStompClient = Stomp.over(socket);
 
@@ -197,7 +191,7 @@ function UnReadChatCount() {
   }
 
   function userInfo(headerAuth) {
-  fetch('api/user-info', {
+  fetch('/api/user-info', {
     method: 'GET',
     headers: {
       'Authorization': headerAuth
