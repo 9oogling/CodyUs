@@ -1,4 +1,7 @@
-let auth;
+let headerAuth;
+let headerStompClient = null;
+let userEmail = null;
+let unReadCount = 0;
 $(document).ready(function() {
   // 페이지 로드 시 검색창 텍스트 초기화
 
@@ -13,9 +16,7 @@ $(document).ready(function() {
   };
 
   const token = localStorage.getItem('Authorization');  // 쿠키에서 로컬 스토리지로 변경
-    auth = token;
-    pollUnReadChatCount(); // 처음 즉시 실행
-
+  headerAuth = token;
     // 로그인 상태에 따라 링크 텍스트 및 기능 설정
   if (token) {
     $('#login-logout-link').text('로그아웃').attr('onclick', 'logout()');
@@ -114,14 +115,73 @@ $(document).ready(function() {
 
 });
 
-function pollUnReadChatCount() {
-    if(!auth) {
+function loadScript(src, callback) {
+  const script = document.createElement('script');
+  script.src = src;
+  script.onload = callback;
+  document.head.appendChild(script);
+}
+
+function loadLibraries(callback) {
+  let loadedCount = 0;
+  const scripts = [
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js', name: 'SockJS' },
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js', name: 'Stomp' }
+  ];
+
+  function onLoad() {
+    loadedCount++;
+    if (loadedCount === scripts.length) {
+      callback();
+    }
+  }
+
+  for (const script of scripts) {
+    loadScript(script.src, onLoad);
+  }
+}
+
+window.onload = function () {
+  loadLibraries(function() {
+    const url = new URL(window.location.href);
+    console.log(headerStompClient);
+    console.log(headerAuth);
+    console.log(url.searchParams.has('chat'));
+
+    if (!headerAuth || headerStompClient || url.pathname === '/chat') {
+      return;
+    }
+
+    userInfo(headerAuth);
+    UnReadChatCount();
+
+    const socket = new SockJS('/chatting', null, { transports: ["websocket", "xhr-streaming", "xhr-polling"] });
+    headerStompClient = Stomp.over(socket);
+
+    let headers = { Authorization: headerAuth };
+
+    headerStompClient.connect(headers, (frame) => {
+      headerStompClient.subscribe('/topic/user/' + userEmail, (message) => {
+        const msg = JSON.parse(message.body);
+        if (msg.message) {
+          unReadCount++;
+          updateUnReadChatCount(unReadCount);
+        }
+      });
+    }, (error) => {
+      console.error("소켓 연결 에러", error);
+    });
+  });
+}
+
+function UnReadChatCount() {
+    if(!headerAuth) {
         return;
     }
     fetch('/api/chat/unreadcount', {
       method: 'GET',
       headers: {
-        'Authorization': auth
+        'Authorization': headerAuth
       }
     })
         .then(response => {
@@ -131,20 +191,36 @@ function pollUnReadChatCount() {
           return response.json();
         })
         .then(data => {
-          updateUnReadChatCount(data.data);
+          updateUnReadChatCount(data.data.unReadCount);
         })
         .catch(error => console.error('Error unread chat count', error));
   }
 
+  function userInfo(headerAuth) {
+  fetch('api/user-info', {
+    method: 'GET',
+    headers: {
+      'Authorization': headerAuth
+    }
+  })
+      .then(response => {
+        if(!response.ok) {
+          throw new Error("user info Error");
+        }
+        return response.json();
+      })
+      .then(data => {
+        userEmail = data.data.username;
+      })
+      .catch(error => console.error('Error userInfo'));
+}
 
-  setInterval(pollUnReadChatCount, 10000) //이후 10초로 설정
-
-function updateUnReadChatCount(data) {
-    const unreadCount = data.unReadCount;
+function updateUnReadChatCount(count) {
+    unReadCount = count;
     const unreadCountElement = document.getElementById('unread-count');
 
-    if (unreadCount > 0) {
-      unreadCountElement.textContent = `${unreadCount}`;
+    if (unReadCount > 0) {
+      unreadCountElement.textContent = `${unReadCount}`;
       unreadCountElement.style.display ='block';
     } else {
       unreadCountElement.textContent = ''; // Hide if count is 0
