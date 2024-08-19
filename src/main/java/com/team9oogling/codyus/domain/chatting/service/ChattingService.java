@@ -18,6 +18,7 @@ import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomFindTopResponseDt
 import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomGetPostResponseDto;
 import com.team9oogling.codyus.domain.chatting.dto.ChattingRoomResponseDto;
 import com.team9oogling.codyus.domain.chatting.dto.MessageOffsetResponseDto;
+import com.team9oogling.codyus.domain.chatting.dto.UnReadChattingCountResponseDto;
 import com.team9oogling.codyus.domain.chatting.entity.ChattingMember;
 import com.team9oogling.codyus.domain.chatting.entity.ChattingMemberStatus;
 import com.team9oogling.codyus.domain.chatting.entity.ChattingRoom;
@@ -137,6 +138,16 @@ public class ChattingService {
 		chattingMember.updateChattingMemberStatusExit();
 	}
 
+	@Transactional(readOnly = true)
+	public UnReadChattingCountResponseDto unReadChatCount(UserDetailsImpl userDetails) {
+		User user = userDetails.getUser();
+		int unReadChatCount = chattingMemberRepository.findByUserAndStatus(user, ChattingMemberStatus.ACTIVE)
+			.stream()
+			.mapToInt(chattingMember -> unReadChattingCount(chattingMember, user))
+			.sum();
+		return new UnReadChattingCountResponseDto(unReadChatCount);
+	}
+
 	public MessageOffsetResponseDto getChattingRoomReadMessage(Long chattingroomsId, UserDetailsImpl userDetails) {
 		MessageOffset messageOffset = messageOffsetRepository.findByChattingRoomIdAndUserIdNot(chattingroomsId, userDetails.getUser().getId()).orElse(null);
 		return new MessageOffsetResponseDto(messageOffset);
@@ -170,6 +181,12 @@ public class ChattingService {
 		Integer unReadCount = messageService.unReadCount(response.getChattingMember(), messageOffset.getLastReadMessageId());
 		var member = chattingMemberRepository.findByChattingRoom(response.getChattingMember().getChattingRoom());
 		return new ChattingRoomResponseDto(response, unReadCount, member, user);
+	}
+
+	private int unReadChattingCount(ChattingMember chattingMember, User user) {
+		ChattingRoomFindTopResponseDto response = messageRepositoryCustom.findTopMessage(chattingMember);
+		var messageOffset = messageService.messageOffsetFindById(response.getChattingRoomId(), user.getId());
+		return messageService.unReadCount(response.getChattingMember(), messageOffset.getLastReadMessageId());
 	}
 }
 

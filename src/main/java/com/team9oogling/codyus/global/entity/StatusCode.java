@@ -31,6 +31,7 @@ public enum StatusCode {
   SUCCESS_SEND_MESSAGE(HttpStatus.OK, "메세지 전송에 성공했습니다."),
   SUCCESS_GET_MESSAGE_LIST(HttpStatus.OK,"메세지 목록 조회에 성공했습니다."),
   SUCCESS_CHATTINGROOMS_EXIT(HttpStatus.OK, "채팅방 나가기에 성공했습니다."),
+  SUCCESS_CHATTINGROOMS_UNREAD_COUNT(HttpStatus.OK, "읽지않은 채팅갯수 조회를 성공했습니다"),
   SUCCESS_GET_USERINFO(HttpStatus.OK, "사용자 정보 조회에 성공했습니다."),
   SUCCESS_FIND_EMAIL(HttpStatus.OK, "이메일 찾기에 성공했습니다."),
   SUCCESS_FIND_CHATTING_ROOM_POST(HttpStatus.OK, "채팅방 게시물을 조회에 성공했습니다."),
