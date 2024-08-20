@@ -337,6 +337,8 @@ body {
 }
 
 #price {
+    width: 30%;
+    text-align: right;
     margin: 0;
     font-size: 14px;
 }
