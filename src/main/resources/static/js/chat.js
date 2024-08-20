@@ -369,7 +369,7 @@ function fetchChattingRoomGetPost(chattingRoomId) {
                     <div class="post-details">
                         <div class="post-title-price">
                             <h3 id="postTitle">${post.postTitle}</h3>
-                            <p id="price">가격 : ${post.price.toLocaleString()}원</p>
+                            <p id="price">${post.price.toLocaleString()}원</p>
                         </div>
                         <div class="post-status">
                         <span id="postStatus">${post.postStatus === 'INPROGRESS' ? '판매 중' : '판매 완료'}</span>
