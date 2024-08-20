@@ -209,6 +209,7 @@ body {
 }
 
 .message-content {
+    word-break: break-all;
     background-color: #f1f0f0;
     border-radius: 18px;
     padding: 8px 12px;
@@ -228,27 +229,27 @@ body {
 }
 
 .message-info {
+    min-width: max-content;
     font-size: 10px;
     color: #888;
-    margin-top: 5px;
+    margin-top: auto;
 }
 
 .message-read {
+    min-width: max-content;
     font-size: 10px;
     color: #888;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .message:not(.user-message) .message-info {
     text-align: right;
-    margin-top: 20px;
     margin-right: 10px;
     margin-left: 5px;
 }
 
 .user-message .message-info {
     text-align: left;
-    margin-top: 20px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -336,6 +337,8 @@ body {
 }
 
 #price {
+    width: 30%;
+    text-align: right;
     margin: 0;
     font-size: 14px;
 }
