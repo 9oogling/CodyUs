@@ -72,21 +72,6 @@ $(document).ready(function () {
             formData.append('productImage', productImageFiles[i]);
         }
 
-        $(function(){
-
-            /* 파일용량 제한*/
-            $("input[name=image], input[productImage]",).on("change", function(){
-                let maxSize = 5 * 1024 * 1024; //* 5MB 사이즈 제한
-                let fileSize = this.files[0].size; //업로드한 파일용량
-
-                if(fileSize > maxSize){
-                    alert("파일첨부 사이즈는 5MB 이내로 가능합니다.");
-                    $(this).val(''); //업로드한 파일 제거
-                    return;
-                }
-            });
-        });
-
         $.ajax({
             url: '/api/posts',
             type: 'POST',
@@ -103,6 +88,18 @@ $(document).ready(function () {
                 console.error(xhr, status, error);
             }
         });
+    });
+
+    // 파일 용량 제한
+    $("input[name=image], input[name=productImage]").on("change", function(){
+        let maxSize = 5 * 1024 * 1024; // 5MB 사이즈 제한
+        let fileSize = this.files[0].size; // 업로드한 파일용량
+
+        if(fileSize > maxSize){
+            alert("파일첨부 사이즈는 5MB 이내로 가능합니다.");
+            $(this).val(''); // 업로드한 파일 제거
+            return;
+        }
     });
 
     // 해시태그 처리

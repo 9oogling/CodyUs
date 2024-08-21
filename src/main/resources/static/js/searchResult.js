@@ -89,7 +89,10 @@ $(document).ready(function () {
                         <p>${post.content || ''}</p>
                       </div>
                       <div class="hashtags">
-                        ${post.hashtags ? post.hashtags.split(',').map(tag => `<span class="hashtag">#${tag.trim()}</span>`).join(' ') : ''}
+            ${post.hashtags ? post.hashtags.split(',').map(tag => {
+                    const trimmedTag = tag.trim();
+                    return `<span class="hashtag">${trimmedTag.startsWith('#') ? trimmedTag : `#${trimmedTag}`}</span>`;
+                }).join(' ') : ''}
                       </div>
                     </div>
                   </div>
