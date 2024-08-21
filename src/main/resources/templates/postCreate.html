@@ -21,11 +21,11 @@
     <form id="createPostForm" class="post-create-form">
         <div>
             <label for="title">제목</label>
-            <textarea id="title" name="title" required></textarea>
+            <textarea id="title" name="title" placeholder="제목은 50자 이내로 작성해주세요" required></textarea>
         </div>
         <div>
             <label for="content">내용</label>
-            <textarea id="content" name="content" rows="4" required></textarea>
+            <textarea id="content" name="content" rows="4" placeholder="내용은 300자 이내로 작성해주세요" required></textarea>
         </div>
         <div>
             <label for="price" class="price-label">가격 </label>
@@ -159,8 +159,8 @@
         </div>
 
         <div>
-            <label for="hashtags">해시태그 (쉼표로 구분)</label>
-            <input type="text" id="hashtags" name="hashtags" placeholder="#example, #sample">
+            <label for="hashtags">해시태그 (쉼표 또는 띄어쓰기로 생성)</label>
+            <input type="text" id="hashtags" name="hashtags" placeholder="#example, 해시태그 수 20개 이내">
             <div id="hashtagContainer" class="hashtag-container"></div>
         </div>
 
