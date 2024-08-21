@@ -28,6 +28,21 @@ body {
     border: 1px solid black;
 }
 
+#title::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
+#content::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
+#hashtags::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
 h1 {
     color: #262626;
     margin: 0 auto auto auto;

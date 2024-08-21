@@ -24,14 +24,41 @@ $(document).ready(function () {
         }
         categoryName = categoryName.concat(seasons).concat(categories);
 
+        const title =$('#title').val();
+        const content =$('#content').val();
+        const hashtags = $('#hashtagContainer .hashtag').map(function () {
+            return $(this).text().replace('×', '').trim();
+        }).get();
+
+        if (title.length > 50) {
+            alert('제목은 50자 이내로 입력해주세요.');
+            return;
+        }
+
+        if (content.length > 300) {
+            alert('내용은 300자 이내로 입력해주세요.');
+            return;
+        }
+
+        if (hashtags.length > 20) {
+            alert('해시태그는 20개 이내로 입력해주세요.');
+            return false;
+        }
+
+        // 해시태그 글자수 제한 확인 (각 해시태그는 20자 이내)
+        for (let i = 0; i < hashtags.length; i++) {
+            if (hashtags[i].length > 20) {
+                alert(`해시태그는 각 20자 이내로 입력해주세요: ${hashtags[i]}`);
+                return;
+            }
+        }
+
         formData.append('request', new Blob([JSON.stringify({
-            title: $('#title').val(),
-            content: $('#content').val(),
+            title: title,
+            content: content,
             price: parseInt($('#price').val()),
             saleType: $('#saleType').val(),
-            hashtags: $('#hashtagContainer .hashtag').map(function () {
-                return $(this).text().replace('×', '').trim();
-            }).get().join(','),
+            hashtags: hashtags.join(','),
             categoryName: categoryName // 카테고리 리스트로 전달
         })], {type: "application/json"}));
 
