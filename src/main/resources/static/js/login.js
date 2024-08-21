@@ -65,6 +65,8 @@ $(document).ready(function () {
           localStorage.setItem('loginProvider', payload.loginProvider);
         }
 
+        alert("로그인에 성공했습니다.");
+
         // 홈 페이지로 리다이렉션합니다.
         window.location.href = host + '/home';
       } else {
