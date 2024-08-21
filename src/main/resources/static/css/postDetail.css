@@ -158,12 +158,14 @@ body {
 }
 
 .post-content {
+    word-break: break-all;
     font-size: 18px;
     font-weight: normal;
     overflow-wrap: break-word;
 }
 
 .post-hashtag {
+    word-break: break-all;
     color: #1da1f2; /* 해시태그 색상 */
     text-decoration: none; /* 링크의 밑줄 제거 */
     font-weight: bold;
