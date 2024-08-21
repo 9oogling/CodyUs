@@ -83,8 +83,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     User user = optionalUser.get();
     UserRole role = user.getRole();
 
-    String accessToken = jwtProvider.createAccessToken(userId, role);
-    String refreshToken = jwtProvider.createRefreshToken(userId, role);
+    String accessToken = jwtProvider.createAccessToken(userId, role, "LOCAL");
+    String refreshToken = jwtProvider.createRefreshToken(userId, role, "LOCAL");
 
     sendLoginResponse(response, user, accessToken, refreshToken);
     log.info("accessToken : " + accessToken);

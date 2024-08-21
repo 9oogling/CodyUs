@@ -51,10 +51,10 @@ public class KakaoService {
     User user = saveOrUpdateUser(kakaoUserInfo);
 
     // 4. JWT 토큰 생성
-    String jwtToken = jwtProvider.createAccessToken(kakaoUserInfo.getEmail(), UserRole.USER);
+    String jwtToken = jwtProvider.createAccessToken(kakaoUserInfo.getEmail(), UserRole.USER, "KAKAO");
 
     // 5. Refresh Token 생성 및 저장
-    String refreshToken = jwtProvider.createRefreshToken(kakaoUserInfo.getEmail(), UserRole.USER);
+    String refreshToken = jwtProvider.createRefreshToken(kakaoUserInfo.getEmail(), UserRole.USER, "KAKAO");
     user.updateRefreshToken(refreshToken);
     userRepository.save(user);
 
@@ -144,6 +144,7 @@ public class KakaoService {
     if (optionalUser.isPresent()) {
       User user = optionalUser.get();
       user.updateNickname(kakaoUserInfo.getNickname());
+      user.setLoginProvider("KAKAO"); // KAKAO 로그인을 알기 위해 세팅
       return userRepository.save(user);
     } else {
       User user = new User(
@@ -151,7 +152,8 @@ public class KakaoService {
           kakaoUserInfo.getNickname(),
           passwordEncoder.encode("kakao_default_password"),
           UserRole.USER,
-          UserStatus.ACTIVE
+          UserStatus.ACTIVE,
+          "KAKAO"
       );
       return userRepository.save(user);
     }

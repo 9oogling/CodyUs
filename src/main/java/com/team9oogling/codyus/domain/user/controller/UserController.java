@@ -43,8 +43,9 @@ public class UserController {
     String phoneNumber = userDetails.getUser().getPhoneNumber();
     String address = userDetails.getUser().getAddress();
     boolean isAdmin = (role == UserRole.ADMIN);
+    String loginProvider = userDetails.getUser().getLoginProvider();
 
-    UserInfoDto responseDto = new UserInfoDto(email, isAdmin, nickName, phoneNumber, address);
+    UserInfoDto responseDto = new UserInfoDto(email, isAdmin, nickName, phoneNumber, address, loginProvider);
 
     return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_GET_USERINFO);
   }

@@ -36,10 +36,11 @@ public class JwtProvider {
     key = Keys.hmacShaKeyFor(bytes);
   }
 
-  public String generateToken(String email, UserRole role, Date expirationDate) {
+  public String generateToken(String email, UserRole role, Date expirationDate, String loginProvider) {
     return Jwts.builder()
         .setSubject(email)
         .claim("auth", role.name())
+        .claim("loginProvider", loginProvider)
         .setExpiration(expirationDate)
         .setIssuedAt(new Date())
         .signWith(key, signatureAlgorithm)
@@ -50,14 +51,14 @@ public class JwtProvider {
     return new Date(new Date().getTime() + ms);
   }
 
-  public String createAccessToken(String email, UserRole role) {
+  public String createAccessToken(String email, UserRole role, String loginProvider) {
     Date expirationDate = generateExpirationDate(ACCESS_TOKEN_EXPIRATION);
-    return generateToken(email, role, expirationDate);
+    return generateToken(email, role, expirationDate, loginProvider);
   }
 
-  public String createRefreshToken(String email, UserRole role) {
+  public String createRefreshToken(String email, UserRole role, String loginProvider) {
     Date expirationDate = generateExpirationDate(REFRESH_TOKEN_EXPIRATION);
-    return generateToken(email, role, expirationDate);
+    return generateToken(email, role, expirationDate, loginProvider);
   }
 
   public String getAccessTokenFromHeader(HttpServletRequest request) {

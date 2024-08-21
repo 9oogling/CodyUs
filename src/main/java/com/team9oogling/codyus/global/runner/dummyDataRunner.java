@@ -60,7 +60,7 @@ public class dummyDataRunner implements CommandLineRunner {
 
 		String encode = passwordEncoder.encode("Qwer1234@");
 		for (int i = 0; i < USER_COUNT; i++) {
-			users.add(new User("user" + i + "@email.com", i + "번째", encode, UserRole.USER, UserStatus.ACTIVE));
+			users.add(new User("user" + i + "@email.com", i + "번째", encode, UserRole.USER, UserStatus.ACTIVE, "LOCAL"));
 		}
 
 		userRepository.saveAll(users);

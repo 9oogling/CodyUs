@@ -2,7 +2,9 @@ package com.team9oogling.codyus.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 @AllArgsConstructor
 public class UserInfoDto {
@@ -12,4 +14,5 @@ public class UserInfoDto {
 	String nickName;
 	String phoneNumber;
 	String address;
+	private String loginProvider;
 }
