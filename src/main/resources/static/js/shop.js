@@ -59,7 +59,7 @@ function renderProduct(categoryName, data) {
                     </span>
                 </div>
                 <div class="hashtags">
-                    ${product.hashtags ? product.hashtags.split(',').map(tag => {
+                    ${product.hashtags ? product.hashtags.split(',').slice(0, 5).map(tag => {
       const trimmedTag = tag.trim();
       return `<span class="hashtag">${trimmedTag.startsWith('#') ? trimmedTag : `#${trimmedTag}`}</span>`;
     }).join(' ') : ''}
