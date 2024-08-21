@@ -79,7 +79,7 @@ public enum StatusCode {
   NOT_FOUND_POST(HttpStatus.NOT_FOUND, "게시물이 없습니다."),
   NOT_FOUND_CHATTINGROOMS(HttpStatus.NOT_FOUND, "채팅방 존재하지 않습니다."),
   ITEM_TRANSACTION_COMPLETED(HttpStatus.CONFLICT, "이미 거래가 완료되었습니다."),
-  SAME_USERID_POST_USERID(HttpStatus.CONFLICT, "게시물 작성 시 사용자 ID가 동일합니다."),
+  SAME_USERID_POST_USERID(HttpStatus.CONFLICT, "게시물 작성자와 사용자가 동일합니다."),
   NOT_FOUND_MESSAGE(HttpStatus.NOT_FOUND,"메세지가 존재하지 않습니다"),
   NOT_FOUND_MESSAGE_OFFSET(HttpStatus.NOT_FOUND, "메시지오프셋이 존재하지 않습니다."),
   NOT_FOUND_CHATTINGROOMS_USER(HttpStatus.NOT_FOUND, "채팅방에 유저가 존재하지 않습니다"),

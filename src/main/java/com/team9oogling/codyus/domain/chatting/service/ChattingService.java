@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -154,11 +155,12 @@ public class ChattingService {
 	}
 
 	private void chattingRoomPostAndUser(Long postId, User user) {
-		boolean isChattingRoom = chattingRoomRepository.findByPostId(postId).stream()
-			.anyMatch(room -> chattingMemberRepository.existsByChattingRoomAndUser(room, user)
-			);
-		if (isChattingRoom) {
-			throw new CustomException(ALREADY_CHATTINGROOMS_EXISTS);
+		Optional<ChattingRoom> existingRoom  = chattingRoomRepository.findByPostId(postId).stream()
+			.filter(room -> chattingMemberRepository.existsByChattingRoomAndUser(room, user))
+			.findFirst();
+		if (existingRoom.isPresent()) {
+			ChattingRoom room = existingRoom.get();
+			throw new CustomException(room.getId(), ALREADY_CHATTINGROOMS_EXISTS);
 		}
 	}
 

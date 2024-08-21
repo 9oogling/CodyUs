@@ -17,6 +17,13 @@ public class CustomException extends RuntimeException {
     log.info("ErrorCode: {}", statusCode.getMessage());
   }
 
+  public CustomException(Long chattingRoomId, StatusCode statusCode) {
+    super(chattingRoomId + " " + statusCode.getMessage());
+    this.statusCode = statusCode;
+    log.info("ExceptionMethod: {}", getExceptionMethod());
+    log.info("ErrorCode: {}", chattingRoomId + " " + statusCode.getMessage());
+  }
+
   public String getExceptionMethod() {
     String className = Thread.currentThread().getStackTrace()[3].getClassName();
     String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();

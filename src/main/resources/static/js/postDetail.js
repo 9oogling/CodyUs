@@ -126,6 +126,11 @@ $(document).ready(function () {
     });
 
     $('#chat-button').on('click', function () {
+      if(!auth) {
+        alert('로그인 페이지 이동합니다.');
+        window.location.href="/login";
+        return;
+      }
       // API 호출
       $.ajax({
         url: `/api/posts/${postId}/chattingrooms`,
@@ -141,8 +146,20 @@ $(document).ready(function () {
           window.location.href = `/chat?roomId=${chatRoomId}`;
         },
         error: function (xhr, status, error) {
-          console.error('API 호출 오류:', error);
-          alert('채팅방 생성 중 오류가 발생했습니다.');
+          let errorMessage = '채팅방 생성 중 오류가 발생했습니다.';
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+            const serverMessage = xhr.responseJSON.message;
+            if (serverMessage === '게시물 작성자와 사용자가 동일합니다.') {
+              errorMessage = '게시물 작성자와 사용자가 동일합니다.';
+            } else if (serverMessage.includes('이미 채팅방이 존재합니다.')) {
+              const parts = serverMessage.split(' ');
+              const chatRoomId = parts[0]; // ID 부분 추출
+              alert(`채팅방이 존재합니다. 채팅방으로 이동합니다.`);
+              window.location.href = `/chat?roomId=${chatRoomId}`; // 채팅방 ID를 포함하여 리다이렉트
+              return;
+            }
+          }
+          alert(errorMessage);
         }
       });
     });
