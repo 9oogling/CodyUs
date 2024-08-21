@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ExceptionResponseDto> handleInvalidPasswordException(
       HttpServletRequest request, CustomException e) {
     ExceptionResponseDto exceptionResponse = ExceptionResponseDto.builder()
-        .message(e.getStatusCode().getMessage())
+        .message(e.getMessage())
         .path(request.getRequestURI())
         .build();
     return new ResponseEntity<>(exceptionResponse,
