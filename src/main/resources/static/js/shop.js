@@ -55,7 +55,7 @@ function renderProduct(categoryName, data) {
                     <span class="product-price">${product.price.toLocaleString()}원</span>
                     <span class="product-likes" id="like-section-${product.id}">
                         <img src="/images/redHeart.png" alt="likes" class="likes-icon" data-post-id="${product.id}"/>
-                        <span class="like-count">Loading likes...</span>
+                        <span class="like-count"> ${product.likes} Likes</span>
                     </span>
                 </div>
                 <div class="hashtags">
@@ -68,27 +68,10 @@ function renderProduct(categoryName, data) {
         `;
     container.append(productItem);
 
-    fetchLikeCount(product.id);
   });
   container.find('img').click(function () {
     const postId = $(this).data('post-id');
     handleImageClick(postId);
-  });
-}
-
-function fetchLikeCount(postId) {
-  $.ajax({
-    url: `/api/posts/${postId}/likes/count`,
-    method: 'GET',
-    dataType: 'json',
-    success: function (response) {
-      const likeCount = response?.data ?? 0;
-      $(`#like-section-${postId} .like-count`).text(`${likeCount}`);
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.error(`Failed to fetch like count for post ID: ${postId}`, textStatus, errorThrown);
-      $(`#like-section-${postId} .like-count`).text('Failed to load likes');
-    }
   });
 }
 
