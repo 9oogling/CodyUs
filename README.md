@@ -13,13 +13,17 @@
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 서비스 아키텍처 </summary>
-    
+
+---
+
 ![image](https://github.com/user-attachments/assets/f36c71a1-3bcc-455d-9b4a-672e5cfea2ae)
 
 </details>
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 ERD </summary>
+
+---
     
 ![image](https://github.com/user-attachments/assets/5b04f7bb-1006-4fbe-8dc9-4f9e4f8e276b)
 
@@ -27,14 +31,18 @@
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 와이어 프레임 </summary>
-    
+
+---
+
 ![image](https://github.com/user-attachments/assets/39fd4597-681f-4c79-9431-d74c818d1e21)
 
 </details>
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 API 명세서 </summary>
-    
+
+---
+
 </details>
 
 <br>
