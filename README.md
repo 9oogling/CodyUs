@@ -1,4 +1,4 @@
-# 📖 책 취향 공유 서비스앱 README
+# 🧥 패션 아이템 거래 플랫폼 README
 
 ![readme_mockup2](https://user-images.githubusercontent.com/112460466/210706312-6a44b60d-a42e-4210-b334-9e5983f70fb3.png)
 
