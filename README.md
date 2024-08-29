@@ -1,7 +1,5 @@
 # <img src="https://github.com/user-attachments/assets/3cc5b90c-4d81-4f77-8b2e-1239ddd046f3" width="50" height="50">   패션 아이템 거래 플랫폼 README
-
-<img src="https://github.com/user-attachments/assets/7ea32250-02d1-43b2-a7c6-a7357cb3087a" width="1000px" >
-
+![image](https://github.com/user-attachments/assets/9a3466ac-257e-455f-8a59-f92cfbf7ab3f)
 
 - 배포 URL : https://codyUs.shop
 
@@ -14,18 +12,29 @@
 - 이를 통해 판매자와 구매자는 특정 스타일에 대해 더 자세히 논의하고 거래를 원활하게 진행할 수 있습니다. 
 
 <details>
+<summary style="font-size: 1.5em; font-weight: bold;"> 🔎 서비스 아키텍처 </summary>
+    
+![image](https://github.com/user-attachments/assets/f36c71a1-3bcc-455d-9b4a-672e5cfea2ae)
+
+</details>
+
+<details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 ERD </summary>
+    
 ![image](https://github.com/user-attachments/assets/5b04f7bb-1006-4fbe-8dc9-4f9e4f8e276b)
+
 </details>
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 와이어 프레임 </summary>
+    
 ![image](https://github.com/user-attachments/assets/39fd4597-681f-4c79-9431-d74c818d1e21)
+
 </details>
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 API 명세서 </summary>
-https://teamsparta.notion.site/759d813145e540e0adca167ac4afcdf8?v=99c615478cfc414989c5cb6c52117478&pvs=4
+    
 </details>
 
 <br>
@@ -33,14 +42,16 @@ https://teamsparta.notion.site/759d813145e540e0adca167ac4afcdf8?v=99c615478cfc41
 ## 팀원 구성 (백엔드 4 명)
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/316758d2-edb8-4ffe-8f9f-ac3c0156eea1" width="5000" >
+    
+![image](https://github.com/user-attachments/assets/d825e580-12ec-4fea-b9c1-836098258b2c)
+
 
 </div>
 
 <br>
 
 
-## 1. 개발 환경
+## 🛠️ 개발 환경
 
 - Front : HTML, CSS, JavaScript, Thymeleaf
 - Back-end : Spring Boot, JPA, Spring Security, QueryDSL, MySQL, S3, WebSocket, STOMP, OAuth2.0
@@ -49,7 +60,7 @@ https://teamsparta.notion.site/759d813145e540e0adca167ac4afcdf8?v=99c615478cfc41
 - 서비스 배포 환경 :  AWS RDS, EC2, Load Balancer
 <br>
 
-## 2. 채택한 개발 기술과 브랜치 전략
+## 채택한 개발 기술과 브랜치 전략
 ### Spring Boot 3.3.1
 - 최신 기술 지원
 Spring Boot 3.x는 최신 Spring 프레임워크의 기능을 지원합니다.
@@ -136,7 +147,7 @@ OAuth2.0은 인증과 권한 부여를 위한 표준 프로토콜로 안전하�
 
 <br>
 
-## 3. 프로젝트 구조
+## 프로젝트 구조
 <details>
     <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 프로젝트 구조 </summary>
 
@@ -180,31 +191,10 @@ src
 </details>
 <br>
 
-## 4. 역할 분담
 
-### 🍊 최연환
+## 개발 기간 및 작업 관리
 
--
-<br>
-    
-### 👻 장재현
-
-- 
-<br>
-
-### 😎 김지수
-
-- 
-<br>
-
-### 🐬 윤일영
-
-- 
-<br>
-
-## 5. 개발 기간 및 작업 관리
-
-### 개발 기간( 2024. 07. 19 ~ 2024. 08. 21 ) 
+### 🗓️ 개발 기간( 2024. 07. 19 ~ 2024. 08. 21 ) 
 
 
 <br>
@@ -214,25 +204,25 @@ src
 -
 <br>
 
-## 6. 신경 쓴 부분
+## 신경 쓴 부분
 
 <br>
 
-## 7. 페이지별 기능
+## 페이지별 기능
 
 <br>
 
-## 8. 트러블 슈팅
+## 트러블 슈팅
 
 <br>
 
-## 9. 개선 목표
+## 개선 목표
 
 -
     
 <br>
 
-## 10. 프로젝트 후기
+## 프로젝트 후기
 
 ### 🍊 최연환
 
