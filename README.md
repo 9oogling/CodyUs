@@ -137,8 +137,47 @@ OAuth2.0은 인증과 권한 부여를 위한 표준 프로토콜로 안전하�
 <br>
 
 ## 3. 프로젝트 구조
+<details>
+    <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 프로젝트 구조 </summary>
 
-
+```
+src
+└── main
+    ├── generated
+    ├── java
+    │   └── codyus
+    │       ├── domain
+    │       │   ├── admin
+    │       │   │   ├── chatting
+    │       │   │   │   ├── controller
+    │       │   │   │   ├── dto
+    │       │   │   │   ├── entity
+    │       │   │   │   ├── repository
+    │       │   │   │   └── service
+    │       │   ├── like
+    │       │   ├── oauth
+    │       │   ├── post
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   ├── entity
+    │       │   │   ├── repository
+    │       │   │   └── service
+    │       │   │       └── PostService
+    │       │   ├── user
+    │       │   └── global
+    │       ├── upload
+    │       ├── CodyUsApplication
+    │       └── HomeController
+    ├── resources
+    │   ├── static
+    │   │   ├── css
+    │   │   ├── images
+    │   │   └── js
+    │   ├── templates
+    │   ├── application.properties
+    │   └── application-secrets.properties
+```
+</details>
 <br>
 
 ## 4. 역할 분담
