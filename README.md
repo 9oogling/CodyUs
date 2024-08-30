@@ -43,7 +43,7 @@
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 API 명세서 </summary>
-
+https://www.notion.so/teamsparta/759d813145e540e0adca167ac4afcdf8?v=99c615478cfc414989c5cb6c52117478&pvs=4
 ---
 
 </details>
