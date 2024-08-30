@@ -66,10 +66,14 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 
 - Front : HTML, CSS, JavaScript, Thymeleaf
 - Back-end : Spring Boot, JPA, Spring Security, QueryDSL, MySQL, S3, WebSocket, STOMP, OAuth2.0
-- 버전 및 이슈관리 : Github, Jira
 - 협업 툴 : Notion
 - 서비스 배포 환경 :  AWS RDS, EC2, Load Balancer
 <br>
+
+## 작업 관리
+- <img src="https://github.com/user-attachments/assets/50e1c8a0-119e-4e7f-b747-b4372e5e84f7" alt="image" width="50"/> Github PR을 통해 개발 작업을 관리하고 코드 리뷰를 진행하였습니다
+- <img src="https://github.com/user-attachments/assets/63426993-84a7-4764-9cf5-3da6772ccf32" alt="image" width="50"/> Jira를 사용하여 역할 분담 및 프로젝트 진행 상황을 관리하였습니다
+
 
 ## 채택한 개발 기술과 브랜치 전략
 ### Spring Boot 3.3.1
