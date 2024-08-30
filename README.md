@@ -43,8 +43,8 @@
 
 <details>
 <summary style="font-size: 1.5em; font-weight: bold;"> 🔎 API 명세서 </summary>
-    [API명세서.pdf](https://github.com/user-attachments/files/16809101/API.pdf)
----
+
+https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v=12657459093d46e4ae85ff79beb4133a
 
 </details>
 
