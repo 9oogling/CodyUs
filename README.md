@@ -1,7 +1,7 @@
 # <img src="https://github.com/user-attachments/assets/3cc5b90c-4d81-4f77-8b2e-1239ddd046f3" width="50" height="50">   패션 아이템 거래 플랫폼 README
 ![image](https://github.com/user-attachments/assets/9a3466ac-257e-455f-8a59-f92cfbf7ab3f)
 
-- 배포 URL : https://codyUs.shop
+- 시연 영상 : https://codyUs.shop
 
 <br>
 
