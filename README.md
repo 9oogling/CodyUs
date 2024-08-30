@@ -67,7 +67,7 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 - Front : HTML, CSS, JavaScript, Thymeleaf
 - Back-end : Spring Boot, JPA, Spring Security, QueryDSL, MySQL, S3, WebSocket, STOMP, OAuth2.0
 - 협업 툴 : Notion
-- 서비스 배포 환경 :  AWS RDS, EC2, Load Balancer
+- 서비스 배포 환경 :  AWS RDS, EC2, Load Balancer, Route53, Github Action
 <br>
 
 ## 작업 관리
