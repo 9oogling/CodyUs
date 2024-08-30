@@ -176,14 +176,27 @@ src
     │   └── codyus
     │       ├── domain
     │       │   ├── admin
-    │       │   │   ├── chatting
-    │       │   │   │   ├── controller
-    │       │   │   │   ├── dto
-    │       │   │   │   ├── entity
-    │       │   │   │   ├── repository
-    │       │   │   │   └── service
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   ├── entity
+    │       │   │   ├── repository
+    │       │   │   └── service
+    │       │   ├── chatting
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   ├── entity
+    │       │   │   ├── repository
+    │       │   │   └── service
     │       │   ├── like
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   ├── entity
+    │       │   │   ├── repository
+    │       │   │   └── service
     │       │   ├── oauth
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   └── service
     │       │   ├── post
     │       │   │   ├── controller
     │       │   │   ├── dto
@@ -192,7 +205,21 @@ src
     │       │   │   └── service
     │       │   │       └── PostService
     │       │   ├── user
-    │       │   └── global
+    │       │   │   ├── controller
+    │       │   │   ├── dto
+    │       │   │   ├── entity
+    │       │   │   ├── repository
+    │       │   │   └── service
+    │       ├── global
+    │       │   ├── config
+    │       │   ├── controller
+    │       │   ├── dto
+    │       │   ├── entity
+    │       │   ├── exception
+    │       │   ├── jwt
+    │       │   ├── repository
+    │       │   ├── runner
+    │       │   └── security
     │       ├── upload
     │       ├── CodyUsApplication
     │       └── HomeController
@@ -204,6 +231,7 @@ src
     │   ├── templates
     │   ├── application.properties
     │   └── application-secrets.properties
+
 ```
 </details>
 <br>
