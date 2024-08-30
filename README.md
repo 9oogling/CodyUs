@@ -209,6 +209,61 @@ src
 <br>
 
 ## 트러블 슈팅
+<details>
+    
+<summary style="font-size: 1.5em; font-weight: bold;"> 🔎 이미지 업로드 S3 관련 ERR_CERT_COMMON_NAME_INVALID 오류 </summary>
+
+### 문제
+
+- 이미지처럼 게시글을 조회하는 페이지에서 `ERR_CERT_COMMON_NAME_INVALID` 오류가 발생
+![image](https://github.com/user-attachments/assets/9257ea6d-bac3-45d8-9f52-0625636985f3)
+![image](https://github.com/user-attachments/assets/7880a9f8-50f2-4831-b41b-96c4bc540a40)
+
+
+### 원인
+
+- 해당 오류 메세지와 함께 `S3` 에 저장하고 받은 url 링크를 조회한 이미지들에 엑스박스가 생겨서 s3 문제라고 인지를 했음. 구글링 결과 url 관련 문제임을 알게되었고, 기존 `Virtual Hosted-Style URL` 을 사용하여 `S3` 업로드를 했고 저장은 됐지만, `SSL`인증서 오류로 인해 조회가 되지 않았다는 것을 알게되었음. 기존에 사용하던 `Virtual Hosted-Style URL`에서 오류가 발생한 이유는 주로 `SSL`인증서와 도메인 이름의 불일치 때문이며, 우리가 사용하는 버킷 이름에 점(.) 이 있었기 때문에 발생한 오류였음.
+
+### 해결
+
+- `SSL`문제를 피하기 위해 선택한 url 스타일은 `Path-Style URL` 이었는데, 특징은 버킷 이름이 도메인의 일부가 아니기 때문에, `SSL` 문제를 피할 수 있음. 따라서 `Path-Style URL` 을 사용하여 해당 문제를 해결하였음.
+    
+</details>
+
+<details>
+
+<summary style="font-size: 1.5em; font-weight: bold;"> 🔎 `WebSocket STOMP` 시큐리티 토큰 인증 연결시 401 에러 </summary>
+
+ ---
+
+### 문제
+
+- 클라이언트가 `SockJS`를 사용하여 `WebSocket`연결을 시도할 때 401 인증 에러가 발생.
+- JWT 토큰은 정상적인 유효값임에도 불구하고 인증 실패.
+
+### 원인
+
+- **헤더 지원 부족**
+    - `SockJS`는 기본적으로 `WebSocket`연결 시 HTTP 헤더를 설정하는 것을 지원하지 않음. 이로 인해 클라이언트에서 설정한 Authorization 헤더가 서버에 전달되지 않음.
+- **서버 측 토큰 검증**
+    - 서버 측에서 `WebSocket`핸드셰이크 요청을 처리할 때 `Authorization`헤더를 찾지 못해 인증에 실패함.
+
+### 해결
+
+- **Spring Security 설정**
+    - `Spring Security` 설정에서 `WebSocket` 엔드포인트에 대한 접근을 허용합니다. 이를 위해 `permitAll()` 메서드를 사용하여 인증 없이 접근할 수 있도록 설정
+- **STOMP 핸들러에서 토큰 검증**
+    - `WebSocket` 연결 후 헤더에서 `JWT`토큰을 추출하여 토큰을 검증
+
+        ![image](https://github.com/user-attachments/assets/226e7535-ab29-4581-a8a4-d03cd679b293)
+        
+- **STOMP 메시지를 전송할 때 토큰을 메시지 본문에 포함하여 전송**
+    - 클라이언트에서 메시지 페이로드에 전송하면 서버측에서 토큰을 추출하여 검증 성공하면 메시지를 처리하고 실패하면 Throw 처리
+
+      ![image](https://github.com/user-attachments/assets/c7abf875-5f37-4b11-b63c-4e2782c9323a)
+
+    
+</details>
 
 <br>
 
@@ -223,6 +278,9 @@ src
 <br>
 
 ### 😎 김지수
+
+- 이번 프로젝트를 통해 프론트엔드와 백엔드의 통합, 효율적인 데이터베이스 설계, 실시간 기능 구현 등 다양한 기술을 배우고 적용할 수 있었습니다. 
+이러한 경험을 통해 문제 해결 능력이 향상되었고 개발 역량을 한층 더 발전시킬 수 있었습니다.
 
 <br>
 
