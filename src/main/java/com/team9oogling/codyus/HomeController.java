@@ -52,6 +52,11 @@ public class HomeController {
     return "postDetail";
   }
 
+  @GetMapping("/posts/postUpdate/{postId}")
+  public String postUpdatePage(@PathVariable("postId") Long postId) {
+    return "postUpdate";
+  }
+
   @GetMapping("/posts/search")
   public String postSearchPage() {
     return "searchResult";
