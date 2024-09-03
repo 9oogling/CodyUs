@@ -24,6 +24,7 @@ public class PostResponseDto {
     private String hashtags;
     private List<String> imageUrls;
     private String nickname; // nickname 필드 추가
+    private int likes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -41,6 +42,7 @@ public class PostResponseDto {
         this.createdAt = post.getCreatedAt();
         this.updatedAt = post.getModifiedAt();
         this.nickname = post.getNickname(); // nickname 필드 초기화
+        this.likes = post.getLikeCount();
     }
 
     public PostResponseDto(Long postId, String title, LocalDateTime createdAt) {
