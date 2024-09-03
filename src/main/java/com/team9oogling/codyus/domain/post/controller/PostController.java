@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,10 +55,13 @@ public class PostController {
     }
 
     //수정
-    @PutMapping("/{postId}")
+    @PutMapping(value="/{postId}", consumes = "multipart/form-data")
     public ResponseEntity<DataResponseDto<PostResponseDto>> updatePost(@PathVariable Long postId,
-                                                                       @RequestBody PostRequestDto requestDto,
+                                                                       @RequestPart(value = "request") PostRequestDto requestDto,
+                                                                       @RequestPart(value = "image", required = false) List<MultipartFile> images,
+                                                                       @RequestPart(value = "productImage", required = false) List<MultipartFile> productImages,
                                                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        System.out.println("test");
         PostResponseDto responseDto = postService.updatePost(postId, requestDto, userDetails);
 
         return ResponseFactory.ok(responseDto, StatusCode.SUCCESS_UPDATE_POST);
