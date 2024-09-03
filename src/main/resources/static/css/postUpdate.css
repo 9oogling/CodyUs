@@ -1,0 +1,222 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.update-container {
+    max-width: 600px; /* 고정된 너비 */
+    margin: 70px auto 70px auto;
+    padding: 30px; /* 페이지 내 여백 */
+    border: 1px solid black;
+}
+
+#title::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
+#content::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
+#hashtags::placeholder{
+    color:#999;
+    opacity: 0.6;
+}
+
+h1 {
+    color: #262626;
+    margin: 0 auto auto auto;
+    font-weight: 600;
+    font-size: 23px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.price-label::before {
+    /*content: '💲';*/
+    margin-right: 5px; /* Add some space between the symbol and the label */
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #262626;
+}
+
+.post-update-form .image-upload{
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+input[type="number"],
+textarea,
+.post-update-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d0d0d0;
+    font-size: 16px;
+    background-color: #ffffff; /* 필요한 경우 배경 색상 추가 */
+    margin-top: 10px;
+    outline: none;
+}
+
+.post-update-form select {
+    margin-bottom: 20px;
+}
+
+.gender-section, .season-section {
+    display: flex;
+    gap: 10px;
+}
+.gender-option, .season-option {
+    flex: 1;
+    text-align: center;
+}
+.gender-option input, .season-option input {
+    display: none;
+}
+.gender-option label, .season-option label {
+    display: block;
+    padding: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+.gender-option input:checked + label, .season-option input:checked + label {
+    background-color: #000000;
+    color: white;
+}
+
+
+.post-update-form div {
+    margin-bottom: 15px; /* 입력 칸 사이의 여백을 설정합니다 */
+    margin-top: 10px;
+}
+
+#title {
+    margin-bottom: 10px;
+    width: 100%; /* 전체 너비를 사용 */
+    padding: 15px; /* 내부 여백을 증가시켜 더 많은 공간을 제공 */
+    font-size: 16px; /* 폰트 크기를 키워 가독성을 높임 */
+    border: 1px solid #d0d0d0; /* 테두리 스타일 */
+    box-sizing: border-box; /* padding과 border를 포함한 너비 조정 */
+    font-weight: 400;
+}
+#hashtags {
+    width: 100%; /* 전체 너비를 사용 */
+    padding: 15px; /* 내부 여백을 증가시켜 더 많은 공간을 제공 */
+    font-size: 16px; /* 폰트 크기를 키워 가독성을 높임 */
+    border: 1px solid #d0d0d0; /* 테두리 스타일 */
+    box-sizing: border-box; /* padding과 border를 포함한 너비 조정 */
+    margin-top: 20px;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+/* 이미지 미리보기 스타일 */
+#imagePreview {
+    margin-top: 10px;
+    /* 필요에 따라 추가 스타일 적용 */
+}
+#imagePreview img,
+#productImagePreview img {
+    max-width: 100%; /* 이미지가 부모 컨테이너를 초과하지 않도록 함 */
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: auto; /* 이미지의 비율을 유지하면서 높이를 자동 조정 */
+}
+
+
+button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #464646;
+}
+
+.hashtag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.hashtag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.hashtag span {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.category-section {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* 항목 간격 */
+}
+
+.category-option {
+    width: calc(25% - 10px); /* 4개씩 배치하기 위한 너비 계산 */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0 !important;
+}
+
+.category-option input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* category-label 스타일 (여기서는 기본 스타일을 무시함) */
+.category-label {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: normal;
+    color: inherit; /* 기본 색상 제거 */
+}
