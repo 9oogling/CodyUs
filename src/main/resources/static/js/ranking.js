@@ -37,7 +37,7 @@ $(document).ready(function () {
                       <div class="card-header">
                         <div class="nickname">${post.nickname || 'Anonymous'}</div>
                         <div class="like-section" id="like-section-${post.id}">                      
-                          <span class="like-count">Loading likes...</span>
+                          <span class="like-count">${post.likes} Likes</span>
                         </div>                  
                       </div>
                       <div class="content">
@@ -53,7 +53,6 @@ $(document).ready(function () {
                   </div>
                 `);
 
-                fetchLikeCount(post.id);
 
                 postElement.click(function () {
                   var postId = $(this).data('post-id');
@@ -103,22 +102,6 @@ $(document).ready(function () {
       complete: function () {
         loading = false; // 로딩이 끝나면 플래그 해제
         console.log('Loading finished.'); // 디버깅용 로그
-      }
-    });
-  }
-
-  function fetchLikeCount(postId) {
-    $.ajax({
-      url: `/api/posts/${postId}/likes/count`,
-      method: 'GET',
-      dataType: 'json',
-      success: function (response) {
-        const likeCount = response?.data ?? 0;
-        $(`#like-section-${postId} .like-count`).text(`${likeCount} likes`);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.error(`Failed to fetch like count for post ID: ${postId}`, textStatus, errorThrown);
-        $(`#like-section-${postId} .like-count`).text('Failed to load likes');
       }
     });
   }
