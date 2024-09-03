@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 수정</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/postUpdate.css"> <!-- 페이지 고유의 스타일 포함 -->
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="page-transition">
+    <div class="update-container">
+        <h1> 게시물 수정하기</h1>
+        <form id="updatePostForm" class="post-update-form">
+            <input type="hidden" id="post-id" name="post-id" value="">
+
+            <div>
+                <label for="title">제목</label>
+                <textarea id="title" name="title" placeholder="제목은 50자 이내로 작성해주세요" required></textarea>
+            </div>
+            <div>
+                <label for="content">내용</label>
+                <textarea id="content" name="content" rows="4" placeholder="내용은 300자 이내로 작성해주세요" required></textarea>
+            </div>
+            <div>
+                <label for="price" class="price-label">가격</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+
+            <div>
+                <div class="image-upload">
+                    <div class="upload-group">
+                        <label for="image">스타일 이미지 업로드</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <div id="imagePreview"></div> <!-- 이미지 미리보기 공간 추가 -->
+                    </div>
+                    <div class="upload-group">
+                        <label for="productImage">상품 이미지 업로드</label>
+                        <input type="file" id="productImage" name="productImage" accept="image/*">
+                        <div id="productImagePreview"></div> <!-- 상품 이미지 미리보기 공간 추가 -->
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label for="saleType">판매 유형</label>
+                <select id="saleType" name="saleType" required>
+                    <option value="">선택해주세요</option>
+                    <option value="NEW">새상품</option>
+                    <option value="USED">중고</option>
+                </select>
+            </div>
+
+            <div>
+                <label>성별</label>
+                <div class="gender-section">
+                    <div class="gender-option">
+                        <input type="radio" id="MAN" name="gender" value="MAN">
+                        <label for="MAN">남자</label>
+                    </div>
+                    <div class="gender-option">
+                        <input type="radio" id="WOMAN" name="gender" value="WOMAN">
+                        <label for="WOMAN">여자</label>
+                    </div>
+                    <div class="gender-option">
+                        <input type="radio" id="UNISEX" name="gender" value="UNISEX">
+                        <label for="UNISEX">남녀공용</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label>계절</label>
+                <div class="season-section">
+                    <div class="season-option">
+                        <input type="checkbox" id="SPRING" name="season" value="SPRING">
+                        <label for="SPRING">봄</label>
+                    </div>
+                    <div class="season-option">
+                        <input type="checkbox" id="SUMMER" name="season" value="SUMMER">
+                        <label for="SUMMER">여름</label>
+                    </div>
+                    <div class="season-option">
+                        <input type="checkbox" id="FALL" name="season" value="FALL">
+                        <label for="FALL">가을</label>
+                    </div>
+                    <div class="season-option">
+                        <input type="checkbox" id="WINTER" name="season" value="WINTER">
+                        <label for="WINTER">겨울</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label>카테고리</label>
+                <div class="category-section">
+                    <div class="category-option">
+                        <input type="checkbox" id="TOPS" name="category" value="TOPS">
+                        <label for="TOPS" class="category-label">TOPS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="BOTTOMS" name="category" value="BOTTOMS">
+                        <label for="BOTTOMS" class="category-label">BOTTOMS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="DRESS" name="category" value="DRESS">
+                        <label for="DRESS" class="category-label">DRESS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="SUITS" name="category" value="SUITS">
+                        <label for="SUITS" class="category-label">SUITS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="FOOTWEAR" name="category" value="FOOTWEAR">
+                        <label for="FOOTWEAR" class="category-label">FOOTWEAR</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="BAGS" name="category" value="BAGS">
+                        <label for="BAGS" class="category-label">BAGS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="UNDERWEAR" name="category" value="UNDERWEAR">
+                        <label for="UNDERWEAR" class="category-label">UNDERWEAR</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="HAT" name="category" value="HAT">
+                        <label for="HAT" class="category-label">HAT</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="GLASSES" name="category" value="GLASSES">
+                        <label for="GLASSES" class="category-label">GLASSES</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="SUNGLASSES" name="category" value="SUNGLASSES">
+                        <label for="SUNGLASSES" class="category-label">SUNGLASSES</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="JEWELRY" name="category" value="JEWELRY">
+                        <label for="JEWELRY" class="category-label">JEWELRY</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="WATCH" name="category" value="WATCH">
+                        <label for="WATCH" class="category-label">WATCH</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="WALLETS" name="category" value="WALLETS">
+                        <label for="WALLETS" class="category-label">WALLETS</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="checkbox" id="TIE" name="category" value="TIE">
+                        <label for="TIE" class="category-label">TIE</label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label for="hashtags">해시태그 (쉼표 또는 띄어쓰기로 생성)</label>
+                <input type="text" id="hashtags" name="hashtags" placeholder="#example, 해시태그 수 20개 이내">
+                <div id="hashtagContainer" class="hashtag-container"></div>
+            </div>
+
+            <button type="submit">게시물 수정</button>
+        </form>
+    </div>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+
+<script src="/js/postUpdate.js"></script>
+<script src="/js/basic.js"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>

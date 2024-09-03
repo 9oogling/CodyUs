@@ -14,40 +14,52 @@
 <div th:insert="header :: header-content"></div>
 
 <div class="page-transition">
-<div class="post-container">
-    <div class="post">
-        <div id="post-detail" class="post-header">
-            <!-- 게시물 정보가 여기에 로드됩니다. -->
-        </div>
-        <div id="post-image" class="post-image">
-            <!-- 게시물 이미지가 여기에 로드됩니다. -->
-        </div>
-        <div class="post-actions">
-            <button id="like-button" class="action-btn"></button>
-            <div id="post-likes" class="post-likes">0</div>
-            <div class="chat-actions">
-                <button id="chat-button" class="action-btn"><img src="/images/chatIcon.png"></button>
-                <span class="chat-text">채팅</span>
+    <div class="post-container">
+        <div class="post">
+            <!-- 오른쪽 상단에 점 3개 메뉴 추가 -->
+            <div class="post-header">
+                <div class="post-options">
+                    <button id="options-button" class="options-btn">
+                        &#x22EE; <!-- 점 3개 아이콘 -->
+                    </button>
+                    <ul id="options-menu" class="options-menu hidden">
+                        <li id="edit-option">수정</li>
+                        <li id="delete-option">삭제</li>
+                    </ul>
+                </div>
+                <div id="post-detail" class="post-header">
+                    <!-- 게시물 정보가 여기에 로드됩니다. -->
+                </div>
+            </div>
+                <div id="post-image" class="post-image">
+                    <!-- 게시물 이미지가 여기에 로드됩니다. -->
+                </div>
+                <div class="post-actions">
+                    <button id="like-button" class="action-btn"></button>
+                    <div id="post-likes" class="post-likes">0</div>
+                    <div class="chat-actions">
+                        <button id="chat-button" class="action-btn"><img src="/images/chatIcon.png"></button>
+                        <span class="chat-text">채팅</span>
+                    </div>
+                </div>
+                <div id="post-caption" class="post-caption">
+                    <!-- 게시물 캡션이 여기에 로드됩니다. -->
+                </div>
+            </div>
+
+            <div class="product-gallery">
+
+                <!-- 여기에 상품 목록이 동적으로 로드됩니다. -->
             </div>
         </div>
-        <div id="post-caption" class="post-caption">
-            <!-- 게시물 캡션이 여기에 로드됩니다. -->
-        </div>
     </div>
 
-    <div class="product-gallery">
-
-        <!-- 여기에 상품 목록이 동적으로 로드됩니다. -->
-    </div>
-</div>
-</div>
-
-<div th:insert="footer :: footer-content"></div>
+    <div th:insert="footer :: footer-content"></div>
 
 
-<script src="/js/postDetail.js"></script>
-<script src="/js/header.js"></script>
-<script src="/js/basic.js"></script>
+    <script src="/js/postDetail.js"></script>
+    <script src="/js/header.js"></script>
+    <script src="/js/basic.js"></script>
 
 </body>
 

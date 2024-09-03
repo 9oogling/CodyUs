@@ -94,7 +94,7 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
         Post post = findById(postId);
