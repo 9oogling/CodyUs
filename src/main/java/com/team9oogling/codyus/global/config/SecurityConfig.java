@@ -79,7 +79,7 @@ public class SecurityConfig {
             .requestMatchers(
                 "chat", "/api/users/signup", "/main.html", "/health", "/ranking", "/man",
                 "/woman", "/season", "/posts", "/unisex","/api/posts", "posts/postDetail/",
-                "/chatting/**", "/posts/**", "/posts/postCreate", "/chat",
+                "/chatting/**", "/posts/**", "/posts/postCreate","/api/posts/{postId}" , "/chat",
                 "/admin/signup", "/admin/back-office", "/login/find-email",
                 "/login/find-password", "/api/admin/category",
                 "/api/posts/category/**", "/api/users/token/refresh",
@@ -90,9 +90,10 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET,
                 "/api/user/kakao/**", "/api/posts", "/api/posts/{postId}/likes/count",
                 "/api/users/email/find-by-phone", "/api/users/exists-by-email",
-                "/api/user-info", "/login", "/api/posts/{postId}",
+                "/api/user-info", "/login", "/api/posts/{postId}","api/posts/postUpdate",
                 "/posts/search", "/posts/postCreate", "api/posts/search/**"
             ).permitAll()
+            .requestMatchers(HttpMethod.PUT, "/api/posts/**").permitAll()// PUT 요청 인증 필요
             .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
             .anyRequest().authenticated()
         )
