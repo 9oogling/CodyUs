@@ -1,11 +1,8 @@
 package com.team9oogling.codyus.upload;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.team9oogling.codyus.domain.post.entity.Post;
-import com.team9oogling.codyus.domain.post.entity.PostImage;
-import com.team9oogling.codyus.domain.post.repository.PostImageRepository;
-import com.team9oogling.codyus.domain.post.repository.PostRepository;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +20,6 @@ import java.util.*;
 public class AwsS3Uploader {
 
     private final AmazonS3Client amazonS3Client;
-    private final PostRepository postRepository;
-    private final PostImageRepository postImageRepository;
     private String random = UUID.randomUUID().toString().substring(0, 10);
 
     @Value("${cloud.aws.s3.bucket}")
@@ -58,28 +53,15 @@ public class AwsS3Uploader {
             }
         }
 
-        switch (type) {
-            case POST:
-            case PRODUCT:
-                Post post = postRepository.findById(typeId).orElseThrow(() ->
-                        new CustomException(StatusCode.NOT_FOUND_POST));
+        return imageUrls; // 모든 경우에서 반환
+    }
 
-                for (String imageUrl : imageUrls) {
-                    PostImage postImage = new PostImage(post, imageUrl);
-                    postImageRepository.save(postImage);
-                }
-                break;
-
-            case LIKES:
-            case MESSAGE:
-                // 처리 로직이 필요한 경우 추가
-                break;
-
-            default:
-                // 처리하지 않는 경우
-                break;
+    public void deleteImage(String imageUrl) {
+        try {
+            amazonS3Client.deleteObject(bucket, imageUrl);
+        }catch (AmazonS3Exception e){
+            throw new CustomException(StatusCode.FILE_CONVERT_FAIL);
         }
 
-        return imageUrls; // 모든 경우에서 반환
     }
 }

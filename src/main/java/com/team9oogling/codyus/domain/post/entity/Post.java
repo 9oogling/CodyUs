@@ -72,13 +72,15 @@ public class Post extends Timestamped {
         });
     }
 
-    public void update(String title, String content, int price, SaleType saleType, String hashtags, User user, List<Category> categories) {
+    public void update(String title, String content, int price, SaleType saleType, String hashtags, User user, List<Category> categories,
+        List<PostImage> postImages) {
         this.title = title;
         this.content = content;
         this.price = price;
         this.saleType = saleType;
         this.hashtags = hashtags;
         this.user = user;
+        this.postImages = postImages;
 
         // 기존 카테고리 매핑 제거
         this.postCategoryMatches.clear();

@@ -94,22 +94,9 @@ $(document).ready(function () {
               hashtagText)}&page=1&size=10`;
         });
 
-        //좋아요 수 요청
-        $.ajax({
-          url: `/api/posts/${postId}/likes/count`,
-          method: 'GET',
-          dataType: 'json',
-          success: function (likeResponse) {
-            const likeCount = likeResponse?.data ?? '좋아요 수를 불러올 수 없습니다';
-            $('#like-button').html(
-                '<img src="/images/whiteHeart.png" alt="white heart">');
-            $('#post-likes').text(`${likeCount}`);
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            $('#post-likes').text('좋아요 수 조회 중 오류 발생.');
-            console.error('좋아요 수 조회 중 오류 발생:', textStatus, errorThrown);
-          }
-        });
+          $('#like-button').html(
+                      '<img src="/images/whiteHeart.png" alt="white heart">');
+          $('#post-likes').text(`${likes}`);
 
         // 사용자 좋아요 상태 요청
         $.ajax({
