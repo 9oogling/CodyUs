@@ -72,15 +72,15 @@ $(document).ready(function () {
                 }
 
                 // S3 URL을 통한 이미지 미리보기
-                if (Array.isArray(data.image)) {
+                if (Array.isArray(data.imageUrls[0])) {
                     data.image.forEach((url, index) => displayImagePreview(url, 'imagePreview'));
-                } else if (data.image) {
-                    displayImagePreview(data.image, 'imagePreview');
+                } else if (data.imageUrls[0]) {
+                    displayImagePreview(data.imageUrls[0], 'imagePreview');
                 }
-                if (Array.isArray(data.productImage)) {
+                if (Array.isArray(data.imageUrls[1])) {
                     data.productImage.forEach((url, index) => displayImagePreview(url, 'productImagePreview'));
-                } else if (data.productImage) {
-                    displayImagePreview(data.productImage, 'productImagePreview');
+                } else if (data.imageUrls[1]) {
+                    displayImagePreview(data.imageUrls[1], 'productImagePreview');
                 }
             } else {
                 alert('게시물 정보를 로드할 수 없습니다.');
@@ -97,8 +97,6 @@ $(document).ready(function () {
     // S3 URL을 통한 이미지 미리보기
     function displayImagePreview(imageUrl, previewElementId) {
         const previewContainer = document.getElementById(previewElementId);
-        previewContainer.innerHTML = ''; // 기존 미리보기 삭제
-
             const img = new Image();
             img.src = imageUrl;
             img.style.maxWidth = '100%';  // 컨테이너에 맞게 조정

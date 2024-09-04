@@ -20,9 +20,7 @@ import com.team9oogling.codyus.domain.post.entity.SearchType;
 import com.team9oogling.codyus.domain.post.repository.CategoryRepository;
 import com.team9oogling.codyus.domain.post.repository.PostImageRepository;
 import com.team9oogling.codyus.domain.post.repository.PostRepository;
-import com.team9oogling.codyus.domain.post.repository.PostRepositoryImpl;
 import com.team9oogling.codyus.domain.user.entity.User;
-import com.team9oogling.codyus.domain.user.repository.UserRepository;
 import com.team9oogling.codyus.global.entity.StatusCode;
 import com.team9oogling.codyus.global.exception.CustomException;
 import com.team9oogling.codyus.global.security.UserDetailsImpl;
@@ -36,8 +34,6 @@ import lombok.RequiredArgsConstructor;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final PostRepositoryImpl postRepositoryImpl;
     private final CategoryRepository categoryRepository;
     private final AwsS3Uploader awsS3Uploader;
     private final PostImageRepository postImageRepository;
@@ -76,10 +72,25 @@ public class PostService {
     }
 
     @Transactional
-    public PostResponseDto updatePost(Long postId, PostRequestDto requestDto, UserDetailsImpl userDetails) {
+    public PostResponseDto updatePost(Long postId, PostRequestDto requestDto, List<MultipartFile> images,
+        List<MultipartFile> productImages, UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
         Post post = findById(postId);
         checkUserSame(post, user);
+        List<PostImage> postImages = post.getPostImages();
+
+        if( null == postImages || null == productImages ) {
+            throw new CustomException(StatusCode.NOT_FOUND_IMAGE);
+        }else{
+            awsS3Uploader.deleteImage(postImages.get(0).getPostUrl());
+            awsS3Uploader.deleteImage(postImages.get(1).getPostUrl());
+            List<String> awsS3Images = awsS3Uploader.uploadImage(images, ImageType.POST, post.getId());
+            List<String> awsS3ProductImages = awsS3Uploader.uploadImage(productImages, ImageType.PRODUCT, post.getId());
+            PostImage postImage = new PostImage(post, awsS3Images.get(0));
+            PostImage postProductImage = new PostImage(post, awsS3ProductImages.get(0));
+            postImages.set(0, postImage);
+            postImages.set(1, postProductImage);
+        }
 
         // 여러 카테고리명을 받아와서 매핑
         List<Category> categories = requestDto.getCategoryName().stream()
@@ -89,7 +100,7 @@ public class PostService {
 
         // 기존의 카테고리를 클리어하고 새롭게 업데이트
         post.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getPrice(),
-            requestDto.getSaleType(), requestDto.getHashtags(), user, categories);
+            requestDto.getSaleType(), requestDto.getHashtags(), user, categories, postImages);
 
         return new PostResponseDto(post);
     }
@@ -130,7 +141,6 @@ public class PostService {
         Page<Post> postsPage = postRepository.findAll(pageable);
         return postsPage.map(PostResponseDto::new);
     }
-
 
     public PostResponseDto getPost(Long postId) {
         Post post = findById(postId);
@@ -181,10 +191,6 @@ public class PostService {
             category.addCategory(categoryName);
             return categoryRepository.save(category);
         });
-    }
-
-    public List<PostImage> findAllByPost(Post post) {
-        return postImageRepository.findByPost(post);
     }
 
     public PostImage findFirstByPost(Post post) {
