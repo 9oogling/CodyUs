@@ -74,6 +74,7 @@ public enum StatusCode {
   ALREADY_EXIST_CATEGORY(HttpStatus.CONFLICT, "이미 존재하는 카테고리입니다."),
   NOT_MATCH_USERID_AND_POSTID(HttpStatus.BAD_REQUEST, "사용자 ID와 게시물 ID가 일치하지 않습니다."),
   NOT_NULL_COMPLETED_DATE(HttpStatus.BAD_REQUEST, "거래 완료 날짜는 null이 될 수 없습니다."),
+  NOT_FOUND_IMAGE(HttpStatus.NOT_FOUND,"이미지가 없습니다."),
 
   // Chatting
   NOT_FOUND_POST(HttpStatus.NOT_FOUND, "게시물이 없습니다."),
