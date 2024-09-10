@@ -53,21 +53,26 @@ public class User extends Timestamped {
   @Column
   private Date inactivatedAt; // 비활성화된 시간
 
+  @Column
+  private String loginProvider;
+
   public User(UserSignupRequestDto requestDto, UserRole role,
-      UserStatus status/*, UserOauth oauth*/) {
+      UserStatus status, String loginProvider/*, UserOauth oauth*/) {
     this.email = requestDto.getEmail();
     this.password = requestDto.getPassword();
     this.nickname = requestDto.getNickname();
     this.role = role;
     this.status = status;
+    this.loginProvider = loginProvider;
   }
 
-  public User( String email, String nickname, String password, UserRole role, UserStatus status) {
+  public User( String email, String nickname, String password, UserRole role, UserStatus status, String loginProvider) {
     this.email = email;
     this.nickname = nickname;
     this.password = password;
     this.role = role;
     this.status = status;
+    this.loginProvider = loginProvider;
   }
 
   public void encryptionPassword(String encryptionPassword) {
@@ -96,5 +101,9 @@ public class User extends Timestamped {
 
   public void updateNickname(String nickname) {
     this.nickname = nickname;
+  }
+
+  public void setLoginProvider(String loginProvider) {
+    this.loginProvider = loginProvider;
   }
 }

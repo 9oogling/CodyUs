@@ -2,6 +2,7 @@ $(document).ready(function () {
   // 페이지 로드 시 기존 토큰 삭제
   console.log("페이지 로드: 기존 토큰 삭제 시도.");
   localStorage.removeItem('Authorization');
+  localStorage.removeItem('loginProvider'); // 이전 로그인 제공자 정보도 삭제
 
   const host = 'http://' + window.location.host;
 
@@ -12,6 +13,13 @@ $(document).ready(function () {
   if (token) {
     console.log("JWT 토큰 감지, 로컬 스토리지에 저장...");
     localStorage.setItem('Authorization', 'Bearer ' + token);
+
+    // 토큰에서 loginProvider 정보 추출 및 저장
+    const payload = parseJwt(token);
+    if (payload && payload.loginProvider) {
+      localStorage.setItem('loginProvider', payload.loginProvider);
+    }
+
     return;
   }
 
@@ -51,6 +59,14 @@ $(document).ready(function () {
         localStorage.setItem('Authorization', token);
         console.log("Token stored successfully!");
 
+        // 토큰에서 loginProvider 정보 추출 및 저장
+        const payload = parseJwt(token.split(' ')[1]);
+        if (payload && payload.loginProvider) {
+          localStorage.setItem('loginProvider', payload.loginProvider);
+        }
+
+        alert("로그인에 성공했습니다.");
+
         // 홈 페이지로 리다이렉션합니다.
         window.location.href = host + '/home';
       } else {
@@ -63,3 +79,19 @@ $(document).ready(function () {
     });
   });
 });
+
+// JWT 토큰의 payload 부분을 파싱하여 loginProvider를 추출
+function parseJwt(token) {
+  try {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    console.error("토큰 파싱 중 오류 발생:", e);
+    return null;
+  }
+}

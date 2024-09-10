@@ -65,14 +65,20 @@ public class UserService {
       role = UserRole.USER;
     }
 
-    User user = new User(requestDto, role, UserStatus.ACTIVE);
-
     if (!requestDto.getPassword().equals(requestDto.getCheckPassword())) {
       throw new CustomException(StatusCode.CHECK_PASSWORD);
     }
 
     String encryptionPassword = passwordEncoder.encode(requestDto.getPassword());
-    user.encryptionPassword(encryptionPassword);
+
+    User user = new User(
+        requestDto.getEmail(),
+        requestDto.getNickname(),
+        encryptionPassword,
+        role,
+        UserStatus.ACTIVE,
+        "LOCAL"
+    );
 
     userRepository.save(user);
   }
@@ -221,9 +227,9 @@ public class UserService {
 
   private HttpHeaders setHeaders(Claims info, User user) {
 
-    String accessToken = jwtProvider.createAccessToken(user.getEmail(), user.getRole());
+    String accessToken = jwtProvider.createAccessToken(user.getEmail(), user.getRole(), "LOCAL");
     String refreshToken = jwtProvider.generateToken(user.getEmail(), user.getRole(),
-        info.getExpiration());
+        info.getExpiration(), "LOCAL");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", "Bearer " + accessToken);

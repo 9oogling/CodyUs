@@ -137,6 +137,15 @@ function renderUserInfo() {
 
             // 주소 업데이트
             document.querySelector('.address1').textContent = userInfo.address || "표시할 정보가 없습니다.";
+
+            // 로그인 제공자 확인
+            if (userInfo.loginProvider === 'KAKAO') {
+                // 비밀번호 필드를 "카카오 로그인입니다"로 변경
+                document.querySelector('.password1').textContent = "카카오 로그인입니다";
+
+                // 비밀번호 변경 버튼 제거
+                document.getElementById('password-change-button').style.display = 'none';
+            }
         },
         error: function (error) {
             alert("오류: " + error.responseJSON.message)

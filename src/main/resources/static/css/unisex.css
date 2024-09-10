@@ -222,6 +222,7 @@ body {
 }
 
 .content p {
+  word-break: break-all;
   margin-block-start: 3px;
   margin-block-end: 3px;
 }
@@ -231,6 +232,7 @@ body {
 }
 
 .card-detail .hashtag {
+  word-break: break-all;
   display: inline-block;
   background-color: #f0f0f0;
   border-radius: 3px;
