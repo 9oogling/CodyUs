@@ -449,5 +449,4 @@ src
 
 <br> <br>
 
-![footer](https://capsule-render.vercel.app/api?type=Venom&color=auto&height=200&section=header&text=CodyUs&fontSize=50&fontColor=7F7F7F&animation=fadeIn)
 <img src="https://capsule-render.vercel.app/api?type=Venom&color=auto&height=200&section=header&text=CodyUs&fontSize=50&fontColor=7F7F7F&animation=fadeIn">
