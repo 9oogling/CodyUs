@@ -98,7 +98,7 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 ### Back-End <br>
 ![Spring Boot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white) &nbsp; ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white) &nbsp; ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white) &nbsp; ![S3](https://img.shields.io/badge/amazons3-F45E3F?style=for-the-badge&logo=amazons3&logoColor=white)
 #### - 사용한 기술
-: JPA QueryDSL WebSocket STOMP OAuth2.0
+: `JPA` `QueryDSL` `WebSocket` `STOMP` `OAuth2.0`
 
 ### 협업 툴 <br>
 ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) &nbsp; ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)  &nbsp; ![slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
