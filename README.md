@@ -312,6 +312,37 @@ src
     
 </details>
 
+<details>
+<summary style="font-size: 1.5em; font-weight: bold;"> 🔎 인덱스 추가를 통한 쿼리 성능 최적화 </summary>
+
+ ### 원인
+더미 데이터(약 496,000건)을 다루는 쿼리에서 성능 저하가 발생
+`post_category_matches` 테이블과 `category` 테이블 간의 조인 및 조건 검색에서 느려지는 문제
+
+### 해결과정
+   데이터베이스에 인덱스를 추가하여 쿼리 성능을 개선함
+   JPQL에서 QueryDSL 로 전환하여 쿼리 성능을 개선함
+
+`CREATE INDEX idx_post_category_matches ON post_category_matches (category_id, post_id);`
+<br>
+ `CREATE INDEX idx_category_name ON category (category);`
+<br>
+이러한 인덱스 추가
+
+ ### 결과
+ - **QueryDSL로 전환하여 쿼리 실행 시간이 11초에서 10초로 개선됨**
+      
+![image](https://github.com/user-attachments/assets/ed327b88-0f2f-42b1-9cf6-c036319aca86)
+
+ - **인덱스 추가 전 쿼리 실행 시간이 평균 10초에서 3초로 줄어듬**
+  
+![image](https://github.com/user-attachments/assets/227a3710-98ca-4042-99d4-051e536b46e7)
+- **이후 추가 인덱스 적용으로 성능이 0.7초로 개선됨**
+  
+![image](https://github.com/user-attachments/assets/46444bc9-ab81-438f-b937-2cad94241291)
+
+  </details>
+
 <br>
 
 ## 프로젝트 후기
