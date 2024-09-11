@@ -405,7 +405,7 @@ src
       
 ![image](https://github.com/user-attachments/assets/ed327b88-0f2f-42b1-9cf6-c036319aca86)
 
- - **인덱스 추가 전 쿼리 실행 시간이 평균 10초에서 3초로 줄어듬**
+ - **인덱스 추가 후 쿼리 실행 시간이 평균 10초에서 3초로 줄어듬**
   
 ![image](https://github.com/user-attachments/assets/227a3710-98ca-4042-99d4-051e536b46e7)
 - **이후 추가 인덱스 적용으로 성능이 0.7초로 개선됨**
