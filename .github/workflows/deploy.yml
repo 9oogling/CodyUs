@@ -61,7 +61,6 @@ jobs:
           # 새 애플리케이션 실행
           cd /home/ubuntu
           nohup java -jar eCommerce-0.0.1-SNAPSHOT.jar &
-        debug: true
 
     # 7. 첫 번째 EC2의 애플리케이션이 실행 중인지 확인 (Health Check) 
     - name: Wait for EC2 Instance 1 to become healthy
