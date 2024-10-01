@@ -6,7 +6,7 @@ on:
       - main
     types:
       - closed # PR이 닫히거나 병합될 때만 실행
-
+ 
 jobs:
   deploy:
     name: Rolling Deploy to EC2
