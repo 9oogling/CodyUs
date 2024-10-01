@@ -1,0 +1,188 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+main {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+main img {
+    max-width: 100%;
+    display: block;
+}
+
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.my-like-product {
+    margin-bottom: 20px; /* 아래쪽에 여백을 추가하여 상품과의 간격 조절 */
+    /*margin-left: 450px;*/
+    font-size: 17px;   /* 텍스트 크기를 약간 키움 */
+    font-weight: bold;   /* 텍스트를 굵게 표시 */
+
+    position: relative;
+    left: 21%;
+    margin-top: 35px;
+}
+
+.responsive-container {
+    max-width: 1000px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+}
+
+.container {
+    text-align: center;
+    position: fixed;
+    padding: 20px;
+    z-index: 999;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/*.grid-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-column > * + * {
+    margin-top: 1rem;
+}*/
+
+.product {
+    width: 100%;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    transition: .15s ease;
+    overflow: hidden;
+    border: 1px solid black;
+
+}
+
+.product:hover {
+    outline: none;
+    box-shadow: 0 0 0 0.05rem #000000;
+}
+
+.product:hover .product-content{
+    border-color: black;
+}
+
+.product-image {
+    overflow: hidden;
+}
+
+.product-content {
+    padding: 0.9rem;
+    border-top: 1px solid black;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: .15s ease;
+    background-color: #FFF;
+    font-size: 13px;
+    color: #000000;
+}
+
+.product-action:hover {
+    background-color: #ebebeb;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
+.product-title {
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.product-price {
+    margin-top: .25rem;
+}
+
+@media all and (max-width: 600px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
+    }
+
+    /*.grid-column > * + * {
+        margin-top: 1.5rem;
+    }*/
+}
+
+/* 좋아요 버튼 */
+.box {
+    width: 40px;
+    height: 40px;
+    background: url(https://blog.kakaocdn.net/dn/BedCA/btsI009q8Jy/xI8PDClhLxxqNklXMG1ul1/img.png)
+    no-repeat center / 25px;
+    cursor: pointer;
+    border:0;
+    font-size:0;
+    margin:5px auto;
+    display:block;
+}
+
+.box.off {
+    background: url(https://blog.kakaocdn.net/dn/btjPdb/btsI1ovJ8w8/CzEgtcKXPLjZekMSWKaMVK/img.png)
+    no-repeat center / 25px;
+    animation: beating .5s 1 alternate;
+}
+
+@keyframes beating {
+    0% {transform: scale(1);}
+    40% {transform: scale(1.25);}
+    70% {transform: scale(0.9);}
+    100% {transform: scale(1);}
+}
+
+.pagination {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center;
+    gap:5px;
+}
+
+footer {
+    position: relative;
+    margin-top: 13.05%;
+}

@@ -1,0 +1,245 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-transition {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 헤더 적용에 따라 다름 */
+.all-all {
+    padding-top: 70px;
+}
+
+.box {
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 70px auto;
+    padding: 35px;
+}
+
+.title {
+    width: 100%;
+
+    font-weight: 500;
+    font-size: 22px;
+
+    position: relative;
+    top: -44%;
+}
+
+span {
+    color: black;
+}
+
+.all {
+    position: relative;
+    left: -50%;
+    top: 2.8%;
+
+    width: 100%;
+    height: 400px;
+
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.all.b-content {
+    width: 100%;
+    position: relative;
+    right: 25%;
+    top: -16%;
+}
+
+.b-content span {
+    font-weight: 500;
+}
+
+.b-content input {
+    width: 350px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    color: #808080;
+
+    padding: 7px 3px;
+    margin-bottom: 40px;
+
+    outline: none;
+    font-size: 13px;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+.b-title1 {
+    width: 100%;
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: -15px;
+}
+
+.all.q-a {
+    width: 100%;
+    position: relative;
+    right: 73%;
+    top: 12%;
+}
+
+.q-a1 textarea {
+    background-color: rgba(246, 246, 246, 0.55);
+    border: 1px solid #cccccc;
+    border-radius: 0;
+
+    margin-top: 13px;
+    width: 350px;
+    height: 210px;
+
+    color: #808080;
+    font-size: 13px;
+    outline: none;
+    overflow: auto;
+    resize: none;
+
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+input::placeholder {
+    color: #cecece;
+    opacity: 5;
+    font-weight: 400;
+}
+
+textarea::placeholder {
+    color: #cecece;
+    opacity: 5;
+    font-weight: 400;
+}
+
+/* 글자 효과 */
+@font-face {
+    font-family: "Monument";
+    src: url("https://res.cloudinary.com/holatresveces/raw/upload/v1573001944/MonumentExtended-Ultrabold_clzvv7.otf");
+}
+
+.font {
+    width: 22%;
+    height: 600px;
+    font-family: "Monument";
+    font-size: 60px;
+    line-height: 65px;
+    overflow: hidden;
+
+    position: absolute;
+    left: 50%;
+    top: 14.5%;
+}
+
+.font ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+.container {
+    position: relative;
+    height: 50px;
+    overflow: hidden;
+    outline: 1px transparent;
+}
+
+.container ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+
+.menu {
+    height: 600px;
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+}
+
+.b-button {
+    width: 330px;
+
+    position: absolute;
+    top: 94%;
+    left: 10%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-btn, .save-btn1 {
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 0 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-btn {
+    float: left;
+    background-color: #000000;
+    color: white;
+    border: transparent;
+}
+
+.save-btn:hover {
+    background-color: #2f2f2f;
+}
+
+.save-btn1 {
+    float: right;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid black;
+}
+
+.save-btn1:hover {
+    background-color: #eaeaea;
+}
+
+#charCount {
+    margin-top: 7px;
+    margin-right: 13px;
+    float:right;
+    font-size: 12px;
+}
+
+#charCount.over-limit {
+    color: red;
+}

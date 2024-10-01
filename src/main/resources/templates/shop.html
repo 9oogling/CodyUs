@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SHOP</title>
+  <link rel="stylesheet" type="text/css" href="/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="stylesheet" type="text/css" href="/css/shop.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+  <script src="https://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="page-transition">
+<div class="container">
+  <div class="create-post">
+    <button type="button" class="post-create-btn" onclick="location.href='/posts/postCreate'">게시물 등록하기</button>
+  </div>
+  <div class="category-title">TOPS</div>
+  <div class="category_sub_title">상의</div>
+  <div class="product-container" id="TOPS">
+  </div>
+
+  <div class="pagination" id="TOPS-pagination">
+    <button class="prev-page" onclick="changePage('TOPS', currentPage['TOPS'] - 1)">이전</button>
+    <span id="TOPS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('TOPS', currentPage['TOPS'] + 1)">다음</button>
+  </div>
+
+  <div class="category-title">BOTTOMS</div>
+  <div class="category_sub_title">하의</div>
+  <div class="product-container" id="BOTTOMS">
+  </div>
+
+  <div class="pagination" id="BOTTOMS-pagination">
+    <button class="prev-page" onclick="changePage('BOTTOMS', currentPage['BOTTOMS'] - 1)">이전
+    </button>
+    <span id="BOTTOMS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('BOTTOMS', currentPage['BOTTOMS'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">DRESS</div>
+  <div class="category_sub_title">드레스</div>
+  <div class="product-container" id="DRESS">
+  </div>
+
+  <div class="pagination" id="DRESS-pagination">
+    <button class="prev-page" onclick="changePage('DRESS', currentPage['DRESS'] - 1)">이전</button>
+    <span id="DRESS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('DRESS', currentPage['DRESS'] + 1)">다음</button>
+  </div>
+
+
+  <div class="category-title">FOOTWEAR</div>
+  <div class="category_sub_title">신발</div>
+  <div class="product-container" id="FOOTWEAR">
+  </div>
+
+  <div class="pagination" id="FOOTWEAR-pagination">
+    <button class="prev-page" onclick="changePage('FOOTWEAR', currentPage['FOOTWEAR'] - 1)">이전
+    </button>
+    <span id="FOOTWEAR-page-numbers"></span>
+    <button class="next-page" onclick="changePage('FOOTWEAR', currentPage['FOOTWEAR'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">BAGS</div>
+  <div class="category_sub_title">가방</div>
+  <div class="product-container" id="BAGS">
+  </div>
+
+  <div class="pagination" id="BAGS-pagination">
+    <button class="prev-page" onclick="changePage('BAGS', currentPage['BAGS'] - 1)">이전
+    </button>
+    <span id="BAGS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('BAGS', currentPage['BAGS'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">HAT</div>
+  <div class="category_sub_title">모자</div>
+  <div class="product-container" id="HAT">
+  </div>
+
+  <div class="pagination" id="HAT-pagination">
+    <button class="prev-page" onclick="changePage('HAT', currentPage['HAT'] - 1)">이전
+    </button>
+    <span id="HAT-page-numbers"></span>
+    <button class="next-page" onclick="changePage('HAT', currentPage['HAT'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">SUNGLASSES</div>
+  <div class="category_sub_title">선글라스</div>
+  <div class="product-container" id="SUNGLASSES">
+  </div>
+
+  <div class="pagination" id="SUNGLASSES-pagination">
+    <button class="prev-page" onclick="changePage('SUNGLASSES', currentPage['SUNGLASSES'] - 1)">이전
+    </button>
+    <span id="SUNGLASSES-page-numbers"></span>
+    <button class="next-page" onclick="changePage('SUNGLASSES', currentPage['SUNGLASSES'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">JEWELRY</div>
+  <div class="category_sub_title">쥬얼리</div>
+  <div class="product-container" id="JEWELRY">
+  </div>
+
+  <div class="pagination" id="JEWELRY-pagination">
+    <button class="prev-page" onclick="changePage('JEWELRY', currentPage['JEWELRY'] - 1)">이전
+    </button>
+    <span id="JEWELRY-page-numbers"></span>
+    <button class="next-page" onclick="changePage('JEWELRY', currentPage['JEWELRY'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">WATCH</div>
+  <div class="category_sub_title">시계</div>
+  <div class="product-container" id="WATCH">
+  </div>
+
+  <div class="pagination" id="WATCH-pagination">
+    <button class="prev-page" onclick="changePage('WATCH', currentPage['WATCH'] - 1)">이전
+    </button>
+    <span id="WATCH-page-numbers"></span>
+    <button class="next-page" onclick="changePage('WATCH', currentPage['WATCH'] + 1)">다음
+    </button>
+  </div>
+
+  <div class="category-title">WALLETS</div>
+  <div class="category_sub_title">지갑</div>
+  <div class="product-container" id="WALLETS">
+  </div>
+
+  <div class="pagination" id="WALLETS-pagination">
+    <button class="prev-page" onclick="changePage('WALLETS', currentPage['WALLETS'] - 1)">이전
+    </button>
+    <span id="WALLETS-page-numbers"></span>
+    <button class="next-page" onclick="changePage('WALLETS', currentPage['WALLETS'] + 1)">다음
+    </button>
+  </div>
+</div>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/basic.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <title>로그인</title>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="page-transition">
+<div class="container">
+    <div class="login-logo">
+        <img src="/images/codyus.png" alt="CodyUsLogo">
+    </div>
+
+    <form id="login-form" method="post">
+        <span>이메일</span>
+        <input id="email" name="email" type="text" placeholder="ex) codyus@email.com">
+        <span>비밀번호</span>
+        <input id="password" name="password" type="password" placeholder="ex) 영문, 숫자, 특수문자 포함 8~16자">
+        <div class="button-container">
+            <button type="submit">로그인</button>
+        </div>
+    </form>
+
+    <div class="links">
+        <a href="/signup">이메일 가입</a> |
+        <a href="/login/find-email">이메일 찾기</a> <!--|-->
+<!--        <a href="/login/find-password">비밀번호 찾기</a>-->
+    </div>
+    <button class="kakao-button"
+            onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=2a8bb218fc28dc7c54e61faf0de6060c&redirect_uri=https://codyus.shop/api/user/kakao/callback&response_type=code'">
+        카카오 로그인
+    </button>
+
+
+</div>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/login.js"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>

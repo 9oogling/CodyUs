@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>관심</title>
+    <link rel="stylesheet" type="text/css" href="/css/likePage.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/css/posts.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="page-transition">
+<div class="container"></div>
+<main>
+    <div class="my-like-product"><span>나의 관심 상품</span></div>
+    <div class="responsive-container">
+        <div class="grid" id="liked-posts-container">
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button id="prev-page" disabled>이전</button>
+        <span id="current-page">1</span> / <span id="total-pages">1</span>
+        <button id="next-page" disabled>다음</button>
+    </div>
+</main>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/likePage.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/basic.js"></script>
+</body>
+</html>

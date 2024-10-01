@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 아이디 찾기</title>
+    <link rel="stylesheet" type="text/css" href="/css/find-email.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+</head>
+<body>
+<div th:insert="header :: header-content"></div>
+
+<div class="page-transition">
+<div class="container">
+    <div class="find-email-logo">
+        <img src="/images/codyus.png" alt="CodyUsLogo">
+    </div>
+
+    <div class="tab-container">
+        <div class="tabs">
+            <div id="tab-email" class="active">이메일 확인</div>
+            <div id="tab-phone">번호로 찾기</div>
+        </div>
+        <div class="tab-content">
+            <div id="content-email" class="active">
+                <div class="findBy-email">
+                    <span>가입 시 등록한 이메일을 입력하세요.</span>
+                    <span>회원가입 여부를 확인하실 수 있습니다.</span>
+                </div>
+                <form id="emailForm" class="email-form">
+                    <br><br><br><span>이메일</span>
+                    <input type="email" placeholder="ex) codyus@email.com">
+                    <button type="submit">이메일 찾기</button>
+                </form>
+            </div>
+            <div id="content-phone">
+                <div class="findBy-phoneNumber">
+                    <span>마이페이지에서 수정한 휴대폰 번호를 입력하세요.</span>
+                    <span>회원가입 시 등록한 이메일을 확인하실 수 있습니다.</span>
+                </div>
+                <form id="phoneForm" class="phone-form">
+                    <br><br><br><span>휴대폰 번호</span>
+                    <input type="text" placeholder="휴대폰 번호 11자리를 입력해주세요.">
+                    <button type="submit">이메일 아이디 찾기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 모달 창 구조 -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+    </div>
+</div>
+</div>
+
+<div th:insert="footer :: footer-content"></div>
+<script src="/js/find-email.js"></script>
+<script src="/js/header.js"></script>
+</body>
+</html>

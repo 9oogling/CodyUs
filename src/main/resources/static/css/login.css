@@ -1,0 +1,153 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+/* 기본 폰트 설정 */
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* 페이지 전환 애니메이션 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.page-transition {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/*
+로그인 화면 크기 조절
+ */
+.container {
+  margin: 0 auto;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+로고 크기 조절
+ */
+.login-logo img {
+  width: 100%;
+  display: flex;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+/*
+이메일, 비밀번호 입력란 정렬
+ */
+#login-form > input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid rgba(115, 115, 115, 0.3);
+  color: #808080;
+  padding: 7px 3px;
+  margin-top: 5px;
+  margin-bottom: 40px;
+  width: 100%;
+  outline: none;
+}
+
+/*
+ex) . . .  예시 색상
+ */
+#login-form > input::placeholder {
+  color: #cecece;
+  opacity: 5;
+}
+
+#login-form > input::-webkit-input-placeholder {
+  color: #cecece;
+}
+
+#login-form > input:-ms-input-placeholder {
+  color: #cecece;
+}
+
+/*
+로그인 버튼 생성
+ */
+.button-container > button {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid #b0b0b0;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #818181;
+  font-size: 13px;
+}
+
+/*
+로그인 버튼 효과
+ */
+.button-container > button:hover {
+  background-color: #f1f1f1;
+}
+
+/*
+입력란 위 이메일, 비밀번호 글자 크기 및 위치 조절
+ */
+#login-form span {
+  display: flex;
+  color: #818181;
+  font-size: 13px;
+  float: left;
+}
+
+/*
+이메일 가입, 이메일 찾기, 비밀번호 찾기 페이지 이동
+ */
+.links {
+  color: #818181;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/*
+이메일 가입, 이메일 찾기, 비밀번호 찾기 위치 조절 및 효과
+ */
+.links a {
+  margin: 0 10px;
+  color: #818181;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+/*
+카카오 버튼 크기 및 위치 조절
+ */
+.kakao-button {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+/*
+카카오 로그인 버튼 생성 및 효과
+ */
+.kakao-button {
+  float: right;
+  background-color: #fed400;
+  color: #805e44;
+}
+
+.kakao-button:hover {
+  background-color: #ebc400;
+}
