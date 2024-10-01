@@ -72,12 +72,13 @@ jobs:
                     ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
                     SECRET_KEY=${{ secrets.SECRET_KEY }} \
                     java -jar eCommerce-0.0.1-SNAPSHOT.jar &
+          exit 0
 
     # 7. 첫 번째 EC2의 애플리케이션이 실행 중인지 확인 (Health Check) 
     - name: Wait for EC2 Instance 1 to become healthy
       run: |
         echo "Checking if instance 1 is healthy..."
-        for i in {1..30}; do  # 최대 30번(5분)까지 확인 시도
+        for i in {1..10}; do  # 최대 10번(약 1분 30초)까지 확인 시도
           response=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.EC2_1_HEALTH_CHECK_URL }})
           if [ "$response" -eq 200 ]; then
             echo "Instance 1 is healthy!"
@@ -127,3 +128,4 @@ jobs:
                     ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
                     SECRET_KEY=${{ secrets.SECRET_KEY }} \
                     java -jar eCommerce-0.0.1-SNAPSHOT.jar &
+          exit 0
