@@ -6,7 +6,7 @@ on:
       - main
     types:
       - closed # PR이 닫히거나 병합될 때만 실행
- 
+
 jobs:
   deploy:
     name: Rolling Deploy to EC2
@@ -58,9 +58,20 @@ jobs:
             sudo kill -9 $(sudo lsof -t -i :8080)
           fi
 
-          # 새 애플리케이션 실행
+          # 새 애플리케이션 실행 (환경 변수 전달)
           cd /home/ubuntu
-          nohup java -jar eCommerce-0.0.1-SNAPSHOT.jar &
+          nohup env DB_URL=${{ secrets.DB_URL }} \
+                    DB_USERNAME=${{ secrets.DB_USERNAME }} \
+                    DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+                    JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
+                    ACCESS_TOKEN_EXPIRATION=${{ secrets.ACCESS_TOKEN_EXPIRATION }} \
+                    REFRESH_TOKEN_EXPIRATION=${{ secrets.REFRESH_TOKEN_EXPIRATION }} \
+                    KAKAO_REST_API_KEY=${{ secrets.KAKAO_REST_API_KEY }} \
+                    KAKAO_REDIRECT_URI=${{ secrets.KAKAO_REDIRECT_URI }} \
+                    ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }} \
+                    ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
+                    SECRET_KEY=${{ secrets.SECRET_KEY }} \
+                    java -jar eCommerce-0.0.1-SNAPSHOT.jar &
 
     # 7. 첫 번째 EC2의 애플리케이션이 실행 중인지 확인 (Health Check) 
     - name: Wait for EC2 Instance 1 to become healthy
@@ -89,7 +100,7 @@ jobs:
         target: /home/ubuntu/
 
     - name: Execute commands on EC2 Instance 2
-      uses: appleboy/ssh-action@v0.1.3
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST_2 }}  # 두 번째 EC2 인스턴스
         username: ${{ secrets.EC2_USER }}
@@ -102,6 +113,17 @@ jobs:
             sudo kill -9 $(sudo lsof -t -i :8080)
           fi
 
-          # 새 애플리케이션 실행
+          # 새 애플리케이션 실행 (환경 변수 전달)
           cd /home/ubuntu
-          nohup java -jar eCommerce-0.0.1-SNAPSHOT.jar &
+          nohup env DB_URL=${{ secrets.DB_URL }} \
+                    DB_USERNAME=${{ secrets.DB_USERNAME }} \
+                    DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+                    JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
+                    ACCESS_TOKEN_EXPIRATION=${{ secrets.ACCESS_TOKEN_EXPIRATION }} \
+                    REFRESH_TOKEN_EXPIRATION=${{ secrets.REFRESH_TOKEN_EXPIRATION }} \
+                    KAKAO_REST_API_KEY=${{ secrets.KAKAO_REST_API_KEY }} \
+                    KAKAO_REDIRECT_URI=${{ secrets.KAKAO_REDIRECT_URI }} \
+                    ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }} \
+                    ACCESS_KEY=${{ secrets.ACCESS_KEY }} \
+                    SECRET_KEY=${{ secrets.SECRET_KEY }} \
+                    java -jar eCommerce-0.0.1-SNAPSHOT.jar &
