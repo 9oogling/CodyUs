@@ -45,7 +45,7 @@ jobs:
         target: /home/ubuntu/
 
     - name: Execute commands on EC2 Instance 1
-      uses: appleboy/ssh-action@v0.1.3
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST_1 }}  # 첫 번째 EC2 인스턴스
         username: ${{ secrets.EC2_USER }}
