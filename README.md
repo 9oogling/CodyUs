@@ -2,7 +2,7 @@
 ![CodyUsPPT](https://github.com/user-attachments/assets/bcf55271-fcaf-4b0d-8bb3-ddc540229e6c)
 
 
-- 링크 : https://codyUs.shop
+- 링크 : https://codyUs.shop (현재 중지)
 
 <br>
 
