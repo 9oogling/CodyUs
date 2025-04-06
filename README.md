@@ -13,17 +13,19 @@
 
 * [🖇️ &nbsp; 팀 구성](#c)
 
-* [🛠️ &nbsp; 개발 환경](#d)
+* [📃 &nbsp; 코드 컨벤션](#c)
 
-* [💻 &nbsp; 작업 관리](#e)
+* [🛠️ &nbsp; 개발 환경](#e)
 
-* [💡 &nbsp; 채택한 개발 기술과 브랜치 전략](#f)
+* [💻 &nbsp; 작업 관리](#f)
 
-* [🔗 &nbsp; 프로젝트 구조](#g)
+* [💡 &nbsp; 채택한 개발 기술과 브랜치 전략](#g)
 
-* [🔋 &nbsp; 트러블 슈팅](#h)
+* [🔗 &nbsp; 프로젝트 구조](#h)
 
-* [✅ &nbsp; 프로젝트 후기](#i)
+* [🔋 &nbsp; 트러블 슈팅](#i)
+
+* [✅ &nbsp; 프로젝트 후기](#j)
 
 <br>
 
@@ -92,6 +94,13 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 
 <div id="d">
 
+## 📃 &nbsp; 코드 컨벤션
+* https://www.notion.so/teamsparta/Code-Convention-93334f496d4a499ca8b3b834b1683550
+
+<br>
+
+<div id="e">
+
 ## 🛠️ &nbsp; 개발 환경
 ### Front-End <br>
 ![HTML](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white) &nbsp; ![CSS](https://img.shields.io/badge/CSS-01B4E4?&style=for-the-badge&logo=css3&logoColor=white) &nbsp; ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white) &nbsp; ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=Thymeleaf&logoColor=white)
@@ -107,7 +116,7 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
   
 <br>
 
-<div id="e">
+<div id="f">
 
 ## 💻 &nbsp; 작업 관리
 ### <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566899596/noticon/slhw4nu8hybreryigopq.png" alt="image" width="25"/> &nbsp; Github <br>
@@ -117,7 +126,7 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 
 <br>
 
-<div id="f">
+<div id="g">
 
 ## 💡 &nbsp; 채택한 개발 기술과 브랜치 전략
 ### <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1583139874/noticon/dri6ny863om8qxtics4i.png" alt="image" width="20"/> &nbsp; Spring Boot 3.3.1
@@ -253,7 +262,7 @@ AWS는 사용한 만큼만 비용을 지불하는 유연한 요금제를 제공�
 
 <br>
 
-<div id="g">
+<div id="h">
 
 ## 🔗 &nbsp; 프로젝트 구조
 <details>
@@ -327,7 +336,7 @@ src
 </details>
 <br>
 
-<div id="h">
+<div id="i">
 
 ## 🔋 &nbsp; 트러블 슈팅
 <details>
@@ -416,7 +425,7 @@ src
 
 <br>
 
-<div id="i">
+<div id="j">
 
 ## ✅ &nbsp; 프로젝트 후기
 
