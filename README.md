@@ -112,7 +112,7 @@ https://mysterious-experience-bf5.notion.site/055ecf8ba4de496381bd55043567e53b?v
 ### 협업 툴 <br>
 ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) &nbsp; ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)  &nbsp; ![slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
 ### 서비스 배포 환경 <br>
-![AWS RDS](https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white) &nbsp; ![EC2](https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white) &nbsp; ![Load Balancer](https://img.shields.io/badge/awselasticloadbalancing-22314E?style=for-the-badge&logo=awselasticloadbalancing&logoColor=white) &nbsp; ![Route53](https://img.shields.io/badge/amazonroute53-8C4FFF?style=for-the-badge&logo=amazonroute53&logoColor=white) &nbsp; ![Github Action](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![AWS RDS](https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white) &nbsp; ![EC2](https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white) &nbsp; ![Load Balancer](https://img.shields.io/badge/awselasticloadbalancing-22314E?style=for-the-badge&logo=awselasticloadbalancing&logoColor=white) &nbsp; ![Route53](https://img.shields.io/badge/amazonroute53-8C4FFF?style=for-the-badge&logo=amazonroute53&logoColor=white)
   
 <br>
 
