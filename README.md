@@ -61,7 +61,7 @@
 
 ---
 
-<img width="1289" alt="스크린샷 2024-09-10 오후 5 32 49" src="https://github.com/user-attachments/assets/dc079c91-bcf8-4254-80e5-ff77a372f346">
+<img width="1289" alt="스크린샷 2024-09-10 오후 5 32 49" src="https://github.com/user-attachments/assets/1a24b33d-ee55-428a-ac0c-c0d3dfb75091">
 
 </details>
 
